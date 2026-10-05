@@ -31,7 +31,7 @@ Edit requests in Bruno ──▶ Commit / Pull Request ──▶ Merge to main �
 
 The [Publish API Docs](.github/workflows/docs.yml) GitHub Actions workflow runs on every push to `main` (and can be triggered manually). It runs [`scripts/build-docs.sh`](scripts/build-docs.sh), which uses the [Bruno CLI](https://docs.usebruno.com/bru-cli/overview) to generate a self-contained HTML documentation page, applies the Oktopus branding, and deploys it to GitHub Pages, served at the custom domain `api.oktopus.app.br`.
 
-Only the `Prod` environment is embedded in the published page, and secret variables are never included. Keep non-secret values in `environments/Prod.yml` generic, since they are publicly visible.
+Only the `Public` environment (`environments/Public.yml`) is embedded in the published page. It holds placeholder values only, since everything in it is publicly visible. Other environments are never published (see [Running Against Your Own Oktopus Instance](#running-against-your-own-oktopus-instance)).
 
 To build the documentation locally (requires Node.js, Python 3 and rsync):
 
@@ -60,7 +60,7 @@ Bruno does not offer branding options when generating docs, so the build script 
 ├── branding/              # Logo and colors of the published docs
 ├── scripts/build-docs.sh  # Builds the branded documentation page
 ├── opencollection.yml     # Collection definition and shared variables
-├── environments/          # Bruno environments (e.g. Prod)
+├── environments/          # Bruno environments (only Public.yml is versioned)
 ├── Auth/                  # Open source endpoints
 ├── Dashboard/
 ├── Device/
@@ -77,16 +77,38 @@ Each request is a `.yml` file containing the HTTP method, URL, headers, body, sc
    git clone https://github.com/OktopUSP/rest-api-docs.git
    ```
 3. In Bruno, choose **Open Collection** and select the cloned folder.
-4. Select an environment (e.g. `Prod`) in the top-right corner, or create your own pointing to your Oktopus instance by setting `base_url`.
-5. Fill in the secret variables (`password`, file server credentials, etc.) in the environment. Secret values are stored locally by Bruno and are never committed.
-6. Run the `Auth/Login` request. Its post-response script stores the returned JWT in the `authToken` variable, which is used by the other requests.
-7. Send any other request.
+4. Create your own environment pointing to your Oktopus instance, as described in [Running Against Your Own Oktopus Instance](#running-against-your-own-oktopus-instance), and select it in the top-right corner.
+5. Run the `Auth/Login` request. Its post-response script stores the returned JWT in the `authToken` variable, which is used by the other requests.
+6. Send any other request.
+
+## Running Against Your Own Oktopus Instance
+
+The `Public` environment only contains placeholders such as `https://{domain-name}/api/`. To send real requests, keep your domain, credentials and device data in a private environment that never leaves your machine:
+
+1. In Bruno, open **Environment Settings**, clone the `Public` environment (or create a new one), and give it your own name, e.g. `Local` or `Prod`.
+2. Fill in your values: `base_url`/`url` with your Oktopus API address (e.g. `https://oktopus.example.com/api/`), `email`, `device`, and so on.
+3. Mark sensitive variables (`password`, file server usernames and passwords, etc.) as **Secret**. Bruno stores secret values encrypted in its local app storage instead of the environment file.
+4. Select your environment and run `Auth/Login`.
+
+Your environment is saved as `environments/<name>.yml`. This repository git-ignores every file in `environments/` except `Public.yml`, so it is never committed, pushed or published.
+
+Other options for keeping data private:
+
+- **`.env` file**: put values in a `.env` file at the collection root and reference them as `{{process.env.VAR_NAME}}` in your environment. `.env` files are git-ignored. Commit a `.env.example` with placeholder names if you want to share the expected variables.
+- **Global environments**: Bruno global environments are stored in the Bruno app, outside this repository, so they can never be committed.
+
+Before committing, make sure your changes don't leak private data:
+
+- Never put real values in `environments/Public.yml`; it is published at https://api.oktopus.app.br.
+- Use variables (`{{base_url}}`, `{{device}}`, ...) in requests instead of hard-coded domains, IDs or tokens.
+- Scrub saved example responses of real device IDs, serial numbers, IP and MAC addresses, emails and tokens.
+- Review `git status` and `git diff` before every commit.
 
 ## Contributing API Changes
 
 1. Create a branch from `main`.
 2. Add or edit requests in Bruno (or edit the `.yml` files directly). Include example responses and docs whenever possible.
-3. Never commit real credentials. Mark sensitive environment variables as secret, or reference them from a local `.env` file via `{{process.env.VAR_NAME}}` (`.env` is git-ignored).
+3. Never commit real credentials, domains or device data. Follow the checklist in [Running Against Your Own Oktopus Instance](#running-against-your-own-oktopus-instance).
 4. Open a Pull Request describing the API change.
 5. Once merged into `main`, the documentation at https://api.oktopus.app.br is updated automatically.
 

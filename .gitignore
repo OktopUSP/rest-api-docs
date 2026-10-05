@@ -4,6 +4,10 @@
 !.env.sample
 !.env.example
 
+# Private Bruno environments: only the Public environment is shared
+environments/*
+!environments/Public.yml
+
 # Dependencies (Bruno scripts may use npm packages)
 node_modules/
 

@@ -22,16 +22,18 @@ CDN="https://cdn.usebruno.com/api-docs"
 GIT_URL="$(git -C "$ROOT" remote get-url origin 2>/dev/null || true)"
 
 # The Bruno CLI parses every folder and .yml file in the collection root, so
-# non-collection folders would show up in the docs. Build from a clean copy.
+# non-collection folders would show up in the docs. Build from a clean copy,
+# which also keeps private environments out of the published page.
 STAGE="$(mktemp -d)"
 trap 'rm -rf "$STAGE"' EXIT
 rsync -a \
+  --include environments/Public.yml --exclude 'environments/*' \
   --exclude .git --exclude .github --exclude site \
   --exclude scripts --exclude branding --exclude node_modules \
   "$ROOT/" "$STAGE/"
 
 mkdir -p "$OUT"
-(cd "$STAGE" && bru docs generate --envs Prod -o "$OUT/index.html")
+(cd "$STAGE" && bru docs generate --envs Public -o "$OUT/index.html")
 
 cp "$ROOT/branding/logo.png" "$ROOT/branding/theme.css" "$OUT/"
 
