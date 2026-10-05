@@ -1,0 +1,44 @@
+:root[data-theme=dark] {
+  --oc-brand: #ff5c00;
+  --oc-primary-solid: #c05521;
+  --oc-primary-text: #ff7a2e;
+  --oc-primary-strong: #ff7a2e;
+  --oc-primary-subtle: #e65300;
+  --oc-accents-primary: #ff5c00;
+  --oc-colors-accent: #e65300;
+  --oc-workspace-accent: #e65300;
+  --oc-input-focus-border: #ff5c00cc;
+  --oc-modal-input-focus-border: #ff5c00cc;
+  --oc-checkbox-checked-bg: #c05521;
+  --oc-dropdown-selected-color: #ff7a2e;
+  --oc-button2-color-primary-bg: #c05521;
+  --oc-button2-color-primary-text: #fff;
+  --oc-button2-color-primary-border: #c05521;
+  --oc-button2-color-light-bg: #ff5c0014;
+  --oc-button2-color-light-text: #ff5c00;
+  --oc-button2-color-light-border: #ff5c000f;
+  --oc-tabs-active-border: #ff7a2e;
+  --oc-console-checkbox-color: #c05521;
+  --oc-app-collection-toolbar-environment-selector-icon: #ff7a2e;
+}
+
+:root[data-theme=light] {
+  --oc-brand: #c05521;
+  --oc-primary-solid: #c05521;
+  --oc-primary-text: #b04d1d;
+  --oc-primary-strong: #d4602a;
+  --oc-primary-subtle: #e07a45;
+  --oc-accents-primary: #c05521;
+  --oc-colors-accent: #a8481a;
+  --oc-workspace-accent: #a8481a;
+  --oc-checkbox-checked-bg: #c05521;
+  --oc-dropdown-selected-color: #b04d1d;
+  --oc-button2-color-primary-bg: #c05521;
+  --oc-button2-color-primary-border: #c05521;
+  --oc-button2-color-light-bg: #c0552114;
+  --oc-button2-color-light-text: #c05521;
+  --oc-button2-color-light-border: #c055210f;
+  --oc-tabs-active-border: #d4602a;
+  --oc-console-checkbox-color: #c05521;
+  --oc-app-collection-toolbar-environment-selector-icon: #b04d1d;
+}

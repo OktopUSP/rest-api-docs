@@ -29,22 +29,36 @@ Edit requests in Bruno ──▶ Commit / Pull Request ──▶ Merge to main �
 
 ### Publishing
 
-The [Publish API Docs](.github/workflows/docs.yml) GitHub Actions workflow runs on every push to `main` (and can be triggered manually). It uses the [Bruno CLI](https://docs.usebruno.com/bru-cli/overview) to generate a self-contained HTML documentation page and deploys it to GitHub Pages, served at the custom domain `api.oktopus.app.br`.
+The [Publish API Docs](.github/workflows/docs.yml) GitHub Actions workflow runs on every push to `main` (and can be triggered manually). It runs [`scripts/build-docs.sh`](scripts/build-docs.sh), which uses the [Bruno CLI](https://docs.usebruno.com/bru-cli/overview) to generate a self-contained HTML documentation page, applies the Oktopus branding, and deploys it to GitHub Pages, served at the custom domain `api.oktopus.app.br`.
 
 Only the `Prod` environment is embedded in the published page, and secret variables are never included. Keep non-secret values in `environments/Prod.yml` generic, since they are publicly visible.
 
-To preview the documentation locally:
+To build the documentation locally (requires Node.js, Python 3 and rsync):
 
 ```sh
 npm install -g @usebruno/cli
-bru docs generate --envs Prod -o site/index.html
+./scripts/build-docs.sh            # output in site/
+./scripts/build-docs.sh --offline  # also bundles the renderer, so it opens without internet
 ```
+
+Open `site/index.html` in your browser. Keep all files in `site/` together.
+
+### Branding
+
+The logo and colors of the published page live in `branding/`:
+
+- `logo.png`: shown in the page header and used as the favicon.
+- `theme.css`: overrides the renderer's `--oc-*` color variables for the dark and light themes.
+
+Bruno does not offer branding options when generating docs, so the build script injects these files into the generated page.
 
 ## Repository Structure
 
 ```
 .
 ├── .github/workflows/     # Documentation publishing pipeline
+├── branding/              # Logo and colors of the published docs
+├── scripts/build-docs.sh  # Builds the branded documentation page
 ├── opencollection.yml     # Collection definition and shared variables
 ├── environments/          # Bruno environments (e.g. Prod)
 ├── Auth/                  # Open source endpoints
