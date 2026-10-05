@@ -27,10 +27,24 @@ The documentation is maintained as a [Bruno](https://www.usebruno.com/) collecti
 Edit requests in Bruno ──▶ Commit / Pull Request ──▶ Merge to main ──▶ api.oktopus.app.br updated
 ```
 
+### Publishing
+
+The [Publish API Docs](.github/workflows/docs.yml) GitHub Actions workflow runs on every push to `main` (and can be triggered manually). It uses the [Bruno CLI](https://docs.usebruno.com/bru-cli/overview) to generate a self-contained HTML documentation page and deploys it to GitHub Pages, served at the custom domain `api.oktopus.app.br`.
+
+Only the `Prod` environment is embedded in the published page, and secret variables are never included. Keep non-secret values in `environments/Prod.yml` generic, since they are publicly visible.
+
+To preview the documentation locally:
+
+```sh
+npm install -g @usebruno/cli
+bru docs generate --envs Prod -o site/index.html
+```
+
 ## Repository Structure
 
 ```
 .
+├── .github/workflows/     # Documentation publishing pipeline
 ├── opencollection.yml     # Collection definition and shared variables
 ├── environments/          # Bruno environments (e.g. Prod)
 ├── Auth/                  # Open source endpoints
@@ -46,7 +60,7 @@ Each request is a `.yml` file containing the HTTP method, URL, headers, body, sc
 1. Install [Bruno](https://www.usebruno.com/downloads).
 2. Clone this repository:
    ```sh
-   git clone <repository-url>
+   git clone https://github.com/OktopUSP/rest-api-docs.git
    ```
 3. In Bruno, choose **Open Collection** and select the cloned folder.
 4. Select an environment (e.g. `Prod`) in the top-right corner, or create your own pointing to your Oktopus instance by setting `base_url`.

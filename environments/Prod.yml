@@ -1,15 +1,15 @@
 name: Prod
 variables:
   - name: email
-    value: support@oktopus.app.br
+    value: youremail@email
   - secret: true
     name: password
   - name: device
-    value: 708190328310CPD
+    value: device-id
   - name: url
-    value: https://app.oktopus.app.br/api/
+    value: https://{domain-name}/api/
   - name: base_url
-    value: https://app.oktopus.app.br/api/
+    value: https://{domain-name}/api/
   - secret: true
     name: upload_file_username
   - secret: true
