@@ -1,0 +1,27 @@
+info:
+  name: Delete File(s)
+  type: http
+  seq: 7
+
+http:
+  method: DELETE
+  url: "{{base_url_file}}file/all/delete"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      [
+          "690df77b670561b8d97011b3"
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

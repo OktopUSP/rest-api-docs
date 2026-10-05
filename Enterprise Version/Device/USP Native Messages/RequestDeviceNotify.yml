@@ -1,0 +1,28 @@
+info:
+  name: RequestDeviceNotify
+  type: http
+  seq: 9
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/notify"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: oktopus-0-mqtt
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

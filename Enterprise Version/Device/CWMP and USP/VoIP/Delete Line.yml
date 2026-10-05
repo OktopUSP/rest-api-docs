@@ -1,0 +1,77 @@
+info:
+  name: Delete Line
+  type: http
+  seq: 7
+
+http:
+  method: DELETE
+  url: "{{base_url}}device/:device/:mtp/voiceline"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "path":"InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.2."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Error to Delete
+    request:
+      url: "{{base_url}}device/:device/:mtp/voiceline"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "path":"InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.2."
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 23 Sep 2025 12:10:00 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "35"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: '"CWMP Fault: 9002 - Internal Error"'

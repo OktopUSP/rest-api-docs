@@ -1,0 +1,52 @@
+info:
+  name: Clean Chat History
+  type: http
+  seq: 3
+
+http:
+  method: DELETE
+  url: "{{base_url}}ai-assistant/conversation/history?device={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: query
+      description: device context for ai
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Clean Chat History
+    request:
+      url: "{{base_url}}ai-assistant/conversation/history"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 07 Oct 2025 20:42:29 GMT
+        - name: Content-Length
+          value: "62"
+      body:
+        type: json
+        data: Cleared chat history for session ID '68e53e16c6df010de948a948'

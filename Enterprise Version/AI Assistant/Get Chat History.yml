@@ -1,0 +1,66 @@
+info:
+  name: Get Chat History
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}ai-assistant/conversation/history?device={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: query
+      description: device context for ai
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Chat History
+    request:
+      url: "{{base_url}}ai-assistant/conversation/history"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 07 Oct 2025 21:54:14 GMT
+        - name: Content-Length
+          value: "1941"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "content": "You are a network technical support assistant. Your job is to help users troubleshoot technical issues.\nWhen you provide instructions, make sure they are clear and easy to follow. Use simple language and avoid technical jargon unless necessary. Always ask clarifying questions if the user's issue is not clear.\nIf you don't know the answer to a question, be honest and say you don't know. Never make up answers or provide incorrect information.\nUse the following format for your responses:\n1. Greet the user and ask how you can help.\n2. Ask clarifying questions to understand the issue better.\n3. Provide step-by-step instructions to resolve the issue.\n4. Summarize the solution and ask if the user needs further assistance.\n\nRemember to be patient, empathetic, and professional at all times.\n\nUsername: test@gmail.com\nIssue/question: eai IA, você manja de roteador fióte?\nCPE (Customer Premises Equipment) data: "
+              },
+              {
+                  "content": "Olá! Como posso te ajudar hoje com o seu roteador?\n\nSó para entender melhor:  \n1. Qual é o modelo do seu roteador?  \n2. Qual problema você está enfrentando? Por exemplo, está sem internet, o Wi-Fi não conecta, ou tem outro tipo de dificuldade?  \n3. Você já tentou reiniciar o roteador ou fazer algum procedimento?\n\nAssim que você me passar mais detalhes, vou te orientar passo a passo para resolver o problema.\n\nSe precisar de ajuda com outra coisa, é só avisar!"
+              },
+              {
+                  "content": "meu nom é zé da manga, qual o seu?"
+              },
+              {
+                  "content": "Olá, Zé da Manga! Eu sou um assistente virtual de suporte técnico, pronto para te ajudar com seu roteador ou qualquer outra dúvida de rede. Não tenho um nome próprio como as pessoas, mas você pode me chamar de Assistente, se quiser!\n\nComo posso te ajudar hoje com seu roteador? Você pode me contar qual é o problema que está enfrentando? Assim, consigo te orientar direitinho, passo a passo.\n\nSe precisar, é só falar!"
+              }
+          ]

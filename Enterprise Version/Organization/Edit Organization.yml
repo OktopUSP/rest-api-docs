@@ -1,0 +1,84 @@
+info:
+  name: Edit Organization
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url}}organization"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "speed_test": {
+              "download_servers": [
+                  {
+                      "host": "http://178.20.72.24/downloads/20MB.file",
+                      "default": false
+                  },
+                  {
+                      "host": "http://178.20.72.24/downloads/200MB.file",
+                      "default": true
+                  }
+              ]
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Edit Organization
+    request:
+      url: "{{base_url}}organization"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "id":"68a8dc36da14da38748d973a",
+              "speed_test": {
+                  "download_servers": [
+                      {
+                          "host": "http://178.20.72.24/downloads/20MB.file",
+                          "default": false
+                      },
+                      {
+                          "host": "http://178.20.72.24/downloads/200MB.file",
+                          "default": true
+                      }
+                  ]
+              }
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Mon, 29 Sep 2025 10:52:53 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: ""

@@ -1,0 +1,608 @@
+info:
+  name: Get SSID
+  type: http
+  seq: 7
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/ssid"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: SSID
+    request:
+      url: "{{base_url}}device/:device/ssid"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::0000CA-267412555500050
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Tue, 06 Aug 2024 20:56:39 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "Device.WiFi.SSID.1.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.0"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A4:98:13:F5:79:E0"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "HHonors"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.1.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.2.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.0"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A4:98:13:F5:79:E1"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "HHonors"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.2.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.3.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.1"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E1"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "HHonors-Elite"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.3.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.4.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.1"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E2"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "HHonors-Elite"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.4.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.5.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.2"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E2"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "HHonors-Staff"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.5.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.6.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.2"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E3"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "HHonors-Staff"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.6.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.7.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.3"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "false"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E3"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-4"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Down"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.7.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.8.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.3"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "false"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E4"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-5G-4"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Down"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.8.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.9.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.4"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E4"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-5"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.9.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.10.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.4"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E5"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-5G-5"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.10.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.11.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.5"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "false"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E5"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-6"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Down"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.11.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.12.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.5"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "false"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E6"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-5G-6"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Down"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.12.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.13.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.6"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E6"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-7"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.13.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.14.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.6"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E7"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-5G-7"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.14.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.15.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0.7"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:79:E7"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-8"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.15.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              },
+              {
+                  "path": "Device.WiFi.SSID.16.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2.7"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "A6:98:13:F5:7B:E8"
+                  },
+                  "ssid": {
+                      "writable": true,
+                      "value": "ARRIS-DA5D-5G-8"
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "security": {
+                      "path": "Device.WiFi.AccessPoint.16.Security.",
+                      "security_modes_supported": {
+                          "writable": false,
+                          "value": "None,WEP-64,WEP-128,WPA2-Personal,WPA-WPA2-Personal,WPA3-Personal,WPA3-Personal-Transition,WPA2-Enterprise,WPA-WPA2-Enterprise"
+                      },
+                      "security_mode_enabled": {
+                          "writable": true,
+                          "value": "WPA2-Personal"
+                      }
+                  }
+              }
+          ]

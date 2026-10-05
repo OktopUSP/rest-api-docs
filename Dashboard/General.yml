@@ -1,0 +1,161 @@
+info:
+  name: General
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}info/general"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: General V2
+    request:
+      url: "{{base_url}}info/general"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 28 Aug 2024 21:38:56 GMT
+        - name: Content-Length
+          value: "527"
+      body:
+        type: json
+        data: |-
+          {
+              "MqttRtt": "0.239ms",
+              "StompRtt": "0.229ms",
+              "WebsocketsRtt": "",
+              "Mtp": [
+                  {
+                      "name": "STOMP-256ce34e-0cd3-4032-bc66-5d0fee182d6b",
+                      "ip": "172.16.235.1",
+                      "rtt": "0.229ms",
+                      "in_msgs": 3,
+                      "out_msgs": 3887,
+                      "in_bytes": 834,
+                      "out_bytes": 303172
+                  },
+                  {
+                      "name": "MQTT-7b37314f-8add-4baf-9b43-182b3a38e28e",
+                      "ip": "172.16.235.1",
+                      "rtt": "0.239ms",
+                      "in_msgs": 1,
+                      "out_msgs": 3920,
+                      "in_bytes": 314,
+                      "out_bytes": 305768
+                  }
+              ],
+              "ProductClassCount": [
+                  {
+                      "productClass": "IGD",
+                      "count": 1
+                  }
+              ],
+              "StatusCount": {
+                  "Online": 1,
+                  "Offline": 0,
+                  "Unknown": 0
+              },
+              "VendorsCount": [
+                  {
+                      "vendor": "Comnect",
+                      "count": 1
+                  }
+              ]
+          }
+  - name: General
+    request:
+      url: "{{base_url}}info/general"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 11 Jun 2024 01:04:10 GMT
+        - name: Content-Length
+          value: "479"
+      body:
+        type: json
+        data: |-
+          {
+              "MqttRtt": "-1.505212ms",
+              "WebsocketsRtt": "-2.217561ms",
+              "StompRtt": "-1.876211ms",
+              "AcsRtt": "-1.845559ms",
+              "ProductClassCount": [
+                  {
+                      "productClass": "USP Agent",
+                      "count": 1
+                  },
+                  {
+                      "productClass": "BM632w",
+                      "count": 2
+                  },
+                  {
+                      "productClass": "Huawei",
+                      "count": 2
+                  },
+                  {
+                      "productClass": "IGD",
+                      "count": 1
+                  }
+              ],
+              "StatusCount": {
+                  "Online": 5,
+                  "Offline": 1
+              },
+              "VendorsCount": [
+                  {
+                      "vendor": "Manufacturer",
+                      "count": 1
+                  },
+                  {
+                      "vendor": "Intelbras",
+                      "count": 1
+                  },
+                  {
+                      "vendor": "Comnect",
+                      "count": 1
+                  },
+                  {
+                      "vendor": "Huawei Technologies Co., Ltd.",
+                      "count": 3
+                  }
+              ]
+          }
+
+docs: List all devices saved at database

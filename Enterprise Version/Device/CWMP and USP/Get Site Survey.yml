@@ -1,0 +1,684 @@
+info:
+  name: Get Site Survey
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/sitesurvey"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Site Survey
+    request:
+      url: "{{base_url}}device/:device/:mtp/sitesurvey"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: 485754434ECDE6AD
+          type: path
+        - name: mtp
+          value: any
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 05 Sep 2024 13:51:31 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "2.4GHz": [
+                  {
+                      "signal_level": "-62",
+                      "ssid": "American Corp",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-69",
+                      "ssid": "Flex",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-16",
+                      "ssid": "HUAWEI-test123456",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-15",
+                      "ssid": "INTELBRAS",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-60",
+                      "ssid": "WIUP-Zedia",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-59",
+                      "ssid": "WIUP-Zedia",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-74",
+                      "ssid": "ZOOME GERAL",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-72",
+                      "ssid": "",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-54",
+                      "ssid": "",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-71",
+                      "ssid": "",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-65",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-65",
+                      "ssid": "CPD",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-73",
+                      "ssid": "DHC 3 ",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-57",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-55",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-84",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-75",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-77",
+                      "ssid": ".INAITEC_Visitante",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-56",
+                      "ssid": "CPD",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  },
+                  {
+                      "signal_level": "-49",
+                      "ssid": "DIRECT-ba-HP M426 LaserJet",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20"
+                  }
+              ],
+              "5GHz": [
+                  {
+                      "signal_level": "-21",
+                      "ssid": "INTELBRAS-5G",
+                      "channel": "36",
+                      "standard": "11ax",
+                      "bandwidth": "160"
+                  },
+                  {
+                      "signal_level": "-94",
+                      "ssid": "VOLK 2.4",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-94",
+                      "ssid": "VOLK 5G",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-90",
+                      "ssid": "ZOOME GERAL",
+                      "channel": "36",
+                      "standard": "11ax",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-84",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "40",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-88",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "40",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-86",
+                      "ssid": "Flex_5Ghz",
+                      "channel": "40",
+                      "standard": "11ax",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-88",
+                      "ssid": "ZOOME STUDIOS",
+                      "channel": "40",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-78",
+                      "ssid": "",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-82",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-80",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40"
+                  },
+                  {
+                      "signal_level": "-77",
+                      "ssid": "American Corp",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-22",
+                      "ssid": "HUAWEI-test123456",
+                      "channel": "44",
+                      "standard": "11ax",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-86",
+                      "ssid": "CALION_5G",
+                      "channel": "48",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-82",
+                      "ssid": "SOLAR_902",
+                      "channel": "52",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-91",
+                      "ssid": "",
+                      "channel": "104",
+                      "standard": "11ax",
+                      "bandwidth": "160"
+                  },
+                  {
+                      "signal_level": "-94",
+                      "ssid": "",
+                      "channel": "108",
+                      "standard": "11ax",
+                      "bandwidth": "80"
+                  },
+                  {
+                      "signal_level": "-94",
+                      "ssid": "VIVOFIBRA-WIFI6-EB81",
+                      "channel": "108",
+                      "standard": "11ax",
+                      "bandwidth": "80"
+                  }
+              ]
+          }
+  - name: Site Survey with noise
+    request:
+      url: "{{base_url}}device/:device/:mtp/sitesurvey"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 11 Nov 2024 18:11:35 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          {
+              "2.4GHz": [
+                  {
+                      "signal_level": "-56",
+                      "ssid": "",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "76:A7:41:84:F4:9E"
+                  },
+                  {
+                      "signal_level": "-57",
+                      "ssid": "American Corp",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "70:A7:41:84:F4:9E"
+                  },
+                  {
+                      "signal_level": "-77",
+                      "ssid": "DIRECT-CGDESKTOP-17PQH4GKAsq",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "5E:CD:5B:D9:88:8E"
+                  },
+                  {
+                      "signal_level": "-60",
+                      "ssid": "Flex",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "40",
+                      "bssid": "14:EB:B6:A6:E2:F2"
+                  },
+                  {
+                      "signal_level": "-15",
+                      "ssid": "HUAWEI-teste",
+                      "channel": "1",
+                      "standard": "b,g,n",
+                      "bandwidth": "40",
+                      "bssid": "F8:AF:05:25:5B:A8"
+                  },
+                  {
+                      "signal_level": "-61",
+                      "ssid": "WIUP-Zedia",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "20",
+                      "bssid": "90:F6:44:D9:1E:60"
+                  },
+                  {
+                      "signal_level": "-56",
+                      "ssid": "WIUP-Zedia",
+                      "channel": "1",
+                      "standard": "11ax",
+                      "bandwidth": "20",
+                      "bssid": "48:05:E2:49:78:24"
+                  },
+                  {
+                      "signal_level": "-59",
+                      "ssid": "",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "2A:5A:4C:27:FF:A3"
+                  },
+                  {
+                      "signal_level": "-59",
+                      "ssid": "American Corp",
+                      "channel": "6",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "24:5A:4C:27:FF:A3"
+                  },
+                  {
+                      "signal_level": "-15",
+                      "ssid": "INTELBRAS",
+                      "channel": "6",
+                      "standard": "11ax",
+                      "bandwidth": "40",
+                      "bssid": "4C:2E:FE:12:FE:01"
+                  },
+                  {
+                      "signal_level": "-77",
+                      "ssid": "",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "24:81:C7:82:42:0D"
+                  },
+                  {
+                      "signal_level": "-45",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "76:83:C2:34:CD:BC"
+                  },
+                  {
+                      "signal_level": "-71",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "FE:EC:DA:AD:0B:84"
+                  },
+                  {
+                      "signal_level": "-44",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "74:83:C2:34:CD:BC"
+                  },
+                  {
+                      "signal_level": "-44",
+                      "ssid": "CPD",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "86:83:C2:34:CD:BC"
+                  },
+                  {
+                      "signal_level": "-55",
+                      "ssid": "DIRECT-ba-HP M426 LaserJet",
+                      "channel": "11",
+                      "standard": "b,g,n",
+                      "bandwidth": "20",
+                      "bssid": "92:CD:B6:44:40:BA"
+                  }
+              ],
+              "5GHz": [
+                  {
+                      "signal_level": "-93",
+                      "ssid": "",
+                      "channel": "36",
+                      "standard": "11ax",
+                      "bandwidth": "80",
+                      "bssid": "92:0A:62:BB:87:DE"
+                  },
+                  {
+                      "signal_level": "-92",
+                      "ssid": "",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "FA:7F:A5:95:8A:05"
+                  },
+                  {
+                      "signal_level": "-84",
+                      "ssid": "",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "70:CD:91:33:6C:06"
+                  },
+                  {
+                      "signal_level": "-93",
+                      "ssid": "Castro",
+                      "channel": "36",
+                      "standard": "11ax",
+                      "bandwidth": "80",
+                      "bssid": "90:0A:62:CB:87:DE"
+                  },
+                  {
+                      "signal_level": "-93",
+                      "ssid": "DEBORA",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "86:7E:CA:BB:39:4E"
+                  },
+                  {
+                      "signal_level": "-84",
+                      "ssid": "Matteo",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "C6:C6:78:0C:48:7F"
+                  },
+                  {
+                      "signal_level": "-84",
+                      "ssid": "Matteo 5G",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "D8:C6:78:0C:48:7F"
+                  },
+                  {
+                      "signal_level": "-84",
+                      "ssid": "Nossafamilia_5G",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "70:CD:91:B6:47:BD"
+                  },
+                  {
+                      "signal_level": "-88",
+                      "ssid": "Pira",
+                      "channel": "36",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "86:0B:BB:DB:5A:47"
+                  },
+                  {
+                      "signal_level": "-86",
+                      "ssid": "ZOOME GERAL",
+                      "channel": "36",
+                      "standard": "11ax",
+                      "bandwidth": "80",
+                      "bssid": "54:71:DD:E3:15:88"
+                  },
+                  {
+                      "signal_level": "-15",
+                      "ssid": "opaopa",
+                      "channel": "36",
+                      "standard": "11ax",
+                      "bandwidth": "160",
+                      "bssid": "62:2E:FE:12:FE:01"
+                  },
+                  {
+                      "signal_level": "-80",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "40",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40",
+                      "bssid": "FE:EC:DA:EA:AA:3E"
+                  },
+                  {
+                      "signal_level": "-95",
+                      "ssid": "American Corp",
+                      "channel": "40",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "24:5A:4C:28:FF:A3"
+                  },
+                  {
+                      "signal_level": "-85",
+                      "ssid": "Gandra",
+                      "channel": "40",
+                      "standard": "a,n,ac",
+                      "bandwidth": "80",
+                      "bssid": "44:3B:32:7B:28:82"
+                  },
+                  {
+                      "signal_level": "-94",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40",
+                      "bssid": "B6:FB:E4:1B:E3:E8"
+                  },
+                  {
+                      "signal_level": "-78",
+                      "ssid": "#Estação_BETHA",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40",
+                      "bssid": "FE:EC:DA:AE:0B:84"
+                  },
+                  {
+                      "signal_level": "-94",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40",
+                      "bssid": "B4:FB:E4:2B:E3:E8"
+                  },
+                  {
+                      "signal_level": "-78",
+                      "ssid": "#Estação_INAITEC",
+                      "channel": "44",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40",
+                      "bssid": "FC:EC:DA:AE:0B:84"
+                  },
+                  {
+                      "signal_level": "-79",
+                      "ssid": "Flex_5Ghz",
+                      "channel": "44",
+                      "standard": "11ax",
+                      "bandwidth": "80",
+                      "bssid": "14:EB:B6:A6:E2:F3"
+                  },
+                  {
+                      "signal_level": "-86",
+                      "ssid": "",
+                      "channel": "48",
+                      "standard": "a,n,ac",
+                      "bandwidth": "40",
+                      "bssid": "78:8A:20:B5:5D:90"
+                  }
+              ],
+              "noise_2.4GHz": {
+                  "0": 37.540000000000006,
+                  "1": 52.63000000000001,
+                  "2": 57.96000000000001,
+                  "3": 68.02,
+                  "4": 26.689999999999998,
+                  "5": 36.67,
+                  "6": 23.96,
+                  "7": 25.87,
+                  "8": 26.87,
+                  "9": 9.61,
+                  "10": 39.120000000000005,
+                  "11": 44.72,
+                  "12": 49.830000000000005,
+                  "13": 52.370000000000005
+              },
+              "noise_5GHz": {
+                  "36": 61.25,
+                  "40": 61.25,
+                  "44": 43.75,
+                  "48": 43.75,
+                  "52": 8.75,
+                  "56": 8.75,
+                  "60": 8.75,
+                  "64": 8.75
+              }
+          }

@@ -1,0 +1,95 @@
+info:
+  name: AddObject
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: "{{base_url}}device/cwmp/:device/addObject"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: VMXQU21B06601401
+      type: path
+  body:
+    type: xml
+    data: |-
+      <?xml version="1.0" encoding="UTF-8"?>
+      <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <soap:Header/>
+        <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <cwmp:AddObject>
+            <ObjectName>InternetGatewayDevice.LANDevice.</ObjectName>
+            <ParameterKey></ParameterKey>
+          </cwmp:AddObject>
+        </soap:Body>
+      </soap:Envelope>
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: AddObject
+    request:
+      url: "{{base_url}}device/cwmp/:device/addObject"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: VMXQU21B06601401
+          type: path
+      body:
+        type: xml
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:AddObject>
+                <ObjectName>InternetGatewayDevice.LANDevice.</ObjectName>
+                <ParameterKey></ParameterKey>
+              </cwmp:AddObject>
+            </soap:Body>
+          </soap:Envelope>
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 12 Jun 2024 00:41:12 GMT
+        - name: Content-Length
+          value: "512"
+      body:
+        type: json
+        data: |+
+          <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+          <SOAP-ENV:Header>
+          <cwmp:ID SOAP-ENV:mustUnderstand="1"/>
+          </SOAP-ENV:Header>
+          <SOAP-ENV:Body>
+          <cwmp:AddObjectResponse>
+          <Status>0</Status>
+          <InstanceNumber>3</InstanceNumber>
+          </cwmp:AddObjectResponse>
+          </SOAP-ENV:Body>
+          </SOAP-ENV:Envelope>
+

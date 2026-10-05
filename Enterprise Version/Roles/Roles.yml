@@ -1,0 +1,93 @@
+info:
+  name: Roles
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}roles"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Roles
+    request:
+      url: "{{base_url}}roles"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 12 Sep 2024 22:59:40 GMT
+        - name: Content-Length
+          value: "543"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "_id": "66e36f75b5b8ad29c1f9f156",
+                  "createdAt": "2024-09-12",
+                  "description": "Admin with access to all resources",
+                  "name": "Admin",
+                  "permissions": {
+                      "Devices Credentials": {
+                          "create": true,
+                          "delete": true,
+                          "read": true,
+                          "update": true
+                      },
+                      "Devices Management": {
+                          "create": true,
+                          "delete": true,
+                          "read": true,
+                          "update": true
+                      },
+                      "Map": {
+                          "read": true
+                      },
+                      "Mass Actions": {
+                          "create": true,
+                          "delete": true,
+                          "read": true,
+                          "update": true
+                      },
+                      "Overview": {
+                          "read": true
+                      },
+                      "Roles": {
+                          "create": true,
+                          "delete": true,
+                          "read": true,
+                          "update": true
+                      },
+                      "Users": {
+                          "create": true,
+                          "delete": true,
+                          "read": true,
+                          "update": true
+                      }
+                  }
+              }
+          ]

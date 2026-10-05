@@ -1,0 +1,107 @@
+info:
+  name: Get Voice
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/voice"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Voice
+    request:
+      url: "{{base_url}}device/:device/:mtp/voice"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Fri, 19 Sep 2025 12:44:40 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "511"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.",
+                  "name": {
+                      "writable": true,
+                      "value": ""
+                  },
+                  "proxy_server": {
+                      "writable": true,
+                      "value": "0.0.0.0"
+                  },
+                  "registrar_server": {
+                      "writable": true,
+                      "value": "0.0.0.0"
+                  },
+                  "domain": {
+                      "writable": true,
+                      "value": ""
+                  },
+                  "lines": [
+                      {
+                          "path": "InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.1.",
+                          "status": {
+                              "writable": false,
+                              "value": "disabled"
+                          },
+                          "username": {
+                              "writable": true,
+                              "value": ""
+                          },
+                          "password": {
+                              "writable": true,
+                              "value": ""
+                          },
+                          "uri": {
+                              "writable": true,
+                              "value": "sip:@"
+                          }
+                      }
+                  ]
+              }
+          ]

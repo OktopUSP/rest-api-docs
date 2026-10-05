@@ -1,0 +1,85 @@
+info:
+  name: Delete Port
+  type: http
+  seq: 4
+
+http:
+  method: DELETE
+  url: "{{base_url}}device/:device/:mtp/ports"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: port
+      value: "123456"
+      type: query
+      disabled: true
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "port": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.2.WANPPPConnection.1."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Port
+    request:
+      url: "{{base_url}}device/:device/:mtp/ports"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: port
+          value: "123456"
+          type: query
+          disabled: true
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "port": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.2.WANPPPConnection.1."
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 21 Oct 2024 20:35:34 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "14"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: '"Port deleted"'

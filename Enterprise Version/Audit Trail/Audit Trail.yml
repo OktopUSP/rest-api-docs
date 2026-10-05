@@ -1,0 +1,359 @@
+info:
+  name: Audit Trail
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}audit?sn={{device}}&sortBy=timestamp&limit=64&orderBy=desc&resource&action&actorType&actorId"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: sn
+      value: "{{device}}"
+      type: query
+      description: required
+    - name: sortBy
+      value: timestamp
+      type: query
+      description: '"timestamp" or "id"; defaults to "timestamp" if none'
+    - name: limit
+      value: "64"
+      type: query
+      description: max is 64
+    - name: cursor
+      value: 695d7fb8b1a0a72682c6e143
+      type: query
+      disabled: true
+    - name: orderBy
+      value: desc
+      type: query
+      description: '"asc" or "desc"'
+    - name: resource
+      value: ""
+      type: query
+      description: list of resources to be fetched, separated by commas
+    - name: action
+      value: ""
+      type: query
+      description: list of actions to be fetched, separated by commas
+    - name: actorType
+      value: ""
+      type: query
+      description: list of actor types to be fetched, separated by commas
+    - name: actorId
+      value: ""
+      type: query
+      description: list of actor id to be fetched, separated by commas
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Device Messages Trail
+    request:
+      url: "{{base_url}}audit?sn={{device}}&sortBy=id&limit=64"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: sn
+          value: "{{device}}"
+          type: query
+          description: required
+        - name: sortBy
+          value: id
+          type: query
+          description: '"timestamp" or "id"; defaults to "timestamp" if none'
+        - name: limit
+          value: "64"
+          type: query
+          description: max is 64
+        - name: cursor
+          value: 695d7fb8b1a0a72682c6e143
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 06 Jan 2026 22:46:47 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: |-
+          {
+              "items": [
+                  {
+                      "id": "695d3307b10447af623878e5",
+                      "timestamp": "2026-01-06T16:06:31.733Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cwmp=\"urn:dslforum-org:cwmp-1-0\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:schemaLocation=\"urn:dslforum-org:cwmp-1-0 ..\\schemas\\wt121.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n  <soap:Header/>\n  <soap:Body soap:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n    <cwmp:GetParameterNames>\n      <ParameterPath>InternetGatewayDevice.</ParameterPath>\n      <NextLevel>1</NextLevel>\n    </cwmp:GetParameterNames>\n  </soap:Body>\n</soap:Envelope>",
+                      "responsePayload": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:cwmp=\"urn:dslforum-org:cwmp-1-0\">\n    <soapenv:Header>\n        <cwmp:ID soapenv:mustUnderstand=\"1\"></cwmp:ID>\n    </soapenv:Header>\n    <soapenv:Body>\n        <cwmp:GetParameterNamesResponse>\n            <ParameterList soapenc:arrayType=\"cwmp:ParameterInfoStruct[7]\">\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.TraceRouteDiagnostics.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.IPPingDiagnostics.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.LANDevice.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.WANDevice.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.ManagementServer.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.Services.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n                <ParameterInfoStruct>\n                    <Name>InternetGatewayDevice.DeviceInfo.</Name>\n                    <Writable>true</Writable>\n                </ParameterInfoStruct>\n            </ParameterList>\n        </cwmp:GetParameterNamesResponse>\n    </soapenv:Body>\n</soapenv:Envelope>\n",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "success",
+                          "action": "update",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "0001-01-01T00:00:00Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d349bb10447af623878e6",
+                      "timestamp": "2026-01-06T16:13:15.902Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "",
+                      "responsePayload": "\"You have no enterprise license, to get one contact: sales@oktopus.app.br\"",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "failure",
+                          "action": "read",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "0001-01-01T00:00:00Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d34c3b10447af623878e7",
+                      "timestamp": "2026-01-06T16:13:55.784Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "",
+                      "responsePayload": "[{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.\",\"name\":{\"writable\":false,\"value\":\"wl1\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":1},\"possible_channels\":{\"writable\":false,\"value\":[1]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"2.4GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"2.4GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}},{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.\",\"name\":{\"writable\":false,\"value\":\"wl0\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":149},\"possible_channels\":{\"writable\":false,\"value\":[149]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"5GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"5GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"a\",\"n\",\"ac\",\"ax\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}}]",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "success",
+                          "action": "read",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "0001-01-01T00:00:00Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d35b1b10447af623878e8",
+                      "timestamp": "2026-01-06T16:17:53.6Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "[\n    {\n        \"path\": \"Device.WiFi.Radio.2.\",\n        \"operating_standards\":{\n            \"value\": \"a,n\"\n        }\n    }\n]",
+                      "responsePayload": "\"Couldn't decode received payload: json: cannot unmarshal string into Go struct field ParamData[*[]string].operating_standards.value of type []string\"",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "failure",
+                          "action": "update",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "0001-01-01T00:00:00Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d7df5039d9187e2da7ce4",
+                      "timestamp": "2026-01-06T21:26:13.839Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "",
+                      "responsePayload": "[{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.\",\"name\":{\"writable\":false,\"value\":\"wl1\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":1},\"possible_channels\":{\"writable\":false,\"value\":[1]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"2.4GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"2.4GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}},{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.\",\"name\":{\"writable\":false,\"value\":\"wl0\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":149},\"possible_channels\":{\"writable\":false,\"value\":[149]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"5GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"5GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"a\",\"n\",\"ac\",\"ax\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}}]",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "success",
+                          "action": "read",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "0001-01-01T00:00:00Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d7e40b1a0a72682c6e141",
+                      "timestamp": "2026-01-06T21:27:28.391Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "",
+                      "responsePayload": "[{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.\",\"name\":{\"writable\":false,\"value\":\"wl1\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":1},\"possible_channels\":{\"writable\":false,\"value\":[1]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"2.4GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"2.4GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}},{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.\",\"name\":{\"writable\":false,\"value\":\"wl0\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":149},\"possible_channels\":{\"writable\":false,\"value\":[149]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"5GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"5GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"a\",\"n\",\"ac\",\"ax\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}}]",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "success",
+                          "action": "read",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "2026-01-06T21:27:28.388Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d7f36b1a0a72682c6e142",
+                      "timestamp": "2026-01-06T21:31:34.325Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "",
+                      "responsePayload": "[{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.\",\"name\":{\"writable\":false,\"value\":\"wl1\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":1},\"possible_channels\":{\"writable\":false,\"value\":[1]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"2.4GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"2.4GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}},{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.\",\"name\":{\"writable\":false,\"value\":\"wl0\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":149},\"possible_channels\":{\"writable\":false,\"value\":[149]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"5GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"5GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"a\",\"n\",\"ac\",\"ax\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}}]",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "success",
+                          "action": "read",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "timeRange": {
+                              "from": "2026-01-06T21:31:34.321Z",
+                              "to": "0001-01-01T00:00:00Z"
+                          }
+                      }
+                  },
+                  {
+                      "id": "695d7fb8b1a0a72682c6e143",
+                      "timestamp": "2026-01-06T21:33:44.452Z",
+                      "actor": {
+                          "type": "user",
+                          "name": "Enterprise Support",
+                          "email": "support@oktopus.app.br",
+                          "role": "Admin"
+                      },
+                      "requestPayload": "",
+                      "responsePayload": "[{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.\",\"name\":{\"writable\":false,\"value\":\"wl1\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":1},\"possible_channels\":{\"writable\":false,\"value\":[1]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"2.4GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"2.4GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}},{\"path\":\"InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.\",\"name\":{\"writable\":false,\"value\":\"wl0\"},\"enable\":{\"writable\":true,\"value\":true},\"auto_channel_enable\":{\"writable\":true,\"value\":true},\"channel\":{\"writable\":true,\"value\":149},\"possible_channels\":{\"writable\":false,\"value\":[149]},\"operating_channel_bandwidth\":{\"writable\":false,\"value\":\"\"},\"supported_operating_channel_bandwidth\":{\"writable\":false,\"value\":[\"\"]},\"operating_frequency_band\":{\"writable\":false,\"value\":\"5GHz\"},\"supported_frequency_bands\":{\"writable\":false,\"value\":[\"5GHz\"]},\"operating_standards\":{\"writable\":false,\"value\":[\"a\",\"n\",\"ac\",\"ax\"]},\"supported_standards\":{\"writable\":false,\"value\":[\"b\",\"g\",\"n\",\"ac\",\"ax\"]},\"transmit_power\":{\"writable\":false,\"value\":\"TransmitPower\"},\"transmit_power_supported\":{\"writable\":false,\"value\":[\"\"]}}]",
+                      "metadata": {
+                          "tenantId": "12345678901234567890",
+                          "actorId": "support@oktopus.app.br",
+                          "severity": "info",
+                          "outcome": "success",
+                          "action": "read",
+                          "resource": "device",
+                          "deviceId": "HUAWNFYC-OPA123-0",
+                          "duration": 6,
+                          "timeRange": {
+                              "from": "2026-01-06T21:33:44.443Z",
+                              "to": "2026-01-06T21:33:44.449Z"
+                          }
+                      }
+                  }
+              ],
+              "page": {
+                  "nextCursor": "695d7fb8b1a0a72682c6e143",
+                  "total": 8
+              }
+          }
+
+docs: |-
+  Returns a filtered, keyset-paginated list of audit trail events for the active tenant.
+
+  ## Query parameters
+
+  | Param | Required | Description |
+  |---|---|---|
+  | `sn` | yes | Device serial number to scope the trail to. |
+  | `sortBy` | no | `timestamp` or `id`. Defaults to `timestamp`. |
+  | `orderBy` | no | `asc` or `desc`. Defaults to `desc`. |
+  | `limit` | no | Page size. Defaults to 50, max 64. |
+  | `cursor` | no | Keyset cursor from the previous response's `page.nextCursor`. Omit for the first page. |
+  | `resource` | no | Comma-separated list of resources to filter by. |
+  | `action` | no | Comma-separated list of actions to filter by. |
+  | `actorType` | no | Comma-separated list of actor types to filter by. |
+  | `actorId` | no | Comma-separated list of actor ids to filter by. |
+  | `startTime` / `endTime` | no | RFC3339 timestamps bounding the event range. |
+
+  ## Response
+
+  ```json
+  {
+    "items": [ /* array of trail events */ ],
+    "page": {
+      "nextCursor": "695d7fb8b1a0a72682c6e143",
+      "total": 8,
+      "pageSize": 64,
+      "totalPages": 1
+    }
+  }
+  ```
+
+  ### `page` object
+
+  | Field | Type | Description |
+  |---|---|---|
+  | `nextCursor` | string | Cursor to pass as `cursor` to fetch the next page. Empty when there are no more pages. |
+  | `total` | integer | Total number of entries matching the filter across all pages. |
+  | `pageSize` | integer | Effective page size applied to this query (the resolved `limit`). |
+  | `totalPages` | integer | Number of pages for the current filter and page size: `ceil(total / pageSize)`. `0` when there are no matches. |
+
+  Pagination is keyset-based on `(timestamp, streamSeq)`, so pages never skip or repeat events that share a timestamp. `totalPages` is informational for UI display; navigate forward with `nextCursor` rather than a page number.

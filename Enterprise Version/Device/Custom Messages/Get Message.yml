@@ -1,0 +1,177 @@
+info:
+  name: Get Message
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{base_url}}device/message?name=usp-test-1&type"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: name
+      value: usp-test-1
+      type: query
+    - name: type
+      value: ""
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get All Messages
+    request:
+      url: "{{base_url}}device/message"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: cwmp-test-1
+          type: query
+          disabled: true
+        - name: type
+          value: usp
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 08 Oct 2024 18:09:58 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "name": "cwmp-test-1",
+                  "type": "cwmp",
+                  "value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<soap:Envelope xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cwmp=\"urn:dslforum-org:cwmp-1-0\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:schemaLocation=\"urn:dslforum-org:cwmp-1-0 ..\\schemas\\wt121.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n  <soap:Header/>\n  <soap:Body soap:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n    <cwmp:GetParameterValues>\n      <ParameterNames>\n        <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.</string>\n       </ParameterNames>\n    </cwmp:GetParameterValues>\n  </soap:Body>\n</soap:Envelope>"
+              },
+              {
+                  "name": "Test numer 2",
+                  "type": "usp",
+                  "value": "\n{\n    \"header\": {\n        \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n        \"msg_type\": 8\n    },\n    \"body\": {\n        \"request\": {\n            \"add\": {\n                \"allow_partial\": true,\n                \"create_objs\": [\n                    {\n                        \"obj_path\": \"Device.IP.Interface.\",\n                        \"param_settings\": [\n                            {\n                                \"param\": \"Alias\",\n                                \"value\": \"test\",\n                                \"required\": true\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    }\n}"
+              },
+              {
+                  "name": "IP ADDRESS",
+                  "type": "usp",
+                  "value": "{\n    \"header\": {\n        \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n        \"msg_type\": 1\n    },\n    \"body\": {\n        \"request\": {\n            \"get\": {\n                \"paramPaths\": [\n                    \"Device.IP.Interface.1.IPv4Address.1.IPAddress\"\n                ],\n                \"maxDepth\": 2\n            }\n        }\n    }\n}"
+              },
+              {
+                  "name": "HUAWEI-TEST-1",
+                  "type": "usp",
+                  "value": "{\n    \"header\": {\n        \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n        \"msg_type\": 1\n    },\n    \"body\": {\n        \"request\": {\n            \"get\": {\n                \"paramPaths\": [\n                    \"Device.WiFi.SSID.[Name==wlan0].\",\n                    \"Device.IP.Interface.*.Alias\",\n                    \"Device.DeviceInfo.FirmwareImage.*.Alias\",\n                    \"Device.IP.Interface.1.IPv4Address.1.IPAddress\"\n                ],\n                \"maxDepth\": 2\n            }\n        }\n    }\n}"
+              }
+          ]
+  - name: Get Messages by Type
+    request:
+      url: "{{base_url}}device/message?type=usp"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: cwmp-test-1
+          type: query
+          disabled: true
+        - name: type
+          value: usp
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 08 Oct 2024 18:10:22 GMT
+        - name: Content-Length
+          value: "1799"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "name": "Test numer 2",
+                  "type": "usp",
+                  "value": "\n{\n    \"header\": {\n        \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n        \"msg_type\": 8\n    },\n    \"body\": {\n        \"request\": {\n            \"add\": {\n                \"allow_partial\": true,\n                \"create_objs\": [\n                    {\n                        \"obj_path\": \"Device.IP.Interface.\",\n                        \"param_settings\": [\n                            {\n                                \"param\": \"Alias\",\n                                \"value\": \"test\",\n                                \"required\": true\n                            }\n                        ]\n                    }\n                ]\n            }\n        }\n    }\n}"
+              },
+              {
+                  "name": "IP ADDRESS",
+                  "type": "usp",
+                  "value": "{\n    \"header\": {\n        \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n        \"msg_type\": 1\n    },\n    \"body\": {\n        \"request\": {\n            \"get\": {\n                \"paramPaths\": [\n                    \"Device.IP.Interface.1.IPv4Address.1.IPAddress\"\n                ],\n                \"maxDepth\": 2\n            }\n        }\n    }\n}"
+              },
+              {
+                  "name": "HUAWEI-TEST-1",
+                  "type": "usp",
+                  "value": "{\n    \"header\": {\n        \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n        \"msg_type\": 1\n    },\n    \"body\": {\n        \"request\": {\n            \"get\": {\n                \"paramPaths\": [\n                    \"Device.WiFi.SSID.[Name==wlan0].\",\n                    \"Device.IP.Interface.*.Alias\",\n                    \"Device.DeviceInfo.FirmwareImage.*.Alias\",\n                    \"Device.IP.Interface.1.IPv4Address.1.IPAddress\"\n                ],\n                \"maxDepth\": 2\n            }\n        }\n    }\n}"
+              }
+          ]
+  - name: Get Message By Name
+    request:
+      url: "{{base_url}}device/message?name=cwmp-test-1"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: cwmp-test-1
+          type: query
+        - name: type
+          value: usp
+          type: query
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 08 Oct 2024 18:10:54 GMT
+        - name: Content-Length
+          value: "688"
+      body:
+        type: json
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:GetParameterValues>
+                <ParameterNames>
+                  <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.</string>
+                 </ParameterNames>
+              </cwmp:GetParameterValues>
+            </soap:Body>
+          </soap:Envelope>

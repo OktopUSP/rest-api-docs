@@ -1,0 +1,161 @@
+info:
+  name: SetParameterValues
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}device/cwmp/:device/setParameterValues"
+  headers:
+    - name: Content-Type
+      value: application/xml
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: 485754434ECDE6AD
+      type: path
+  body:
+    type: xml
+    data: |-
+      <?xml version="1.0" encoding="UTF-8"?>
+      <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <soap:Header/>
+        <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <cwmp:SetParameterValues>
+            <ParameterList soapenc:arrayType="cwmp:ParameterValueStruct[4]">
+                      <ParameterValueStruct>
+                          <Name>InternetGatewayDevice.TraceRouteDiagnostics.Host</Name>
+                          <Value>192.168.60.4</Value>
+                      </ParameterValueStruct>
+            </ParameterList>
+            <ParameterKey></ParameterKey>
+          </cwmp:SetParameterValues>
+        </soap:Body>
+      </soap:Envelope>
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: SetParameterValues
+    request:
+      url: "{{base_url}}device/cwmp/:device/setParameterValues"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: VMXQU21B06601401
+          type: path
+      body:
+        type: xml
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:SetParameterValues>
+                <ParameterList soapenc:arrayType="cwmp:ParameterValueStruct[1]">
+          		  <ParameterValueStruct>
+          			  <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable</Name>
+          			  <Value>1</Value>
+          		  </ParameterValueStruct>
+                </ParameterList>
+                <ParameterKey></ParameterKey>
+              </cwmp:SetParameterValues>
+            </soap:Body>
+          </soap:Envelope>
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 21 May 2024 23:25:59 GMT
+        - name: Content-Length
+          value: "495"
+      body:
+        type: xml
+        data: |-
+          <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+              <SOAP-ENV:Header>
+                  <cwmp:ID SOAP-ENV:mustUnderstand="1"/>
+              </SOAP-ENV:Header>
+              <SOAP-ENV:Body>
+                  <cwmp:SetParameterValuesResponse>
+                      <Status>0</Status>
+                  </cwmp:SetParameterValuesResponse>
+              </SOAP-ENV:Body>
+          </SOAP-ENV:Envelope>
+  - name: SetParameterMultiValues
+    request:
+      url: "{{base_url}}device/cwmp/:device/setParameterValues"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: VMXQU21B06601401
+          type: path
+      body:
+        type: xml
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:SetParameterValues>
+                <ParameterList soapenc:arrayType="cwmp:ParameterValueStruct[3]">
+          		<ParameterValueStruct>
+          			  <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable</Name>
+          			  <Value>0</Value>
+                  </ParameterValueStruct>
+                  <ParameterValueStruct>
+          			  <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.SSID</Name>
+          			  <Value>HUAWEI_TEST-2</Value>
+                  </ParameterValueStruct>
+                </ParameterList>
+                <ParameterKey>LC1309123</ParameterKey>
+              </cwmp:SetParameterValues>
+            </soap:Body>
+          </soap:Envelope>
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 30 May 2024 12:57:30 GMT
+        - name: Content-Length
+          value: "495"
+      body:
+        type: xml
+        data: |-
+          <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+              <SOAP-ENV:Header>
+                  <cwmp:ID SOAP-ENV:mustUnderstand="1"/>
+              </SOAP-ENV:Header>
+              <SOAP-ENV:Body>
+                  <cwmp:SetParameterValuesResponse>
+                      <Status>0</Status>
+                  </cwmp:SetParameterValuesResponse>
+              </SOAP-ENV:Body>
+          </SOAP-ENV:Envelope>

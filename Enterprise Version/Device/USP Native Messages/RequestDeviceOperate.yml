@@ -1,0 +1,330 @@
+info:
+  name: RequestDeviceOperate
+  type: http
+  seq: 8
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/operate"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: ""
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "command": "Device.Reboot()",
+          "send_resp": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Operate OnBoardRequest
+    request:
+      url: "{{base_url}}device/{{device}}/operate"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "command": "Device.LocalAgent.Controller.1.SendOnBoardRequest()",
+              "send_resp": true
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 23 Oct 2023 23:23:46 GMT
+        - name: Content-Length
+          value: "136"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.LocalAgent.Controller.1.SendOnBoardRequest()",
+                      "OperationResp": {
+                          "ReqOutputArgs": {}
+                      }
+                  }
+              ]
+          }
+  - name: Operate Reboot
+    request:
+      url: "{{base_url}}device/{{device}}/operate"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "command": "Device.Reboot()",
+              "send_resp": true
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 23 Oct 2023 23:30:13 GMT
+        - name: Content-Length
+          value: "100"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.Reboot()",
+                      "OperationResp": {
+                          "ReqOutputArgs": {}
+                      }
+                  }
+              ]
+          }
+  - name: Install container
+    request:
+      url: "{{base_url}}device/:device/:mtp/operate"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::FFFFFF-10000000ef93a6b3
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "command": "Device.SoftwareModules.InstallDU()",
+              "send_resp": true,                                                                        
+              "input_args": {
+                  "URL":"http://69.136.49.27/testapp32.tar"
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 10 Oct 2024 13:24:27 GMT
+        - name: Content-Length
+          value: "143"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.SoftwareModules.InstallDU()",
+                      "OperationResp": {
+                          "ReqObjPath": "Device.LocalAgent.Request.1"
+                      }
+                  }
+              ]
+          }
+  - name: Active container
+    request:
+      url: "{{base_url}}device/:device/:mtp/operate"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::FFFFFF-10000000ef93a6b3
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "command": "Device.SoftwareModules.ExecutionUnit.1.SetRequestedState()",
+              "send_resp": true,
+              "input_args": {
+                  "RequestedState": "Active"
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 10 Oct 2024 13:20:46 GMT
+        - name: Content-Length
+          value: "182"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.SoftwareModules.ExecutionUnit.1.SetRequestedState()",
+                      "OperationResp": {
+                          "ReqOutputArgs": {
+                              "output_args": {
+                                  "Ret": "\"Starting EU\""
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Stop container
+    request:
+      url: "{{base_url}}device/:device/:mtp/operate"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::FFFFFF-10000000ef93a6b3
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+             "command": "Device.SoftwareModules.ExecutionUnit.1.SetRequestedState()",
+             "send_resp": true,
+             "input_args": {
+               "RequestedState": "Idle"
+             }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 10 Oct 2024 13:22:18 GMT
+        - name: Content-Length
+          value: "182"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.SoftwareModules.ExecutionUnit.1.SetRequestedState()",
+                      "OperationResp": {
+                          "ReqOutputArgs": {
+                              "output_args": {
+                                  "Ret": "\"Stopping EU\""
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Uninstall container
+    request:
+      url: "{{base_url}}device/:device/:mtp/operate"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::FFFFFF-10000000ef93a6b3
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "command": "Device.SoftwareModules.DeploymentUnit.1.Uninstall()",
+              "send_resp": true,
+              "input_args": {
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 10 Oct 2024 13:23:38 GMT
+        - name: Content-Length
+          value: "160"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.SoftwareModules.DeploymentUnit.1.Uninstall()",
+                      "OperationResp": {
+                          "ReqObjPath": "Device.LocalAgent.Request.1"
+                      }
+                  }
+              ]
+          }

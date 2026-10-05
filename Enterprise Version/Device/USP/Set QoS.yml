@@ -1,0 +1,98 @@
+info:
+  name: Set QoS
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/qos"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "enable": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Set QoS
+    request:
+      url: "{{base_url}}device/:device/:mtp/qos"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "enable": true
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 31 Mar 2025 17:41:12 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "206"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.X_TP_Iqos.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.X_TP_Iqos.",
+                                          "updated_params": {
+                                              "Enable": "1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

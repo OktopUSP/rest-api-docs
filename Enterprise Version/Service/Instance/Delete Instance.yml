@@ -1,0 +1,63 @@
+info:
+  name: Delete Instance
+  type: http
+  seq: 6
+
+http:
+  method: DELETE
+  url: "{{base_url}}service/instance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/instance"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "id":"69ca8eb2bbbf26001dcca0eb"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 15:11:52 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

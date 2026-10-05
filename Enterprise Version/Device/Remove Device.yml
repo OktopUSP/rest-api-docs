@@ -1,0 +1,117 @@
+info:
+  name: Remove Device
+  type: http
+  seq: 13
+
+http:
+  method: DELETE
+  url: "{{base_url}}device?id=test123669"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: id
+      value: test123669
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Remove Devices
+    request:
+      url: "{{base_url}}device?id=oktopus-2-stomp,oktopus-4-stomp"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: oktopus-2-stomp,oktopus-4-stomp
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 07 Aug 2024 12:35:51 GMT
+        - name: Content-Length
+          value: "32"
+      body:
+        type: json
+        data: |-
+          {
+              "number_of_deleted_devices": 2
+          }
+  - name: Remove Device
+    request:
+      url: "{{base_url}}device?id=oktopus-3-stomp"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: oktopus-3-stomp
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 07 Aug 2024 12:37:10 GMT
+        - name: Content-Length
+          value: "32"
+      body:
+        type: json
+        data: |-
+          {
+              "number_of_deleted_devices": 1
+          }
+  - name: No Device to Delete
+    request:
+      url: "{{base_url}}device?id="
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 07 Aug 2024 12:38:35 GMT
+        - name: Content-Length
+          value: "17"
+      body:
+        type: json
+        data: '"No id provided"'

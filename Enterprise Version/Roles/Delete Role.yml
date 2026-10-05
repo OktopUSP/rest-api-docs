@@ -1,0 +1,53 @@
+info:
+  name: Delete Role
+  type: http
+  seq: 5
+
+http:
+  method: DELETE
+  url: "{{base_url}}roles/:rolename"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: rolename
+      value: test
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Role
+    request:
+      url: "{{base_url}}roles/:rolename"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: rolename
+          value: test
+          type: path
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 13 Sep 2024 18:30:50 GMT
+      body:
+        type: json
+        data: ""

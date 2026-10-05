@@ -1,0 +1,88 @@
+info:
+  name: Get Script(s)
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}scripts"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Script(s)
+    request:
+      url: "{{base_url}}scripts"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 01:09:14 GMT
+        - name: Content-Length
+          value: "1110"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "_id": "673fd8c95df925a773782ca5",
+                  "active": true,
+                  "content": "",
+                  "created_by": "teste@gmail.com",
+                  "deleted": false,
+                  "deleted_by": "",
+                  "description": "newScriptDescription",
+                  "last_change": "2024-11-22T01:05:13.247Z",
+                  "last_changed_by": "teste@gmail.com",
+                  "name": "newScriptname",
+                  "state": 0
+              },
+              {
+                  "_id": "673fd9575df925a773782ca6",
+                  "active": true,
+                  "content": "",
+                  "created_by": "teste@gmail.com",
+                  "deleted": false,
+                  "deleted_by": "",
+                  "description": "newScriptDescription",
+                  "last_change": "2024-11-22T01:07:35.683Z",
+                  "last_changed_by": "teste@gmail.com",
+                  "name": "fghgfhgf",
+                  "state": 0
+              },
+              {
+                  "_id": "673fd9b65df925a773782ca7",
+                  "active": true,
+                  "content": "newScriptPayload",
+                  "created_by": "teste@gmail.com",
+                  "deleted": false,
+                  "deleted_by": "",
+                  "description": "newScriptDescription",
+                  "last_change": "2024-11-22T01:09:10.197Z",
+                  "last_changed_by": "teste@gmail.com",
+                  "name": "goiaba",
+                  "state": 0
+              }
+          ]

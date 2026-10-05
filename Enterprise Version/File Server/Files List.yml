@@ -1,0 +1,30 @@
+info:
+  name: Files List
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{base_url_file}}file/all/list"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: models
+      value: ""
+      type: query
+      disabled: true
+    - name: type
+      value: image,app
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

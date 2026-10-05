@@ -1,0 +1,136 @@
+info:
+  name: Passcode
+  type: http
+  seq: 1
+
+http:
+  method: PUT
+  url: "{{base_url}}license/passcode"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+        "Pscd": "88225378",
+        "Period": 30,
+        "Digits": 6,
+        "Algorithm": 0
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Ping Failure
+    request:
+      url: "{{base_url}}device/:device/ping"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: 485754434ECDE6AD
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "interface": {
+                  "value": ""
+              },
+              "timeout" : {
+                  "value": 10
+              },
+              "host": {
+                  "value":"192.168.60.3"
+              },
+              "number_of_repetitions": {
+                  "value": 2
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sun, 30 Jun 2024 22:56:03 GMT
+        - name: Content-Length
+          value: "85"
+      body:
+        type: json
+        data: |-
+          {
+              "failure_count": 2,
+              "success_count": 0,
+              "average_rtt": 0,
+              "minimum_rtt": 0,
+              "maximum_rtt": 0
+          }
+  - name: Ping Sucess
+    request:
+      url: "{{base_url}}device/:device/ping"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: 485754434ECDE6AD
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "interface": {
+                  "value": ""
+              },
+              "timeout" : {
+                  "value": 10
+              },
+              "host": {
+                  "value":"192.168.60.95"
+              },
+              "number_of_repetitions": {
+                  "value": 2
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sun, 30 Jun 2024 22:56:58 GMT
+        - name: Content-Length
+          value: "85"
+      body:
+        type: json
+        data: |-
+          {
+              "failure_count": 0,
+              "success_count": 2,
+              "average_rtt": 1,
+              "minimum_rtt": 1,
+              "maximum_rtt": 1
+          }

@@ -1,0 +1,81 @@
+info:
+  name: Create Geolocation
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}map/?sn={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: sn
+      value: "{{device}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+          "img":"https://consumer.huawei.com/dam/content/dam/huawei-cbg-site/common/mkt/pdp/routers/5g-cpe-pro-2/images/Huawei-5g-cpe-pro-2.png",
+          "coordinates":{
+              "lat":37.77490000000000,
+              "lng":-122.41940000000000
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Create Geolocation
+    request:
+      url: "{{base_url}}map/?sn={{device}}"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: sn
+          value: "{{device}}"
+          type: query
+      body:
+        type: json
+        data: |-
+          {
+              "img":"https://consumer.huawei.com/dam/content/dam/huawei-cbg-site/common/mkt/pdp/routers/5g-cpe-pro-2/images/Huawei-5g-cpe-pro-2.png",
+              "coordinates":{
+                  "lat":37.77490000000000,
+                  "lng":-122.41940000000000
+              }
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Mon, 06 Apr 2026 20:33:07 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "0"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

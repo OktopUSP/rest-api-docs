@@ -1,0 +1,70 @@
+info:
+  name: Get SpeedTest Options
+  type: http
+  seq: 24
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/speedtest"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: SpeedTest Options
+    request:
+      url: "{{base_url}}device/:device/:mtp/speedtest"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Thu, 10 Apr 2025 16:12:56 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "64"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "download_servers": [],
+              "upload_servers": [],
+              "request_timeout": 30
+          }

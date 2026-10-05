@@ -1,0 +1,20 @@
+info:
+  name: Cancel Mass Action
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}mass-actions?actionId=671017da6174deeacd62a2aa"
+  params:
+    - name: actionId
+      value: 671017da6174deeacd62a2aa
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

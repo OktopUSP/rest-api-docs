@@ -1,0 +1,101 @@
+info:
+  name: Create Mass Firmware Update
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}mass-actions/fwUpdate"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name": "Pão com maionese",
+          "description": "oloquinho meu",
+          "devices": [
+              {
+                  "id": "{{device}}"
+              },
+              {
+                  "id": "dsadasdsa"
+              }
+          ],
+          "parameters": {
+              "num_of_updates_in_parallel": 4,
+              "fw_name": "2.2-dsfdsfsd-dev",
+              "fw_download_url": "http://192.168.4.225/firmwares/hw_ctree-wifi-resetado.xml"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+  omitHeaders:
+    - content-type
+
+examples:
+  - name: Mass Firmware Update
+    request:
+      url: "{{base_url}}mass-actions/fwUpdate"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name" : "Pão com maionese",
+              "description": "vinagrete holandês",
+              "devices": [
+                  { 
+                      "id": "os::4C2EFE-GCN230700061"
+                  },
+                  { 
+                      "id": "dsadasdsa"
+                  }
+              ],
+              "parameters": {
+                  "fw_name":"2.2-dsfdsfsd-dev",
+                  "fw_download_url":"http://urltodownloadthefile.com/firmwares/teste-v134.tar",
+                  "num_of_updates_in_parallel": 4
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 30 Aug 2024 19:58:17 GMT
+        - name: Content-Length
+          value: "0"
+      body:
+        type: json
+        data: ""
+
+docs: |-
+  Requirements:
+
+  - More than two devices attached.
+  - User must be authenticated.
+  - The devices attached must not be in other mass actions which have not finished yet.
+  - Firmware must have a name.
+  - Firmware must have a download url.
+  - If you set the "num_of_updates_in_parallel" to 1, then the device firmware update wil be done sequentially, one after one.
+      
+  - The "fw_name" field is used to check if the current firmware version of the device is the same of the new firmware you want to upload, if it is, then the device is skipped.

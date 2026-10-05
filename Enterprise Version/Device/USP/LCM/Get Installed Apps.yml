@@ -1,0 +1,84 @@
+info:
+  name: Get Installed Apps
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/lcm"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Installed Apps
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 14:15:11 GMT
+        - name: Content-Length
+          value: "572"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "execution_unit": "Device.SoftwareModules.ExecutionUnit.1.",
+                  "deployment_unit": "Device.SoftwareModules.DeploymentUnit.1.",
+                  "name": "testapp32.tar",
+                  "url": "http://69.136.49.27/testapp32.tar",
+                  "status": "Idle"
+              },
+              {
+                  "execution_unit": "Device.SoftwareModules.ExecutionUnit.2.",
+                  "deployment_unit": "Device.SoftwareModules.DeploymentUnit.2.",
+                  "name": "busybox.tar",
+                  "url": "http://69.136.49.27/busybox.tar",
+                  "status": "Idle"
+              },
+              {
+                  "execution_unit": "",
+                  "deployment_unit": "Device.SoftwareModules.DeploymentUnit.3.",
+                  "name": "testapp32.tar",
+                  "url": "http://192.168.4.225/apps/testapp32.tar",
+                  "status": "New"
+              }
+          ]

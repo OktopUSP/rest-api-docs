@@ -1,0 +1,23 @@
+opencollection: 1.0.0
+
+info:
+  name: Oktopus Controller REST API
+
+request:
+  variables:
+    - name: authToken
+      value: ""
+    - name: base_url
+      value: ""
+    - name: base_url_file
+      value: ""
+
+docs:
+  content: REST API documentation of Oktopus Open Source USP Controller and CWMP compatible multi-vendor device management platform.
+  type: text/markdown
+bundled: false
+extensions:
+  bruno:
+    ignore:
+      - node_modules
+      - .git

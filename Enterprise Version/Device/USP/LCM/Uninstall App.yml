@@ -1,0 +1,83 @@
+info:
+  name: Uninstall App
+  type: http
+  seq: 4
+
+http:
+  method: DELETE
+  url: "{{base_url}}device/:device/:mtp/lcm"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "deployment_unit": "Device.SoftwareModules.DeploymentUnit.2."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Uninstall App
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "deployment_unit": "Device.SoftwareModules.DeploymentUnit.2."
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 14:58:44 GMT
+        - name: Content-Length
+          value: "159"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.SoftwareModules.DeploymentUnit.2.Uninstall()",
+                      "OperationResp": {
+                          "ReqObjPath": "Device.LocalAgent.Request.5"
+                      }
+                  }
+              ]
+          }

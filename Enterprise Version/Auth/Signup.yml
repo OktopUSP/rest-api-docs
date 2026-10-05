@@ -1,0 +1,81 @@
+info:
+  name: Signup
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}auth/signup"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+          "user": {
+              "email":"opa@gmail.com",
+              "name": "dsadsadsa",
+              "password": "oloquinhomeu"
+          },
+          "tenant": {
+              "name": "minha tenant 1",
+              "subdomain": "paraguai"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Captcha token is required
+    request:
+      url: "{{base_url}}auth/signup"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+              "user": {
+                  "email":"{{email}}",
+                  "name": "dsadsadsa",
+                  "password": "{{password}}"
+              },
+              "tenant": {
+                  "name": "minha tenant 1",
+                  "subdomain": "paraguai"
+              }
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Wed, 19 Nov 2025 19:33:00 GMT
+        - name: Content-Type
+          value: text/plain; charset=utf-8
+        - name: Content-Length
+          value: "25"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: text
+        data: Captcha token is required

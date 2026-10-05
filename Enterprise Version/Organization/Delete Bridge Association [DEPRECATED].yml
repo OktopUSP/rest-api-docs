@@ -1,0 +1,27 @@
+info:
+  name: Delete Bridge Association [DEPRECATED]
+  type: http
+  seq: 13
+
+http:
+  method: DELETE
+  url: "{{base_url}}organization/association"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "bridge": "75feeab3-5118-4bfe-a1f0-bd40e6a6a046"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

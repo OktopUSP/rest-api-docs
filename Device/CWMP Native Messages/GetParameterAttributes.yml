@@ -1,0 +1,690 @@
+info:
+  name: GetParameterAttributes
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url}}device/cwmp/:device/getParameterAttributes"
+  headers:
+    - name: Content-Type
+      value: application/json
+      disabled: true
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+  body:
+    type: xml
+    data: |-
+      <?xml version="1.0" encoding="UTF-8"?>
+      <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <soap:Header/>
+        <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <cwmp:GetParameterAttributes>
+            <ParameterNames>
+              <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.</string>
+              <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.</string>
+              <string>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.</string>
+              <string>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.</string>
+             </ParameterNames>
+          </cwmp:GetParameterAttributes>
+        </soap:Body>
+      </soap:Envelope>
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: GetParameterAttributes
+    request:
+      url: "{{base_url}}device/cwmp/:device/getParameterAttributes"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+          disabled: true
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: VMXQU21B06601401
+          type: path
+      body:
+        type: xml
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:GetParameterAttributes>
+                <ParameterNames>
+                  <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.</string>
+                  <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.</string>
+                  <string>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.</string>
+                  <string>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.</string>
+                 </ParameterNames>
+              </cwmp:GetParameterAttributes>
+            </soap:Body>
+          </soap:Envelope>
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 29 May 2024 01:13:45 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: xml
+        data: |-
+          <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+              <SOAP-ENV:Header>
+                  <cwmp:ID SOAP-ENV:mustUnderstand="1"/>
+              </SOAP-ENV:Header>
+              <SOAP-ENV:Body>
+                  <cwmp:GetParameterAttributesResponse>
+                      <ParameterList SOAP-ENC:arrayType="cwmp:ParameterAttributeStruct[84]">
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Name</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BSSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.AutoChannelEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.ChannelsInUse</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WMMEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalBytesSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalBytesReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalAssociations</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.ErrorsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.ErrorsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.DiscardPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.DiscardPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Enable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Status</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Name</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.BSSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Channel</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.AutoChannelEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.ChannelsInUse</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.SSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.BeaconType</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Standard</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.WMMEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.TotalBytesSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.TotalBytesReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.TotalPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.TotalPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.TotalAssociations</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.PreSharedKey.1.KeyPassphrase</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Stats.ErrorsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Stats.ErrorsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Stats.DiscardPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.2.Stats.DiscardPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Enable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Status</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Name</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.BSSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Channel</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.AutoChannelEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.ChannelsInUse</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.SSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.BeaconType</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Standard</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.WMMEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.TotalBytesSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.TotalBytesReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.TotalPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.TotalPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.TotalAssociations</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.PreSharedKey.1.KeyPassphrase</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Stats.ErrorsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Stats.ErrorsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Stats.DiscardPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.2.Stats.DiscardPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Enable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Status</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Name</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.BSSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Channel</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.AutoChannelEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.ChannelsInUse</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.SSID</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.BeaconType</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Standard</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.WMMEnable</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.TotalBytesSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.TotalBytesReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.TotalPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.TotalPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.TotalAssociations</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Stats.ErrorsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Stats.ErrorsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Stats.DiscardPacketsSent</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                          <ParameterAttributeStruct>
+                              <Name>InternetGatewayDevice.LANDevice.2.WLANConfiguration.1.Stats.DiscardPacketsReceived</Name>
+                              <AccessList SOAP-ENC:arrayType="xsd:string[1]">
+                                  <string>Subscriber</string>
+                              </AccessList>
+                              <Notification>0</Notification>
+                          </ParameterAttributeStruct>
+                      </ParameterList>
+                  </cwmp:GetParameterAttributesResponse>
+              </SOAP-ENV:Body>
+          </SOAP-ENV:Envelope>

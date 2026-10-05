@@ -1,0 +1,61 @@
+info:
+  name: Create Role
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}roles"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name": "teste123",
+          "description":""
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Create Role
+    request:
+      url: "{{base_url}}roles"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name": "test",
+              "description":""
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 13 Sep 2024 15:29:09 GMT
+        - name: Content-Length
+          value: "0"
+      body:
+        type: json
+        data: ""

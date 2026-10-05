@@ -1,0 +1,262 @@
+info:
+  name: Set Bridge
+  type: http
+  seq: 28
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/bridge"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      [
+          {
+              "ip_path": "Device.IP.Interface.1.",
+              "max_mtu_size": {
+                  "value": "1494"
+              },
+              "dhcp_v4": {
+                  "server": [
+                      {
+                          "path": "Device.DHCPv4.Server.Pool.1.",
+                          "max_address": {
+                              "value": "192.168.0.249"
+                          },
+                          "lease_time": {
+                              "value": "7199"
+                          }
+                      }
+                  ]
+              }
+          }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Max MTU Size
+    request:
+      url: "{{base_url}}device/:device/:mtp/bridge"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "ip_path": "Device.IP.Interface.1.",
+                  "max_mtu_size": {
+                      "value": "1492"
+                  }
+                  
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Tue, 28 Jan 2025 13:37:11 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "223"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.1.",
+                                          "updated_params": {
+                                              "MaxMTUSize": "1492"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Enable/Disable IGMP Proxy
+    request:
+      url: "{{base_url}}device/:device/:mtp/bridge"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "ip_path": "Device.IP.Interface.1.",
+                  "igmp_proxy_enable": {
+                      "value": "false"
+                  }
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Tue, 28 Jan 2025 13:40:47 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "234"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.1.",
+                                          "updated_params": {
+                                              "X_TP_IGMPProxyEnable": "false"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Ports Mapping
+    request:
+      url: "{{base_url}}device/:device/:mtp/bridge"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "ip_path": "Device.IP.Interface.1.",
+                  "ports": [
+                      {
+                          "enable": {
+                              "value": "false"
+                          },
+                          "name": "LAN1",
+                          "path": "Device.Bridging.Bridge.1.Port.3."
+                      }
+                  ]
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Tue, 28 Jan 2025 13:51:12 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "240"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.Bridging.Bridge.1.Port.3.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.Bridging.Bridge.1.Port.3.",
+                                          "updated_params": {
+                                              "Enable": "false"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

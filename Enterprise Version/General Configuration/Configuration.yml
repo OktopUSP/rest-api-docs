@@ -1,0 +1,64 @@
+info:
+  name: Configuration
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}config"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+      disabled: true
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Configuration
+    request:
+      url: "{{base_url}}config"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+          disabled: true
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Wed, 19 Nov 2025 18:56:30 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "87"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "admin_is_already_registered": true,
+              "enable_saas_mode": true,
+              "enable_subdomains": false
+          }

@@ -1,0 +1,55 @@
+info:
+  name: AdminRegister
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}auth/admin/register"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "email":"{{email}}",
+          "password":"{{password}}"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: AdminRegister
+    request:
+      url: "{{base_url}}auth/admin/register"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "email":"lucas@gmail.com",
+              "password":"lucas"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 24 Jun 2023 13:45:33 GMT
+        - name: Content-Length
+          value: "0"
+      body:
+        type: text
+        data: ""

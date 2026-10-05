@@ -1,0 +1,141 @@
+info:
+  name: DeviceLabel_1
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{base_url}}device/label?id=oktopus-0-mqtt"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: id
+      value: oktopus-0-mqtt
+      type: query
+  body:
+    type: json
+    data: |-
+      [
+         {
+            "name": "MyLabel",
+            "value": "Anyone"
+         },
+         {
+            "name":"Building",
+            "value":"a",
+            "children":[
+               {
+                  "name":"Floor",
+                  "value":"1",
+                  "children":[
+                     {
+                        "name":"apartament",
+                        "value":"101"
+                     },
+                     {
+                        "name":"apartament",
+                        "value":"102"
+                     }
+                  ]
+               },
+               {
+                  "name":"Floor",
+                  "value":"2",
+                  "children":[
+                     {
+                        "name":"apartament",
+                        "value":"202"
+                     }
+                  ]
+               }
+            ]
+         }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: DeviceLabel
+    request:
+      url: "{{base_url}}device/label?id=oktopus-base-mqtt"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: oktopus-base-mqtt
+          type: query
+      body:
+        type: json
+        data: |-
+          [
+             {
+                "name": "MyLabel",
+                "value": "Anyone"
+             },
+             {
+                "name":"Building",
+                "value":"a",
+                "children":[
+                   {
+                      "name":"Floor",
+                      "value":"1",
+                      "children":[
+                         {
+                            "name":"apartament",
+                            "value":"101"
+                         },
+                         {
+                            "name":"apartament",
+                            "value":"102"
+                         }
+                      ]
+                   },
+                   {
+                      "name":"Floor",
+                      "value":"2",
+                      "children":[
+                         {
+                            "name":"apartament",
+                            "value":"202"
+                         }
+                      ]
+                   }
+                ]
+             }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.4
+        - name: Date
+          value: Mon, 22 Dec 2025 10:29:46 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "13"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: Label updated
+
+docs: List all devices saved at database

@@ -1,0 +1,61 @@
+info:
+  name: Set Device Alias
+  type: http
+  seq: 11
+
+http:
+  method: PUT
+  url: "{{base_url}}device/alias?id=485754434ECDE6AD"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: id
+      value: 485754434ECDE6AD
+      type: query
+  body:
+    type: json
+    data: goaiba123
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Set Device Alias
+    request:
+      url: "{{base_url}}device/alias?id=485754434ECDE6AD"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: 485754434ECDE6AD
+          type: query
+      body:
+        type: json
+        data: goaiba123
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 25 Jun 2024 23:04:10 GMT
+        - name: Content-Length
+          value: "15"
+      body:
+        type: json
+        data: '"Alias updated"'

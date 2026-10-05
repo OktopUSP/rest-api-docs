@@ -1,0 +1,38 @@
+info:
+  name: ACS Health
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: http://localhost:9292/health
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Health
+    request:
+      url: http://localhost:9292/health
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Thu, 15 May 2025 18:41:48 GMT
+        - name: Content-Length
+          value: "15"
+      body:
+        type: json
+        data: |-
+          {
+              "status": "ok"
+          }

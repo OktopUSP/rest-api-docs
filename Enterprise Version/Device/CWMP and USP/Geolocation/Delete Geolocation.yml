@@ -1,0 +1,59 @@
+info:
+  name: Delete Geolocation
+  type: http
+  seq: 3
+
+http:
+  method: DELETE
+  url: "{{base_url}}map/?sn={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: sn
+      value: "{{device}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Geolocation
+    request:
+      url: "{{base_url}}map/?sn={{device}}"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: sn
+          value: "{{device}}"
+          type: query
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Mon, 06 Apr 2026 20:35:19 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

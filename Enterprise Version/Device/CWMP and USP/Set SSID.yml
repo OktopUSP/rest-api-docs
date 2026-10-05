@@ -1,0 +1,244 @@
+info:
+  name: Set SSID
+  type: http
+  seq: 8
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/ssid"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      [
+          {
+              "ssid_path": "Device.WiFi.SSID.1.",
+              "ssid": {
+                  "value": "OKTOPUS_TEST_1"
+              }
+          }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Disable
+    request:
+      url: "{{base_url}}device/:device/:mtp/ssid"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::0000CA-29G412666500039
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "Device.WiFi.SSID.1.",
+                  "enable": {
+                      "value": "false"
+                  }
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.0
+        - name: Date
+          value: Tue, 27 Aug 2024 15:57:22 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "214"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.WiFi.SSID.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.WiFi.SSID.1.",
+                                          "updated_params": {
+                                              "Enable": "false"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Security Mode
+    request:
+      url: "{{base_url}}device/:device/:mtp/ssid"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::0000CA-29G412666500039
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {   
+                  "security" :{
+                      "path": "Device.WiFi.AccessPoint.2.Security.",
+                      "security_mode_enabled": {
+                          "value": "None"
+                      }
+                  }
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.0
+        - name: Date
+          value: Tue, 27 Aug 2024 17:45:58 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "250"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.WiFi.AccessPoint.2.Security.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.WiFi.AccessPoint.2.Security.",
+                                          "updated_params": {
+                                              "ModeEnabled": "None"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: WiFi SSID Name
+    request:
+      url: "{{base_url}}device/:device/:mtp/ssid"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::0000CA-29G412666500039
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "Device.WiFi.SSID.1.",
+                  "ssid": {
+                      "value": "OKTOPUS_TEST_1"
+                  }
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.0
+        - name: Date
+          value: Tue, 27 Aug 2024 17:47:20 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "221"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.WiFi.SSID.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.WiFi.SSID.1.",
+                                          "updated_params": {
+                                              "SSID": "OKTOPUS_TEST_1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

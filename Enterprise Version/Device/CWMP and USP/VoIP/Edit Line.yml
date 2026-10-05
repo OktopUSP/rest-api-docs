@@ -1,0 +1,85 @@
+info:
+  name: Edit Line
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/voiceline"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "path": "InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.2.",
+          "username": {
+              "writable": true,
+              "value": "testjjkhgst"
+          }
+      }     
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Edit Line
+    request:
+      url: "{{base_url}}device/:device/:mtp/voiceline"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "path": "InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.1.Line.2.",
+              "username": {
+                  "writable": true,
+                  "value": "testjjkhgst"
+              }
+          }     
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 23 Sep 2025 12:34:52 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "33"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: '"Voice line updated successfully"'

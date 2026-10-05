@@ -1,0 +1,78 @@
+info:
+  name: Get Mass Custom Msg
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}mass-actions/msg"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Mass Custom Msg
+    request:
+      url: "{{base_url}}mass-actions/msg"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 16 Oct 2024 18:20:19 GMT
+        - name: Content-Length
+          value: "1028"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "id": "670ff9e23c452a0ff6aedfc4",
+                  "name": "sssss",
+                  "description": "",
+                  "devices": [
+                      {
+                          "id": "os::4C2EFE-GCN230700061",
+                          "actionResult": 1,
+                          "actionInfo": "{\"deleted_obj_results\":[{\"requested_path\":\"Device.IP.Interface.[Alias==test].\",\"oper_status\":{\"OperStatus\":{\"OperSuccess\":{}}}}]}"
+                      },
+                      {
+                          "id": "os::FFFFFF-10000000ef93a6b3",
+                          "actionResult": 2,
+                          "actionInfo": "device was not online"
+                      }
+                  ],
+                  "status": 1,
+                  "date": "2024-10-16T17:37:38.183Z",
+                  "user": {
+                      "email": "teste@gmail.com",
+                      "name": "Teste"
+                  },
+                  "actionType": 4,
+                  "parameters": {
+                      "payload": "{\n          \"header\": {\n              \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n              \"msg_type\": 10\n          },\n          \"body\": {\n              \"request\": {\n                  \"delete\": {\n                      \"allow_partial\": true,\n                      \"obj_paths\": [\n                          \"Device.IP.Interface.[Alias==test].\"\n                      ]\n                  }\n              }\n          }\n      }",
+                      "num_of_updates_in_parallel": 1
+                  },
+                  "removed": false
+              }
+          ]

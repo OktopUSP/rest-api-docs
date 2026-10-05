@@ -1,0 +1,88 @@
+info:
+  name: Create Mass Custom Msg
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}mass-actions/msg"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name" : "Test-1 Custom Msg",
+          "devices": [
+              { 
+                  "id": "{{device}}"
+              },
+              { 
+                  "id": "oktopus-1-mqtt"
+              },
+              { 
+                  "id": "oktopus-2-mqtt"
+              }
+          ],
+          "scheduler_start": "2024-11-05T16:27:16.963Z",
+          "scheduler_end": "2024-11-06T15:52:01.963Z",
+          "num_of_updates_in_parallel":1,
+          "parameters": {
+              "payload": 
+      "{\n          \"header\": {\n              \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n              \"msg_type\": 10\n          },\n          \"body\": {\n              \"request\": {\n                  \"delete\": {\n                      \"allow_partial\": true,\n                      \"obj_paths\": [\n                          \"Device.IP.Interface.[Alias==test].\"\n                      ]\n                  }\n              }\n          }\n      }"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Create Mass Custom Msg
+    request:
+      url: "{{base_url}}mass-actions/msg"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name" : "Test-1 Custom Msg",
+              "devices": [
+                  { 
+                      "id": "{{device}}"
+                  },
+                  { 
+                      "id": "os::4C2EFE-GCN230700061"
+                  }
+              ],
+              "parameters": {
+                  "payload": 
+          "{\n          \"header\": {\n              \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n              \"msg_type\": 10\n          },\n          \"body\": {\n              \"request\": {\n                  \"delete\": {\n                      \"allow_partial\": true,\n                      \"obj_paths\": [\n                          \"Device.IP.Interface.[Alias==test].\"\n                      ]\n                  }\n              }\n          }\n      }",
+                  "num_of_updates_in_parallel":1
+              }
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 16 Oct 2024 21:40:00 GMT
+      body:
+        type: json
+        data: ""

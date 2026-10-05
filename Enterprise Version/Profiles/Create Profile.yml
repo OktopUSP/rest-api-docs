@@ -1,0 +1,73 @@
+info:
+  name: Create Profile
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}device-profile"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name": "Test1",
+          "model": "EG8145X6-10",
+          "protocol": "cwmp",
+          "active": true,
+          "content": "script-here"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Create Device Profile Script
+    request:
+      url: "{{base_url}}device-profile"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name": "Test1",
+              "model": "EG8145X6-10",
+              "protocol": "cwmp",
+              "active": true,
+              "content": "script-here"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.4
+        - name: Date
+          value: Tue, 17 Feb 2026 11:32:52 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "0"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

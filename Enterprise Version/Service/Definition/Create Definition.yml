@@ -1,0 +1,85 @@
+info:
+  name: Create Definition
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}service/definition"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name":"test-1",
+          "description": "my first test",
+          "script": "--should be a lua script",
+          "variables": [
+              {
+                  "name": "A",
+                  "type": "string",
+                  "required": true
+              }
+          ],
+          "available": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/definition"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name":"test-1",
+              "description": "my first test",
+              "script": "--should be a lua script",
+              "variables": [
+                  {
+                      "name": "A",
+                      "type": "string",
+                      "required": true
+                  }
+              ],
+              "available": true
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 13:55:20 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "4"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: "null"

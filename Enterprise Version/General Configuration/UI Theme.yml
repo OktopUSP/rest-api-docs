@@ -1,0 +1,42 @@
+info:
+  name: UI Theme
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}ui-theme"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Ui Theme
+    request:
+      url: "{{base_url}}ui-theme"
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Mon, 18 Aug 2025 15:57:41 GMT
+        - name: Content-Type
+          value: text/plain; charset=utf-8
+        - name: Content-Length
+          value: "220"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: text
+        data: |
+          {"color_scheme":{"buttons":"#c05521","sidebar_end":"#305a85","sidebar_initial":"#173033","tables":"#214256","words_outside_sidebar":"#173033"},"logo":"/images/logo.png","website":"https://oktopus.app.br","subdomain":""}

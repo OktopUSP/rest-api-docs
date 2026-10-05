@@ -1,0 +1,106 @@
+info:
+  name: New Organization
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}organization?inherit=true&roles=true"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: inherit
+      value: "true"
+      type: query
+      description: defines if the new tenant will inherit properties from the parent tenant.
+    - name: roles
+      value: "true"
+      type: query
+      description: inherit parent tenant roles
+    - name: services
+      value: "false"
+      type: query
+      description: inherit parent tenant services [WIP]
+      disabled: true
+    - name: scripts
+      value: "false"
+      type: query
+      description: inherit parent tenant scripts [WIP]
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+          "name": "org3"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: New Organization
+    request:
+      url: "{{base_url}}organization?inherit=false&roles=false"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: inherit
+          value: "false"
+          type: query
+          description: defines if the new tenant will inherit properties from the parent tenant.
+        - name: roles
+          value: "false"
+          type: query
+          description: inherit parent tenant roles
+        - name: services
+          value: "false"
+          type: query
+          description: inherit parent tenant services [WIP]
+          disabled: true
+        - name: scripts
+          value: "false"
+          type: query
+          description: inherit parent tenant scripts [WIP]
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+              "name": "org3"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: :status
+          value: "200"
+        - name: server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: date
+          value: Tue, 05 May 2026 10:40:58 GMT
+        - name: content-type
+          value: application/json; version=1
+        - name: content-length
+          value: "34"
+        - name: access-control-allow-credentials
+          value: "true"
+        - name: access-control-allow-origin
+          value: "null"
+      body:
+        type: json
+        data: |-
+          {
+              "id": "69f9c93ae949794d0a39d91e"
+          }

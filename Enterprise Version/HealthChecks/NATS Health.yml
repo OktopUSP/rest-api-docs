@@ -1,0 +1,40 @@
+info:
+  name: NATS Health
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: http://localhost:8222/healthz
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: NATS Health
+    request:
+      url: http://localhost:8222/healthz
+      method: GET
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Access-Control-Allow-Origin
+          value: "*"
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Thu, 15 May 2025 19:01:45 GMT
+        - name: Content-Length
+          value: "15"
+      body:
+        type: json
+        data: |-
+          {
+              "status": "ok"
+          }

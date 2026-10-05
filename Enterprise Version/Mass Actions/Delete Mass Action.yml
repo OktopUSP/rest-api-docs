@@ -1,0 +1,53 @@
+info:
+  name: Delete Mass Action
+  type: http
+  seq: 4
+
+http:
+  method: DELETE
+  url: "{{base_url}}mass-actions?actionId=671017da6174deeacd62a2aa"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: actionId
+      value: 671017da6174deeacd62a2aa
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Mass Action
+    request:
+      url: "{{base_url}}mass-actions?actionId=671017da6174deeacd62a2aa"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: actionId
+          value: 671017da6174deeacd62a2aa
+          type: query
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 16 Oct 2024 20:58:12 GMT
+      body:
+        type: json
+        data: ""

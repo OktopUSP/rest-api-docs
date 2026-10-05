@@ -1,0 +1,87 @@
+info:
+  name: Login
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}auth/login"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "email":"{{email}}",
+          "password":"{{password}}",
+          "otp": "219784"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var responseBody = res.getBody();
+        bru.setVar("authToken", responseBody.token);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Login
+    request:
+      url: "{{base_url}}auth/login"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "email":"{{email}}",
+              "password":"{{password}}",
+              "otp": "219784"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 18 Nov 2025 19:48:06 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "465"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "token": "<jwt-token>",
+              "user": {
+                  "email": "opa@gmail.com",
+                  "name": "dsadsadsa",
+                  "password": "<password-hash>",
+                  "phone": "",
+                  "role": "Admin",
+                  "org": "691c8ad6f7584977190de1e9",
+                  "preferences": {
+                      "ai_model": "gpt-4o",
+                      "theme": "",
+                      "locale": ""
+                  },
+                  "enable_2fa": false
+              }
+          }

@@ -1,0 +1,63 @@
+info:
+  name: Delete Definition
+  type: http
+  seq: 4
+
+http:
+  method: DELETE
+  url: "{{base_url}}service/definition"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "id": "69ca800e7a4e2558538ffcdf"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/definition"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "id": "69ca800e7a4e2558538ffcdf"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 13:55:42 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

@@ -1,0 +1,78 @@
+info:
+  name: Get Tenant Device Management Config
+  type: http
+  seq: 9
+
+http:
+  method: GET
+  url: "{{base_url}}organization/bulk_device_management/config"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Tenant Device Management Config
+    request:
+      url: "{{base_url}}organization/bulk_device_management/config"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 11 Oct 2025 12:56:48 GMT
+        - name: Content-Length
+          value: "486"
+      body:
+        type: json
+        data: |-
+          {
+              "speed_test": {
+                  "enable_download_speed_test": true,
+                  "enable_upload_speed_test": true,
+                  "download_servers": [
+                      {
+                          "host": "http://217.145.76.36/download/download_file_200MB.txt",
+                          "default": true
+                      }
+                  ],
+                  "upload_servers": [
+                      {
+                          "host": "http://178.20.72.24/uploads",
+                          "default": true
+                      }
+                  ]
+              },
+              "ping_test": {
+                  "enable": true,
+                  "servers": [
+                      "google.com",
+                      "cloudfare.com",
+                      "spotify.com",
+                      "youtube.com"
+                  ]
+              },
+              "critical_start_time": "0001-01-01T00:00:00Z",
+              "critical_end_time": "0001-01-01T00:00:00Z",
+              "timezone": "Local",
+              "interval": 2700000000000
+          }

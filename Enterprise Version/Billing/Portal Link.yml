@@ -1,0 +1,66 @@
+info:
+  name: Portal Link
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}billing/portal-link"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: returnUrl
+      value: ""
+      type: query
+      description: define the url to go back after the operations are done
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Portal Link
+    request:
+      url: "{{base_url}}billing/portal-link"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: returnUrl
+          value: ""
+          type: query
+          description: define the url to go back after the operations are done
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 18 Nov 2025 17:53:24 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "143"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "portalLink": "https://pay.oktopus.app.br/p/session/<session-id>"
+          }

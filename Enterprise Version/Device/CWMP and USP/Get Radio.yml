@@ -1,0 +1,258 @@
+info:
+  name: Get Radio
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/radio"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Radio
+    request:
+      url: "{{base_url}}device/:device/:mtp/radio"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: a8:37:59:3e:d5:88
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.0
+        - name: Date
+          value: Sat, 10 Aug 2024 15:47:43 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1808"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "Device.WiFi.Radio.1.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan0"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "auto_channel_enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "channel": {
+                      "writable": true,
+                      "value": "1"
+                  },
+                  "possible_channels": {
+                      "writable": false,
+                      "value": [
+                          "1",
+                          "2",
+                          "3",
+                          "4",
+                          "5",
+                          "6",
+                          "7",
+                          "8",
+                          "9",
+                          "10",
+                          "11"
+                      ]
+                  },
+                  "operating_channel_bandwidth": {
+                      "writable": true,
+                      "value": "20MHz"
+                  },
+                  "supported_operating_channel_bandwidth": {
+                      "writable": false,
+                      "value": [
+                          "20MHz",
+                          "40MHz"
+                      ]
+                  },
+                  "operating_frequency_band": {
+                      "writable": false,
+                      "value": "2.4GHz"
+                  },
+                  "supported_frequency_bands": {
+                      "writable": true,
+                      "value": [
+                          "2.4GHz"
+                      ]
+                  },
+                  "operating_standards": {
+                      "writable": true,
+                      "value": [
+                          "g",
+                          "n",
+                          "ax"
+                      ]
+                  },
+                  "supported_standards": {
+                      "writable": false,
+                      "value": [
+                          "b",
+                          "g",
+                          "n",
+                          "ax"
+                      ]
+                  },
+                  "transmit_power": {
+                      "writable": true,
+                      "value": "100"
+                  },
+                  "transmit_power_supported": {
+                      "writable": false,
+                      "value": [
+                          "12",
+                          "25",
+                          "50",
+                          "75",
+                          "100"
+                      ]
+                  }
+              },
+              {
+                  "path": "Device.WiFi.Radio.2.",
+                  "name": {
+                      "writable": false,
+                      "value": "wlan2"
+                  },
+                  "enable": {
+                      "writable": true,
+                      "value": "true"
+                  },
+                  "auto_channel_enable": {
+                      "writable": true,
+                      "value": "false"
+                  },
+                  "channel": {
+                      "writable": true,
+                      "value": "36"
+                  },
+                  "possible_channels": {
+                      "writable": false,
+                      "value": [
+                          "36",
+                          "40",
+                          "44",
+                          "48",
+                          "52",
+                          "56",
+                          "60",
+                          "64",
+                          "100",
+                          "104",
+                          "108",
+                          "112",
+                          "116",
+                          "120",
+                          "124",
+                          "128",
+                          "132",
+                          "136",
+                          "140",
+                          "144",
+                          "149",
+                          "153",
+                          "157",
+                          "161",
+                          "165"
+                      ]
+                  },
+                  "operating_channel_bandwidth": {
+                      "writable": true,
+                      "value": "80MHz"
+                  },
+                  "supported_operating_channel_bandwidth": {
+                      "writable": false,
+                      "value": [
+                          "20MHz",
+                          "40MHz",
+                          "80MHz",
+                          "160MHz"
+                      ]
+                  },
+                  "operating_frequency_band": {
+                      "writable": false,
+                      "value": "5GHz"
+                  },
+                  "supported_frequency_bands": {
+                      "writable": true,
+                      "value": [
+                          "5GHz"
+                      ]
+                  },
+                  "operating_standards": {
+                      "writable": true,
+                      "value": [
+                          "a",
+                          "n",
+                          "ac",
+                          "ax"
+                      ]
+                  },
+                  "supported_standards": {
+                      "writable": false,
+                      "value": [
+                          "a",
+                          "n",
+                          "ac",
+                          "ax"
+                      ]
+                  },
+                  "transmit_power": {
+                      "writable": true,
+                      "value": "100"
+                  },
+                  "transmit_power_supported": {
+                      "writable": false,
+                      "value": [
+                          "12",
+                          "25",
+                          "50",
+                          "75",
+                          "100"
+                      ]
+                  }
+              }
+          ]

@@ -1,0 +1,69 @@
+info:
+  name: ListUsers
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}users"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: ListUsers
+    request:
+      url: "{{base_url}}users"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 08 Oct 2025 19:42:24 GMT
+        - name: Content-Length
+          value: "211"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "_id": "68e6a1917a89c0b8844833d5",
+                  "createdAt": "08/10/2025",
+                  "email": "test@gmail.com",
+                  "name": "",
+                  "org": "12345678901234567890",
+                  "phone": "",
+                  "preferences": {
+                      "ai_model": "gpt-4o",
+                      "locale": "",
+                      "theme": ""
+                  },
+                  "role": "Admin"
+              }
+          ]

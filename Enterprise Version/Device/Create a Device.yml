@@ -1,0 +1,101 @@
+info:
+  name: Create a Device
+  type: http
+  seq: 9
+
+http:
+  method: POST
+  url: "{{base_url}}device"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "sn":"test123"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Add with SN
+    request:
+      url: "{{base_url}}device"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "sn":"test123669"
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Thu, 26 Mar 2026 21:40:41 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "27"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: Device created successfully
+  - name: Duplicated SN Error
+    request:
+      url: "{{base_url}}device"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "sn":"test123"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Thu, 26 Mar 2026 21:39:59 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "34"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: Device with this SN already exists

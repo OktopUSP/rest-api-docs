@@ -1,0 +1,139 @@
+info:
+  name: Get CWMP Session Metrics
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}info/acs/sessions?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: start
+      value: 2026-08-29T00:00:00Z
+      type: query
+      description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+    - name: end
+      value: 2026-08-30T00:00:00Z
+      type: query
+      description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 OK
+    request:
+      url: "{{base_url}}info/acs/sessions?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: start
+          value: 2026-08-29T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+        - name: end
+          value: 2026-08-30T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "series": [
+              { "timestamp": "2026-08-29T23:55:00Z", "count": 10 },
+              { "timestamp": "2026-08-29T23:56:00Z", "count": 14 },
+              { "timestamp": "2026-08-29T23:57:00Z", "count": 12 },
+              { "timestamp": "2026-08-29T23:58:00Z", "count": 9 },
+              { "timestamp": "2026-08-29T23:59:00Z", "count": 15 }
+            ]
+          }
+  - name: 400 Bad Request - invalid time range
+    request:
+      url: "{{base_url}}info/acs/sessions?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: start
+          value: 2026-08-29T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+        - name: end
+          value: 2026-08-30T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: '"invalid end: parsing time \"2026-08-30\" as \"2006-01-02T15:04:05Z07:00\": cannot parse \"\" as \"T\""'
+
+docs: |-
+  Returns the CWMP (TR-069) session-count time series over a range, scoped to the authenticated user's organization: one point per aggregation bucket (~1 minute).
+
+  The frontend uses this for two things:
+
+  - **"Sessions now"** — the `count` of the most recent point in `series`.
+  - **Session timeline** — the whole `series`, plotted over time.
+
+  > **Note:** a "session" is counted once, when the `acs` service receives its Inform, and stamped with the `acs-metrics` receipt time. "Sessions now" is therefore *sessions started in the last bucket* — a throughput/activity gauge, not a live count of open TCP sessions.
+
+  ### Query parameters
+
+  | Name | Required | Description |
+  |---|---|---|
+  | `start` | No | RFC 3339 timestamp, inclusive lower bound. Defaults to `now - 24h`. |
+  | `end` | No | RFC 3339 timestamp, exclusive upper bound. Defaults to `now`. Must be strictly after `start`. |
+
+  ### Authentication
+
+  `Authorization: {{authToken}}` (JWT). Requires the **Overview → Read** permission.
+
+  ### Response `200 OK`
+
+  ```json
+  {
+    "series": [
+      { "timestamp": "2026-08-29T23:57:00Z", "count": 12 },
+      { "timestamp": "2026-08-29T23:58:00Z", "count": 9 },
+      { "timestamp": "2026-08-29T23:59:00Z", "count": 15 }
+    ]
+  }
+  ```
+
+  Points are ordered oldest-first. `series` is omitted or empty when no sessions were recorded in the range. Buckets with no sessions are not emitted (gaps are implicit zeros).
+
+  ### Error responses
+
+  | Status | Body | Cause |
+  |---|---|---|
+  | `400 Bad Request` | `"invalid end: ..."` / `"start must be a time before end"` | Malformed or inverted time range |
+  | `403 Forbidden` | `Not allowed to perform this action` | Missing Overview read permission |
+  | `502 Bad Gateway` | `Error to communicate with acs-metrics service: ...` | NATS request to `acs-metrics` failed |
+  | `503 Service Unavailable` | `acs-metrics service not available` | No `acs-metrics` responder on NATS |

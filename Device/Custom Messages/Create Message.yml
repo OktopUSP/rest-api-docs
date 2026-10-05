@@ -1,0 +1,128 @@
+info:
+  name: Create Message
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}device/message/:type?name=cwmp-test-1"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: name
+      value: cwmp-test-1
+      type: query
+    - name: type
+      value: cwmp
+      type: path
+  body:
+    type: xml
+    data: |-
+      <?xml version="1.0" encoding="UTF-8"?>
+      <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <soap:Header/>
+        <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <cwmp:GetParameterValues>
+            <ParameterNames>
+              <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.</string>
+             </ParameterNames>
+          </cwmp:GetParameterValues>
+        </soap:Body>
+      </soap:Envelope>
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Save USP Message
+    request:
+      url: "{{base_url}}device/message/:type?name=usp-test-1"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: usp-test-1
+          type: query
+        - name: type
+          value: usp
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+            "param_paths": [
+                "Device.WiFi.SSID.[Name==wlan0].",
+                "Device.IP.Interface.*.Alias",
+                "Device.DeviceInfo.FirmwareImage.*.Alias",
+                "Device.IP.Interface.1.IPv4Address.1.IPAddress"
+            ],
+            "max_depth": 2
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 07 Oct 2024 18:35:05 GMT
+      body:
+        type: json
+        data: ""
+  - name: Save CWMP Message
+    request:
+      url: "{{base_url}}device/message/:type?name=cwmp-test-1"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: cwmp-test-1
+          type: query
+        - name: type
+          value: cwmp
+          type: path
+      body:
+        type: xml
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:GetParameterValues>
+                <ParameterNames>
+                  <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.</string>
+                 </ParameterNames>
+              </cwmp:GetParameterValues>
+            </soap:Body>
+          </soap:Envelope>
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 07 Oct 2024 18:36:18 GMT
+      body:
+        type: json
+        data: ""

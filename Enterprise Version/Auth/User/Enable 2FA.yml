@@ -1,0 +1,59 @@
+info:
+  name: Enable 2FA
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}auth/enable2fa"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "enable_2fa": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Enable 2FA
+    request:
+      url: "{{base_url}}auth/enable2fa"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "enable_2fa": true
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Mon, 17 Nov 2025 22:20:01 GMT
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: text
+        data: ""

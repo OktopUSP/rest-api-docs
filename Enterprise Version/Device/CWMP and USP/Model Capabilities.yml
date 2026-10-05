@@ -1,0 +1,86 @@
+info:
+  name: Model Capabilities
+  type: http
+  seq: 18
+
+http:
+  method: GET
+  url: "{{base_url}}device/capabilities?model=EG8145X6-10a&sn={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: model
+      value: EG8145X6-10a
+      type: query
+    - name: sn
+      value: "{{device}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Model Capabilities
+    request:
+      url: "{{base_url}}device/capabilities?model=EG8145X6-10a&sn=485754434ECDE6AD"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: model
+          value: EG8145X6-10a
+          type: query
+        - name: sn
+          value: 485754434ECDE6AD
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Thu, 22 May 2025 15:46:35 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "333"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "Wifi": true,
+              "SiteSurvey": true,
+              "ConnectedDevices": true,
+              "Diagnostic": true,
+              "Ping": true,
+              "Traceroute": true,
+              "SpeedTest": true,
+              "Ports": true,
+              "Reboot": true,
+              "FactoryReset": false,
+              "FirmwareUpgrade": true,
+              "FirmwareRollback": false,
+              "FactoryDefault": true,
+              "Logs": true,
+              "Stats": true,
+              "Interfaces": true,
+              "Hwinfo": true,
+              "Pon": true,
+              "ParallelProcessing": false
+          }

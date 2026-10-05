@@ -1,0 +1,153 @@
+info:
+  name: Traceroute_1
+  type: http
+  seq: 15
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/traceroute"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "interface": {
+              "value": ""
+          },
+          "timeout" : {
+              "value": 4
+          },
+          "host": {
+              "value":"192.168.60.3"
+          },
+          "number_of_tries": {
+              "value": 2
+          },
+          "max_hop_count": {
+              "value": "30"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Traceroute
+    request:
+      url: "{{base_url}}device/:device/:mtp/traceroute"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "interface": {
+                  "value": ""
+              },
+              "timeout" : {
+                  "value": 4
+              },
+              "host": {
+                  "value":"8.8.8.8"
+              },
+              "number_of_tries": {
+                  "value": 2
+              },
+              "max_hop_count": {
+                  "value": 30
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 19 Sep 2024 15:34:08 GMT
+        - name: Content-Length
+          value: "704"
+      body:
+        type: json
+        data: |-
+          {
+              "result": "Success",
+              "response_time": 2235,
+              "hop_count": 9,
+              "hops": [
+                  {
+                      "host": "192.168.4.1",
+                      "addr": "192.168.4.1",
+                      "rtt": "0.728 ms, 0.601 ms"
+                  },
+                  {
+                      "host": "10.28.100.1",
+                      "addr": "10.28.100.1",
+                      "rtt": "0.741 ms, 0.758 ms"
+                  },
+                  {
+                      "host": "160.238.217.17",
+                      "addr": "160.238.217.17",
+                      "rtt": "1.823 ms, 2.164 ms"
+                  },
+                  {
+                      "host": "172.20.0.2",
+                      "addr": "172.20.0.2",
+                      "rtt": "1.237 ms, 2.179 ms"
+                  },
+                  {
+                      "host": "201.16.65.164",
+                      "addr": "201.16.65.164",
+                      "rtt": "2.112 ms, 2.280 ms"
+                  },
+                  {
+                      "host": "ae0-0.core01.bre2.commcorp.net.br",
+                      "addr": "201.16.2.7",
+                      "rtt": "16.297 ms, 27.158 ms"
+                  },
+                  {
+                      "host": "142.250.162.184",
+                      "addr": "142.250.162.184",
+                      "rtt": "15.653 ms, 14.826 ms"
+                  },
+                  {
+                      "host": "*",
+                      "addr": "*",
+                      "rtt": "*"
+                  },
+                  {
+                      "host": "dns.google",
+                      "addr": "8.8.8.8",
+                      "rtt": "13.052 ms, 13.870 ms"
+                  }
+              ]
+          }

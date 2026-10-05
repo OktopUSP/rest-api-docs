@@ -1,0 +1,875 @@
+info:
+  name: Set Port
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/ports"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+              "path": "Device.Ethernet.Interface.5.",
+              "enable": {
+                  "writable": false,
+                  "value": "1"
+              },
+              "alias": {
+                  "writable": false,
+                  "value": "EWAN"
+              },
+              "mac_address": {
+                  "writable": false,
+                  "value": "9A:25:4A:42:A4:A1"
+              },
+              "upstream": {
+                  "writable": false,
+                  "value": true
+              },
+              "status": {
+                  "writable": false,
+                  "value": "Up"
+              },
+              "rx": {
+                  "writable": false,
+                  "value": "3828434628"
+              },
+              "tx": {
+                  "writable": false,
+                  "value": "3567811580"
+              },
+              "ip": {
+                  "Device.IP.Interface.10.": {
+                      "name": {
+                          "writable": true,
+                          "value": "test_static_vlan6"
+                      },
+                      "enable": {
+                          "writable": true,
+                          "value": "0"
+                      },
+                      "max_mtu_size": {
+                          "writable": true,
+                          "value": ""
+                      },
+                      "pppoe": {},
+                      "vlan": {
+                          "Device.Ethernet.VLANTermination.6.": {
+                              "id": {
+                                  "writable": true,
+                                  "value": "123"
+                              },
+                              "enable": {
+                                  "writable": true,
+                                  "value": "1"
+                              },
+                              "priority": {
+                                  "writable": true,
+                                  "value": "0"
+                              }
+                          }
+                      },
+                      "ipv4": {
+                          "Device.IP.Interface.10.IPv4Address.1.": {
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": "10.10.11.16"
+                              },
+                              "subnet_mask": {
+                                  "writable": false,
+                                  "value": "255.255.0.0"
+                              },
+                              "dns_servers": {
+                                  "Device.DNS.Relay.Forwarding.15.": {
+                                      "writable": true,
+                                      "value": "8.8.6.6,8.8.8.8"
+                                  }
+                              }
+                          }
+                      },
+                      "ipv6": {
+                          "Device.IP.Interface.10.IPv6Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "1"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": "2001:DB8:2:2::16"
+                              },
+                              "prefix": {
+                                  "writable": false,
+                                  "value": ""
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "Static"
+                              },
+                              "dns_servers": {
+                                  "Device.DNS.Relay.Forwarding.16.": {
+                                      "writable": true,
+                                      "value": "2001:4860:4860::8844,2001:4860:4860::8846"
+                                  }
+                              },
+                              "state": {
+                                  "writable": false,
+                                  "value": null
+                              }
+                          }
+                      }
+                  },
+                  "Device.IP.Interface.12.": {
+                      "name": {
+                          "writable": true,
+                          "value": "test-static-dns"
+                      },
+                      "enable": {
+                          "writable": true,
+                          "value": "1"
+                      },
+                      "max_mtu_size": {
+                          "writable": true,
+                          "value": ""
+                      },
+                      "pppoe": {},
+                      "vlan": {},
+                      "ipv4": {
+                          "Device.IP.Interface.12.IPv4Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "1"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": "10.11.12.13"
+                              },
+                              "subnet_mask": {
+                                  "writable": false,
+                                  "value": "255.255.255.0"
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "Static"
+                              },
+                              "dns_servers": {
+                                  "Device.DNS.Relay.Forwarding.20.": {
+                                      "writable": true,
+                                      "value": "10.10.10.11,10.10.10.11"
+                                  }
+                              }
+                          }
+                      },
+                      "ipv6": {
+                          "Device.IP.Interface.12.IPv6Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "0"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": "::"
+                              },
+                              "prefix": {
+                                  "writable": false,
+                                  "value": ""
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "Static"
+                              },
+                              "dns_servers": {},
+                              "state": {
+                                  "writable": false,
+                                  "value": null
+                              }
+                          }
+                      }
+                  },
+                  "Device.IP.Interface.8.": {
+                      "name": {
+                          "writable": true,
+                          "value": "test"
+                      },
+                      "enable": {
+                          "writable": true,
+                          "value": "1"
+                      },
+                      "max_mtu_size": {
+                          "writable": true,
+                          "value": ""
+                      },
+                      "pppoe": {},
+                      "vlan": {
+                          "Device.Ethernet.VLANTermination.4.": {
+                              "id": {
+                                  "writable": true,
+                                  "value": "100"
+                              },
+                              "enable": {
+                                  "writable": true,
+                                  "value": "1"
+                              },
+                              "priority": {
+                                  "writable": true,
+                                  "value": "5"
+                              }
+                          }
+                      },
+                      "ipv4": {
+                          "Device.IP.Interface.8.IPv4Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "1"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": "0.0.0.0"
+                              },
+                              "subnet_mask": {
+                                  "writable": false,
+                                  "value": "0.0.0.0"
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "DHCP"
+                              },
+                              "dns_servers": {}
+                          }
+                      },
+                      "ipv6": {
+                          "Device.IP.Interface.8.IPv6Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "1"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": ""
+                              },
+                              "prefix": {
+                                  "writable": false,
+                                  "value": ""
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "DHCPv6"
+                              },
+                              "dns_servers": {},
+                              "state": {
+                                  "writable": false,
+                                  "value": null
+                              }
+                          }
+                      }
+                  },
+                  "Device.IP.Interface.9.": {
+                      "name": {
+                          "writable": true,
+                          "value": "test_pppoe"
+                      },
+                      "enable": {
+                          "writable": true,
+                          "value": "1"
+                      },
+                      "max_mtu_size": {
+                          "writable": true,
+                          "value": ""
+                      },
+                      "pppoe": {
+                          "Device.PPP.Interface.2.": {
+                              "username": {
+                                  "writable": true,
+                                  "value": "1234qwer1234"
+                              },
+                              "password": {
+                                  "writable": true,
+                                  "value": "asdfasdf"
+                              },
+                              "connection_status": {
+                                  "writable": false,
+                                  "value": "Connecting"
+                              }
+                          }
+                      },
+                      "vlan": {
+                          "Device.Ethernet.VLANTermination.5.": {
+                              "id": {
+                                  "writable": true,
+                                  "value": "10"
+                              },
+                              "enable": {
+                                  "writable": true,
+                                  "value": "0"
+                              },
+                              "priority": {
+                                  "writable": true,
+                                  "value": "2"
+                              }
+                          }
+                      },
+                      "ipv4": {
+                          "Device.IP.Interface.9.IPv4Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "1"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": "0.0.0.0"
+                              },
+                              "subnet_mask": {
+                                  "writable": false,
+                                  "value": "0.0.0.0"
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "IPCP"
+                              },
+                              "dns_servers": {}
+                          }
+                      },
+                      "ipv6": {
+                          "Device.IP.Interface.9.IPv6Address.1.": {
+                              "enable": {
+                                  "writable": false,
+                                  "value": "1"
+                              },
+                              "ip_address": {
+                                  "writable": false,
+                                  "value": ""
+                              },
+                              "prefix": {
+                                  "writable": false,
+                                  "value": ""
+                              },
+                              "origin": {
+                                  "writable": false,
+                                  "value": "DHCPv6"
+                              },
+                              "dns_servers": {},
+                              "state": {
+                                  "writable": false,
+                                  "value": null
+                              }
+                          }
+                      }
+                  }
+              }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Set Ports V2
+    request:
+      url: "{{base_url}}device/:device/:mtp/ports"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+          "pppoe": {
+              "Device.PPP.Interface.2.": {
+                  "path": "Device.PPP.Interface.2.",
+                  "username": {
+                      "writable": true,
+                      "value": "1234qwer1234"
+                  },
+                  "password": {
+                      "writable": true,
+                      "value": ""
+                  },
+                  "connection_status": {
+                      "writable": false,
+                      "value": "Connecting"
+                  }
+                  }
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Wed, 16 Apr 2025 17:30:34 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.12.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.12.",
+                                          "updated_params": {
+                                              "Alias": "test-static-dns",
+                                              "Enable": "1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.12.IPv4Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.12.IPv4Address.1.",
+                                          "updated_params": {
+                                              "AddressingType": "Static",
+                                              "Enable": "1",
+                                              "IPAddress": "10.11.12.13",
+                                              "SubnetMask": "255.255.255.0"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.DNS.Relay.Forwarding.20.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.DNS.Relay.Forwarding.20.",
+                                          "updated_params": {
+                                              "DNSServer": "10.10.10.11,10.10.10.11"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.12.IPv6Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.12.IPv6Address.1.",
+                                          "updated_params": {
+                                              "Enable": "0",
+                                              "IPAddress": "::",
+                                              "Origin": "Static",
+                                              "Prefix": ""
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.7.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.7.",
+                                          "updated_params": {
+                                              "Alias": "ipoe_0_1_s",
+                                              "Enable": "1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.7.IPv4Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.7.IPv4Address.1.",
+                                          "updated_params": {
+                                              "AddressingType": "Static",
+                                              "Enable": "1",
+                                              "IPAddress": "154.47.89.146",
+                                              "SubnetMask": "255.255.255.252"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.DNS.Relay.Forwarding.9.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.DNS.Relay.Forwarding.9.",
+                                          "updated_params": {
+                                              "DNSServer": "8.8.8.8,8.8.4.4"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.7.IPv6Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.7.IPv6Address.1.",
+                                          "updated_params": {
+                                              "Enable": "0",
+                                              "IPAddress": "",
+                                              "Origin": "DHCPv6",
+                                              "Prefix": ""
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.8.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.8.",
+                                          "updated_params": {
+                                              "Alias": "test",
+                                              "Enable": "1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.Ethernet.VLANTermination.4.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.Ethernet.VLANTermination.4.",
+                                          "updated_params": {
+                                              "VLANID": "100",
+                                              "X_TP_VLANEnable": "1",
+                                              "X_TP_VLANPr": "5"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.8.IPv4Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.8.IPv4Address.1.",
+                                          "updated_params": {
+                                              "AddressingType": "DHCP",
+                                              "Enable": "1",
+                                              "IPAddress": "0.0.0.0",
+                                              "SubnetMask": "0.0.0.0"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.8.IPv6Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.8.IPv6Address.1.",
+                                          "updated_params": {
+                                              "Enable": "1",
+                                              "IPAddress": "",
+                                              "Origin": "DHCPv6",
+                                              "Prefix": ""
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.9.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.9.",
+                                          "updated_params": {
+                                              "Alias": "test_pppoe",
+                                              "Enable": "1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.Ethernet.VLANTermination.5.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.Ethernet.VLANTermination.5.",
+                                          "updated_params": {
+                                              "VLANID": "10",
+                                              "X_TP_VLANEnable": "1",
+                                              "X_TP_VLANPr": "2"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.PPP.Interface.2.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.PPP.Interface.2.",
+                                          "updated_params": {
+                                              "Password": "",
+                                              "Username": "1234qwer1234"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.9.IPv4Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.9.IPv4Address.1.",
+                                          "updated_params": {
+                                              "AddressingType": "IPCP",
+                                              "Enable": "1",
+                                              "IPAddress": "0.0.0.0",
+                                              "SubnetMask": "0.0.0.0"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.9.IPv6Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.9.IPv6Address.1.",
+                                          "updated_params": {
+                                              "Enable": "1",
+                                              "IPAddress": "",
+                                              "Origin": "DHCPv6",
+                                              "Prefix": ""
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.10.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.10.",
+                                          "updated_params": {
+                                              "Alias": "test_static_vlan9",
+                                              "Enable": "1"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.Ethernet.VLANTermination.6.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.Ethernet.VLANTermination.6.",
+                                          "updated_params": {
+                                              "VLANID": "1239",
+                                              "X_TP_VLANEnable": "1",
+                                              "X_TP_VLANPr": "5"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.10.IPv4Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.10.IPv4Address.1.",
+                                          "updated_params": {
+                                              "AddressingType": "Static",
+                                              "Enable": "1",
+                                              "IPAddress": "10.10.11.19",
+                                              "SubnetMask": "255.255.0.0"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.DNS.Relay.Forwarding.15.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.DNS.Relay.Forwarding.15.",
+                                          "updated_params": {
+                                              "DNSServer": "8.8.9.9,8.8.8.8"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.10.IPv6Address.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.10.IPv6Address.1.",
+                                          "updated_params": {
+                                              "Enable": "1",
+                                              "IPAddress": "2001:DB8:2:2::19",
+                                              "Origin": "Static",
+                                              "Prefix": "2001::"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.DNS.Relay.Forwarding.16.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.DNS.Relay.Forwarding.16.",
+                                          "updated_params": {
+                                              "DNSServer": "2001:4860:4860::8844,2001:4860:4860::8849"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

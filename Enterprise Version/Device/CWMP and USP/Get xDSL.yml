@@ -1,0 +1,97 @@
+info:
+  name: Get xDSL
+  type: http
+  seq: 33
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/xdsl"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get xDSL
+    request:
+      url: "{{base_url}}device/:device/:mtp/xdsl"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 07 Oct 2025 10:19:38 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "348"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "enable": {
+                      "writable": false,
+                      "value": true
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "upstream_rate": {
+                      "writable": false,
+                      "value": 21599
+                  },
+                  "upstream_max_rate": {
+                      "writable": false,
+                      "value": 24935
+                  },
+                  "downstream_rate": {
+                      "writable": false,
+                      "value": 105146
+                  },
+                  "downstream_max_rate": {
+                      "writable": false,
+                      "value": 121431
+                  },
+                  "modulation_type": {
+                      "writable": false,
+                      "value": "VDSL2"
+                  }
+              }
+          ]

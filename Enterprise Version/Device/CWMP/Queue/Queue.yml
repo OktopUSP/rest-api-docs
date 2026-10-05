@@ -1,0 +1,84 @@
+info:
+  name: Queue
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}device/cwmp/:device/queue"
+  headers:
+    - name: Content-Type
+      value: application/xml
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Queue
+    request:
+      url: "{{base_url}}device/cwmp/:device/queue"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.4
+        - name: Date
+          value: Wed, 31 Dec 2025 05:14:53 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Transfer-Encoding
+          value: chunked
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: |-
+          {
+              "queue": [
+                  {
+                      "async": false,
+                      "block": false,
+                      "cwmp_msg": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n            <soap:Envelope xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cwmp=\"urn:dslforum-org:cwmp-1-0\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:schemaLocation=\"urn:dslforum-org:cwmp-1-0 ..schemaswt121.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n            <soap:Header/>\n            <soap:Body soap:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n                <cwmp:GetParameterNames>\n                <ParameterPath>InternetGatewayDevice.</ParameterPath>\n                <NextLevel>1</NextLevel>\n                </cwmp:GetParameterNames>\n            </soap:Body>\n            </soap:Envelope>",
+                      "time": "2025-12-31T12:14:49.550501+07:00"
+                  },
+                  {
+                      "async": false,
+                      "block": false,
+                      "cwmp_msg": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n            <soap:Envelope xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cwmp=\"urn:dslforum-org:cwmp-1-0\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:schemaLocation=\"urn:dslforum-org:cwmp-1-0 ..schemaswt121.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n            <soap:Header/>\n            <soap:Body soap:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n                <cwmp:GetParameterNames>\n                <ParameterPath>InternetGatewayDevice.</ParameterPath>\n                <NextLevel>1</NextLevel>\n                </cwmp:GetParameterNames>\n            </soap:Body>\n            </soap:Envelope>",
+                      "time": "2025-12-31T12:14:50.391081+07:00"
+                  },
+                  {
+                      "async": false,
+                      "block": false,
+                      "cwmp_msg": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n            <soap:Envelope xmlns:soapenc=\"http://schemas.xmlsoap.org/soap/encoding/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:cwmp=\"urn:dslforum-org:cwmp-1-0\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:schemaLocation=\"urn:dslforum-org:cwmp-1-0 ..schemaswt121.xsd\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n            <soap:Header/>\n            <soap:Body soap:encodingStyle=\"http://schemas.xmlsoap.org/soap/encoding/\">\n                <cwmp:GetParameterNames>\n                <ParameterPath>InternetGatewayDevice.</ParameterPath>\n                <NextLevel>1</NextLevel>\n                </cwmp:GetParameterNames>\n            </soap:Body>\n            </soap:Envelope>",
+                      "time": "2025-12-31T12:14:51.288713+07:00"
+                  }
+              ],
+              "queue_size": 3
+          }

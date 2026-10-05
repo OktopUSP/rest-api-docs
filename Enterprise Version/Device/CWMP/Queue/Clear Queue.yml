@@ -1,0 +1,59 @@
+info:
+  name: Clear Queue
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}device/cwmp/:device/queue/clear"
+  headers:
+    - name: Content-Type
+      value: application/xml
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Clear Queue
+    request:
+      url: "{{base_url}}device/cwmp/:device/queue/clear"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.27.4
+        - name: Date
+          value: Wed, 31 Dec 2025 05:16:09 GMT
+        - name: Content-Type
+          value: application/xml; version=1
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: xml
+        data: ""

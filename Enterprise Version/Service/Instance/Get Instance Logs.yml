@@ -1,0 +1,101 @@
+info:
+  name: Get Instance Logs
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}service/instance/logs?service_instance_id=69cbb2a7905d227aecbe5f62"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: service_instance_id
+      value: 69cbb2a7905d227aecbe5f62
+      type: query
+    - name: device_id
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+          
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/instance/logs?service_instance_id=69cbb2a7905d227aecbe5f62"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: service_instance_id
+          value: 69cbb2a7905d227aecbe5f62
+          type: query
+        - name: device_id
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+              
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Wed, 01 Apr 2026 11:22:58 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "741"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "timestamp": "2026-04-01T10:53:18.261Z",
+                  "metadata": {
+                      "service_instance_id": "69cbb2a7905d227aecbe5f62",
+                      "device_id": "HUAWNFYC-OPA123-0",
+                      "tenant_id": "12345678901234567890"
+                  },
+                  "message": "2026-04-01 10:53:18 Processing device SN: HUAWNFYC-OPA123-0, adding PPPoE WAN connection\n"
+              },
+              {
+                  "timestamp": "2026-04-01T10:57:15.312Z",
+                  "metadata": {
+                      "service_instance_id": "69cbb2a7905d227aecbe5f62",
+                      "device_id": "HUAWNFYC-OPA123-0",
+                      "tenant_id": "12345678901234567890"
+                  },
+                  "message": "2026-04-01 10:57:15 Processing device SN: HUAWNFYC-OPA123-0, adding PPPoE WAN connection\n2026-04-01 10:57:15 interface conversion: interface {} is nil, not string\nstack traceback:\n\t[G]: in function 'send_cwmp_message_and_forget'\n\t<string>:70: in main chunk\n\t[G]: ?\n"
+              }
+          ]

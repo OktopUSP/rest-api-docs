@@ -1,0 +1,7 @@
+info:
+  name: Custom Messages
+  type: folder
+  seq: 6
+
+request:
+  auth: inherit

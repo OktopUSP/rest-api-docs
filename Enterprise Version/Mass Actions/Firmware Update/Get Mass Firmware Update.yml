@@ -1,0 +1,99 @@
+info:
+  name: Get Mass Firmware Update
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}mass-actions/fwUpdate"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Mass Action
+    request:
+      url: "{{base_url}}mass-actions/fwUpdate"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Thu, 29 Aug 2024 23:11:28 GMT
+        - name: Content-Length
+          value: "774"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "id": "b95aed8b-32a6-4092-a61e-a2db3abc3152",
+                  "devices": [
+                      {
+                          "id": "os::4C2EFE-TESTEX00061",
+                          "actionResult": 0
+                      },
+                      {
+                          "id": "os::4C2EFE-TESTEsadsaX00061",
+                          "actionResult": 0
+                      }
+                  ],
+                  "status": 3,
+                  "date": "2024-08-29T21:41:56.174Z",
+                  "user": {
+                      "email": "teste@gmail.com",
+                      "name": "leleco"
+                  },
+                  "actionType": 1,
+                  "parameters": {
+                      "fw_name": "teste",
+                      "fw_download_url": "teste",
+                      "num_of_updates_in_parallel": 1
+                  }
+              },
+              {
+                  "id": "32074076-cdaa-47f4-9435-d962b1c9bfe2",
+                  "devices": [
+                      {
+                          "id": "os::4C2EFE-TESTEX00061",
+                          "actionResult": 0
+                      },
+                      {
+                          "id": "os::4C2EFE-TESTEsadsaX00061",
+                          "actionResult": 0
+                      }
+                  ],
+                  "status": 3,
+                  "date": "2024-08-29T21:47:34.46Z",
+                  "user": {
+                      "email": "teste@gmail.com",
+                      "name": "leleco"
+                  },
+                  "actionType": 1,
+                  "parameters": {
+                      "fw_name": "teste",
+                      "fw_download_url": "teste",
+                      "num_of_updates_in_parallel": 1
+                  }
+              }
+          ]

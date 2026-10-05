@@ -1,0 +1,89 @@
+info:
+  name: Edit Definition
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}service/definition"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "id": "69ca80207a4e2558538ffce0",
+          "name": "test-1",
+          "description": "my first test",
+          "tenant_id": "12345678901234567890",
+          "script": "--just changin the original lua script",
+          "variables": [
+              {
+                  "name": "A",
+                  "description": "",
+                  "type": "string",
+                  "required": true
+              }
+          ],
+          "available": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/definition"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "id": "69ca80207a4e2558538ffce0",
+              "name": "test-1",
+              "description": "my first test",
+              "tenant_id": "12345678901234567890",
+              "script": "--just changin the original lua script",
+              "variables": [
+                  {
+                      "name": "A",
+                      "description": "",
+                      "type": "string",
+                      "required": true
+                  }
+              ],
+              "available": true
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 13:58:41 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

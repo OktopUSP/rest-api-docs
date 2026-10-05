@@ -1,0 +1,55 @@
+info:
+  name: Delete Mass Firmware Update
+  type: http
+  seq: 3
+
+http:
+  method: DELETE
+  url: "{{base_url}}mass-actions/fwUpdate?actionId=671021212e13e4509cec86bf"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: actionId
+      value: 671021212e13e4509cec86bf
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Mass Firmware Update
+    request:
+      url: "{{base_url}}mass-actions/fwUpdate?actionId=66d3461fc580486e26c32ddf"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: actionId
+          value: 66d3461fc580486e26c32ddf
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 31 Aug 2024 16:36:05 GMT
+        - name: Content-Length
+          value: "0"
+      body:
+        type: json
+        data: ""

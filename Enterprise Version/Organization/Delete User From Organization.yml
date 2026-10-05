@@ -1,0 +1,53 @@
+info:
+  name: Delete User From Organization
+  type: http
+  seq: 8
+
+http:
+  method: DELETE
+  url: "{{base_url}}organization/user?email={{email}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: email
+      value: "{{email}}"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete User From Organization
+    request:
+      url: "{{base_url}}organization/user?email=john@gmail.com"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: email
+          value: john@gmail.com
+          type: query
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 04 Jul 2025 17:46:30 GMT
+      body:
+        type: json
+        data: ""

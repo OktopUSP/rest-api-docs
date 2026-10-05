@@ -1,0 +1,288 @@
+info:
+  name: Get Device(s)
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}device?page_number=0&page_size=20&vendor=&version&alias=&statusOrder=desc&type=&model&uptime=-1"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: id
+      value: "{{device}}"
+      type: query
+      disabled: true
+    - name: page_number
+      value: "0"
+      type: query
+    - name: page_size
+      value: "20"
+      type: query
+    - name: vendor
+      value: ""
+      type: query
+    - name: version
+      value: ""
+      type: query
+    - name: alias
+      value: ""
+      type: query
+    - name: statusOrder
+      value: desc
+      type: query
+    - name: type
+      value: ""
+      type: query
+    - name: status
+      value: "2"
+      type: query
+      disabled: true
+    - name: model
+      value: ""
+      type: query
+    - name: uptime
+      value: "-1"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: List Devices
+    request:
+      url: "{{base_url}}device?page_number=1&page_size=20"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: oktopus-agent-test
+          type: query
+          disabled: true
+        - name: page_number
+          value: "1"
+          type: query
+        - name: page_size
+          value: "20"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 10 Jun 2024 15:27:47 GMT
+        - name: Content-Length
+          value: "1166"
+      body:
+        type: json
+        data: |-
+          {
+              "devices": [
+                  {
+                      "SN": "VMXQU21B06601401",
+                      "Model": "",
+                      "Customer": "",
+                      "Vendor": "Huawei Technologies Co., Ltd.",
+                      "Version": "2.0.0.318(SP2C947)",
+                      "ProductClass": "Huawei",
+                      "Status": 0,
+                      "Mqtt": 0,
+                      "Stomp": 0,
+                      "Websockets": 0,
+                      "Cwmp": 0
+                  },
+                  {
+                      "SN": "ITBS-000001",
+                      "Model": "",
+                      "Customer": "",
+                      "Vendor": "Intelbras",
+                      "Version": "1.1-220505",
+                      "ProductClass": "BM632w",
+                      "Status": 2,
+                      "Mqtt": 0,
+                      "Stomp": 0,
+                      "Websockets": 0,
+                      "Cwmp": 2
+                  },
+                  {
+                      "SN": "000000",
+                      "Model": "",
+                      "Customer": "",
+                      "Vendor": "Huawei Technologies Co., Ltd.",
+                      "Version": "V100R001IRQC56B017",
+                      "ProductClass": "BM632w",
+                      "Status": 2,
+                      "Mqtt": 0,
+                      "Stomp": 0,
+                      "Websockets": 0,
+                      "Cwmp": 2
+                  },
+                  {
+                      "SN": "VMXQU21919009609",
+                      "Model": "",
+                      "Customer": "",
+                      "Vendor": "Huawei Technologies Co., Ltd.",
+                      "Version": "2.0.0.322(SP1C947)",
+                      "ProductClass": "Huawei",
+                      "Status": 2,
+                      "Mqtt": 0,
+                      "Stomp": 0,
+                      "Websockets": 0,
+                      "Cwmp": 2
+                  },
+                  {
+                      "SN": "oktopus-0-mqtt",
+                      "Model": "USP Agent",
+                      "Customer": "",
+                      "Vendor": "Manufacturer",
+                      "Version": "",
+                      "ProductClass": "USP Agent",
+                      "Status": 2,
+                      "Mqtt": 2,
+                      "Stomp": 0,
+                      "Websockets": 0,
+                      "Cwmp": 0
+                  },
+                  {
+                      "SN": "os::4C2EFE-GCN230700061",
+                      "Model": "AX3000V",
+                      "Customer": "",
+                      "Vendor": "Comnect",
+                      "Version": "2.2-231105-dev",
+                      "ProductClass": "IGD",
+                      "Status": 2,
+                      "Mqtt": 0,
+                      "Stomp": 0,
+                      "Websockets": 2,
+                      "Cwmp": 0
+                  }
+              ],
+              "page": 1,
+              "pages": 0,
+              "size": 20
+          }
+  - name: Find Device By Id
+    request:
+      url: "{{base_url}}device?id=oktopus-1-mqtt&page_number=1&page_size=20"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: oktopus-1-mqtt
+          type: query
+        - name: page_number
+          value: "1"
+          type: query
+        - name: page_size
+          value: "20"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Tue, 06 Aug 2024 23:00:32 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "187"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "SN": "oktopus-1-mqtt",
+              "Model": "USP Agent",
+              "Customer": "",
+              "Vendor": "Manufacturer",
+              "Version": "",
+              "ProductClass": "USP Agent",
+              "Alias": "",
+              "Status": 0,
+              "Mqtt": 0,
+              "Stomp": 0,
+              "Websockets": 0,
+              "Cwmp": 0
+          }
+  - name: Invalid Status Ordering
+    request:
+      url: "{{base_url}}device?vendor&version&alias&status=teste&label&type"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: oktopus-1-mqtt
+          type: query
+          disabled: true
+        - name: page_number
+          value: "1"
+          type: query
+          disabled: true
+        - name: page_size
+          value: "20"
+          type: query
+          disabled: true
+        - name: vendor
+          value: ""
+          type: query
+        - name: version
+          value: ""
+          type: query
+        - name: alias
+          value: ""
+          type: query
+        - name: status
+          value: teste
+          type: query
+        - name: label
+          value: ""
+          type: query
+        - name: type
+          value: ""
+          type: query
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 07 Aug 2024 15:52:48 GMT
+        - name: Content-Length
+          value: "39"
+      body:
+        type: json
+        data: "\"Status order must be 'asc' or 'desc'\""
+
+docs: List all devices saved at database

@@ -1,0 +1,7 @@
+info:
+  name: HealthChecks
+  type: folder
+  seq: 13
+
+request:
+  auth: inherit

@@ -1,0 +1,86 @@
+info:
+  name: Install App
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}device/:device/:mtp/lcm"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "url": "http://192.168.4.225/apps/testapp32.tar"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Install App
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm?"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: ""
+          value: ""
+          type: query
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "url": "http://192.168.4.225/apps/testapp32.tar"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 14:05:59 GMT
+        - name: Content-Length
+          value: "142"
+      body:
+        type: json
+        data: |-
+          {
+              "operation_results": [
+                  {
+                      "executed_command": "Device.SoftwareModules.InstallDU()",
+                      "OperationResp": {
+                          "ReqObjPath": "Device.LocalAgent.Request.5"
+                      }
+                  }
+              ]
+          }

@@ -1,0 +1,31 @@
+info:
+  name: Upload File
+  type: http
+  seq: 5
+
+http:
+  method: POST
+  url: "{{base_url_file}}file/app/upload"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: multipart-form
+    data:
+      - name: file
+        type: file
+        value:
+          - postman-cloud:///1ef8c7b4-1b2f-4d10-ade3-86830b65c78e
+      - name: metadata
+        type: text
+        value: '{"filename": "testapp32.tar", "type":"app", "model":"test123"}'
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

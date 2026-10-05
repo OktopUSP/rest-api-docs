@@ -1,0 +1,50 @@
+info:
+  name: Cancel Mass Firmware Update
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url}}mass-actions/fwUpdate?actionId=66d3461fc580486e26c32ddf"
+  params:
+    - name: actionId
+      value: 66d3461fc580486e26c32ddf
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Invalid Cancel
+    request:
+      url: "{{base_url}}mass-actions/fwUpdate?actionId=66d35876a20ab554bbd63956"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: actionId
+          value: 66d35876a20ab554bbd63956
+          type: query
+    response:
+      status: 409
+      statusText: Conflict
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 31 Aug 2024 18:24:35 GMT
+        - name: Content-Length
+          value: "40"
+      body:
+        type: json
+        data: '"action is finished or already canceled"'

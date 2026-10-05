@@ -1,0 +1,73 @@
+info:
+  name: Set Device settings
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}insights/device/:device/settings"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "hiredUpBW": 200,
+          "hiredDownBW": 400
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Set Device settings
+    request:
+      url: "{{base_url}}insights/device/:device/settings"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "hiredUpBW": 200,
+              "hiredDownBW": 400
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.4
+        - name: Date
+          value: Fri, 12 Sep 2025 10:07:07 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "0"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: ""

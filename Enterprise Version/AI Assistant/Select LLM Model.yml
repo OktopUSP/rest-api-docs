@@ -1,0 +1,57 @@
+info:
+  name: Select LLM Model
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: "{{base_url}}ai-assistant/models"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "ai_model": "gpt-4.1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Select LLM Model
+    request:
+      url: "{{base_url}}ai-assistant/models"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "ai_model": "gpt-4.1"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 07 Oct 2025 23:44:04 GMT
+      body:
+        type: json
+        data: ""

@@ -1,0 +1,73 @@
+info:
+  name: Firmware Update
+  type: http
+  seq: 13
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/fw_update"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "Url": "http://192.168.4.225:8004/logo.png"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Firmware Update
+    request:
+      url: "{{base_url}}device/:device/:mtp/fw_update"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "Url": "http://192.168.4.225:8004/logo.png"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 18 Sep 2024 19:32:47 GMT
+        - name: Content-Length
+          value: "25"
+      body:
+        type: json
+        data: '"Firmware update started"'

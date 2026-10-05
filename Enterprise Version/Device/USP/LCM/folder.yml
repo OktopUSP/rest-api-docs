@@ -1,0 +1,11 @@
+info:
+  name: LCM
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit
+
+docs:
+  content: Lifecycle Container Management
+  type: text/markdown

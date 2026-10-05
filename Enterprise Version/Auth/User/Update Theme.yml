@@ -1,0 +1,125 @@
+info:
+  name: Update Theme
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: "{{base_url}}user/preferences/theme"
+  headers:
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "theme": "light"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Bad Payload Name
+    request:
+      url: "{{base_url}}user/preferences/theme"
+      method: PUT
+      headers:
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "theme": "black"
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Fri, 20 Mar 2026 18:34:31 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "45"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: Invalid theme data, must be 'light' or 'dark'
+  - name: Set to Dark Theme
+    request:
+      url: "{{base_url}}user/preferences/theme"
+      method: PUT
+      headers:
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "theme": "dark"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Fri, 20 Mar 2026 18:34:55 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""
+  - name: Set to Light Theme
+    request:
+      url: "{{base_url}}user/preferences/theme"
+      method: PUT
+      headers:
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "theme": "light"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Fri, 20 Mar 2026 18:35:20 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

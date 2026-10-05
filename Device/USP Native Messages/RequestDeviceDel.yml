@@ -1,0 +1,133 @@
+info:
+  name: RequestDeviceDel
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/del"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: ""
+      type: path
+    - name: mtp
+      value: mqtt
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "allow_partial": true,
+          "obj_paths": [
+              "Device.IP.Interface.3."
+          ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: DeleteInstance
+    request:
+      url: "{{base_url}}device/{{device}}/del"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial": true,
+              "obj_paths": [
+                  "Device.IP.Interface.3."
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 10 May 2023 02:19:33 GMT
+        - name: Content-Length
+          value: "161"
+      body:
+        type: json
+        data: |-
+          {
+              "deleted_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.3.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "affected_paths": [
+                                      "Device.IP.Interface.3."
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: DeleteWithQuery
+    request:
+      url: "{{base_url}}device/{{device}}/del"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial": true,
+              "obj_paths": [
+                  "Device.IP.Interface.[Alias==test]."
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 10 May 2023 02:20:05 GMT
+        - name: Content-Length
+          value: "173"
+      body:
+        type: json
+        data: |-
+          {
+              "deleted_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.[Alias==test].",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "affected_paths": [
+                                      "Device.IP.Interface.4."
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

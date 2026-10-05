@@ -1,0 +1,192 @@
+info:
+  name: Connected Devices
+  type: http
+  seq: 26
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/connecteddevices"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Connected Devices
+    request:
+      url: "{{base_url}}device/:device/connecteddevices"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: 485754434ECDE6AD
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 22 Jun 2024 14:57:41 GMT
+        - name: Content-Length
+          value: "145"
+      body:
+        type: json
+        data: |-
+          {
+              "2.4GHz": [
+                  {
+                      "mac": "d4:6e:0e:11:f7:6b",
+                      "ip_adress": "192.168.18.5",
+                      "adress_source": "DHCP",
+                      "active": true,
+                      "rssi": "-40",
+                      "hostname": "leandro-laptop"
+                  }
+              ]
+          }
+  - name: Connected Devices With Mesh Router
+    request:
+      url: "{{base_url}}device/:device/:mtp/connecteddevices"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Wed, 23 Oct 2024 18:04:29 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1382"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "5GHz": [
+                  {
+                      "mac": "2A:B0:F6:D1:AF:70",
+                      "ip_adress": "192.168.3.6",
+                      "adress_source": "DHCP",
+                      "active": true,
+                      "rssi": "-58",
+                      "hostname": "iPhone",
+                      "router_mesh": false
+                  },
+                  {
+                      "mac": "5E:4A:B6:72:AA:C6",
+                      "ip_adress": "192.168.3.7",
+                      "adress_source": "DHCP",
+                      "active": false,
+                      "rssi": "",
+                      "hostname": "Watch",
+                      "router_mesh": false
+                  },
+                  {
+                      "mac": "4A:15:D2:14:CC:90",
+                      "ip_adress": "192.168.3.8",
+                      "adress_source": "DHCP",
+                      "active": true,
+                      "rssi": "-56",
+                      "hostname": "",
+                      "router_mesh": false
+                  }
+              ],
+              "LAN 1": [
+                  {
+                      "mac": "00:E0:4C:68:15:14",
+                      "ip_adress": "192.168.3.4",
+                      "adress_source": "STATIC",
+                      "active": false,
+                      "rssi": "",
+                      "hostname": "lenovo-worker1",
+                      "router_mesh": false
+                  },
+                  {
+                      "mac": "F8:AF:05:25:32:87",
+                      "ip_adress": "192.168.3.5",
+                      "adress_source": "DHCP",
+                      "active": true,
+                      "rssi": "",
+                      "hostname": "HUAWEI:router:WS7001-40:0782",
+                      "router_mesh": true
+                  },
+                  {
+                      "mac": "8C:04:BA:FC:F7:0A",
+                      "ip_adress": "192.168.3.10",
+                      "adress_source": "DHCP",
+                      "active": true,
+                      "rssi": "",
+                      "hostname": "dell-worker2",
+                      "router_mesh": false
+                  },
+                  {
+                      "mac": "F8:AF:05:25:32:89",
+                      "ip_adress": "192.168.3.2",
+                      "adress_source": "DHCP",
+                      "active": false,
+                      "rssi": "",
+                      "hostname": "HUAWEI:router:WS7001-40:0782:16",
+                      "router_mesh": true
+                  },
+                  {
+                      "mac": "F8:AF:05:25:32:88",
+                      "ip_adress": "192.168.3.3",
+                      "adress_source": "DHCP",
+                      "active": false,
+                      "rssi": "",
+                      "hostname": "HUAWEI:router:WS7001-40:0782:16",
+                      "router_mesh": true
+                  },
+                  {
+                      "mac": "0A:55:DC:53:ED:C3",
+                      "ip_adress": "192.168.3.9",
+                      "adress_source": "DHCP",
+                      "active": true,
+                      "rssi": "",
+                      "hostname": "MacBookPro",
+                      "router_mesh": false
+                  }
+              ]
+          }

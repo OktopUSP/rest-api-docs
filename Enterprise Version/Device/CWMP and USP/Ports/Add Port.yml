@@ -1,0 +1,111 @@
+info:
+  name: Add Port
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}device/:device/:mtp/ports"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "pppoe": {
+              "username": {
+                  "writable": false,
+                  "value": "test"
+              },
+              "password": {
+                  "writable": false,
+                  "value": ""
+              }
+          },
+          "vlan": {
+              "writable": false,
+              "value": "87"
+          },
+          "service": {
+              "writable": false,
+              "value": "INTERNET"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Add Port
+    request:
+      url: "{{base_url}}device/:device/:mtp/ports"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "pppoe": {
+                  "username": {
+                      "writable": false,
+                      "value": "test"
+                  },
+                  "password": {
+                      "writable": false,
+                      "value": ""
+                  }
+              },
+              "vlan": {
+                  "writable": false,
+                  "value": "87"
+              },
+              "service": {
+                  "writable": false,
+                  "value": "INTERNET"
+              }
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Tue, 22 Oct 2024 13:43:15 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "12"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: '"Port added"'

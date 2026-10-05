@@ -1,0 +1,226 @@
+info:
+  name: Get Cellular
+  type: http
+  seq: 29
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/cellular"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Cellular
+    request:
+      url: "{{base_url}}device/:device/:mtp/cellular"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Fri, 26 Sep 2025 19:44:25 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "1905"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "Device.Cellular.Interface.1.",
+                  "enable": {
+                      "writable": false,
+                      "value": null
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "name": {
+                      "writable": false,
+                      "value": "rmnet_data0"
+                  },
+                  "supported_access_technologies": {
+                      "writable": false,
+                      "value": [
+                          "LTE",
+                          "NR",
+                          "Auto"
+                      ]
+                  },
+                  "current_access_technology": {
+                      "writable": true,
+                      "value": "Auto"
+                  },
+                  "rssi": {
+                      "writable": false,
+                      "value": -48
+                  },
+                  "rsrp": {
+                      "writable": false,
+                      "value": -84
+                  },
+                  "rsrq": {
+                      "writable": false,
+                      "value": -16
+                  },
+                  "network_name": {
+                      "writable": false,
+                      "value": "WINDTRE"
+                  },
+                  "access_point": [
+                      {
+                          "path": "Device.X_Aethra_AccessPoint.AccessPoint.2.",
+                          "default_activation": {
+                              "writable": true,
+                              "value": false
+                          },
+                          "apn": {
+                              "writable": false,
+                              "value": "apn2.none"
+                          },
+                          "ip": {
+                              "writable": false,
+                              "value": null
+                          },
+                          "vlan_id": {
+                              "writable": false,
+                              "value": "200"
+                          }
+                      },
+                      {
+                          "path": "Device.X_Aethra_AccessPoint.AccessPoint.1.",
+                          "default_activation": {
+                              "writable": true,
+                              "value": true
+                          },
+                          "apn": {
+                              "writable": false,
+                              "value": "iot.wimore.static.it"
+                          },
+                          "ip": {
+                              "writable": false,
+                              "value": "10.39.6.114"
+                          },
+                          "vlan_id": {
+                              "writable": false,
+                              "value": "100"
+                          }
+                      },
+                      {
+                          "path": "Device.X_Aethra_AccessPoint.AccessPoint.6.",
+                          "default_activation": {
+                              "writable": true,
+                              "value": false
+                          },
+                          "apn": {
+                              "writable": false,
+                              "value": "apn6.none"
+                          },
+                          "ip": {
+                              "writable": false,
+                              "value": null
+                          },
+                          "vlan_id": {
+                              "writable": false,
+                              "value": "600"
+                          }
+                      },
+                      {
+                          "path": "Device.X_Aethra_AccessPoint.AccessPoint.5.",
+                          "default_activation": {
+                              "writable": true,
+                              "value": false
+                          },
+                          "apn": {
+                              "writable": false,
+                              "value": "apn5.none"
+                          },
+                          "ip": {
+                              "writable": false,
+                              "value": null
+                          },
+                          "vlan_id": {
+                              "writable": false,
+                              "value": "500"
+                          }
+                      },
+                      {
+                          "path": "Device.X_Aethra_AccessPoint.AccessPoint.4.",
+                          "default_activation": {
+                              "writable": true,
+                              "value": false
+                          },
+                          "apn": {
+                              "writable": false,
+                              "value": "apn4.none"
+                          },
+                          "ip": {
+                              "writable": false,
+                              "value": null
+                          },
+                          "vlan_id": {
+                              "writable": false,
+                              "value": "400"
+                          }
+                      },
+                      {
+                          "path": "Device.X_Aethra_AccessPoint.AccessPoint.3.",
+                          "default_activation": {
+                              "writable": true,
+                              "value": false
+                          },
+                          "apn": {
+                              "writable": false,
+                              "value": "apn3.none"
+                          },
+                          "ip": {
+                              "writable": false,
+                              "value": null
+                          },
+                          "vlan_id": {
+                              "writable": false,
+                              "value": "300"
+                          }
+                      }
+                  ]
+              }
+          ]

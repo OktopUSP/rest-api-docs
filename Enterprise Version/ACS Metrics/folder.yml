@@ -1,0 +1,36 @@
+info:
+  name: ACS Metrics
+  type: folder
+  seq: 20
+
+request:
+  auth: inherit
+
+docs:
+  content: |-
+    ## ACS Metrics
+
+    Read-only endpoints that expose **CWMP (TR-069) metrics** aggregated by the `acs-metrics` service. The Controller proxies each request to `acs-metrics` over NATS and returns its JSON response verbatim.
+
+    There are two independent metric families:
+
+    | Family | Endpoint | Frontend visual |
+    |---|---|---|
+    | **Events** | `GET /api/info/acs/events` | Donut chart, one slice per CWMP event code |
+    | **Sessions** | `GET /api/info/acs/sessions` | A "sessions now" number + a timeline of session counts |
+
+    ### Common behaviour
+
+    - **Auth:** `Authorization: {{authToken}}` header (JWT). The caller also needs the **Overview → Read** permission.
+    - **Tenant scope:** results are always scoped to the authenticated user's organization; there is no client-supplied `org` parameter.
+    - **Time range:** `start` and `end` are optional RFC 3339 timestamps. When omitted they default to `now-24h` .. `now`. `start` must be strictly before `end`.
+
+    ### Shared error responses
+
+    | Status | Meaning |
+    |---|---|
+    | `400 Bad Request` | `start`/`end` not RFC 3339, or `start` is not before `end` |
+    | `403 Forbidden` | Caller lacks the Overview read permission |
+    | `502 Bad Gateway` | Error talking to the `acs-metrics` service over NATS |
+    | `503 Service Unavailable` | The `acs-metrics` service is not running / has no responders |
+  type: text/markdown

@@ -1,0 +1,98 @@
+info:
+  name: RequestDeviceParametersInstances
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/instances"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: ""
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "obj_paths" : ["Device."],
+            "first_level_only" : false,
+            "return_commands" : false,
+            "return_events" : false,
+            "return_params" : true 
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: RequestDeviceParametersInstances
+    request:
+      url: "{{base_url}}device/{{device}}/instances"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "obj_paths" : ["Device.DeviceInfo."],
+              "first_level_only" : false
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 24 Jun 2023 14:24:38 GMT
+        - name: Content-Length
+          value: "477"
+      body:
+        type: json
+        data: |-
+          {
+              "req_path_results": [
+                  {
+                      "requested_path": "Device.DeviceInfo.",
+                      "curr_insts": [
+                          {
+                              "instantiated_obj_path": "Device.DeviceInfo.FirmwareImage.1."
+                          },
+                          {
+                              "instantiated_obj_path": "Device.DeviceInfo.FirmwareImage.2."
+                          },
+                          {
+                              "instantiated_obj_path": "Device.DeviceInfo.Processor.1."
+                          },
+                          {
+                              "instantiated_obj_path": "Device.DeviceInfo.TemperatureStatus.TemperatureSensor.1."
+                          },
+                          {
+                              "instantiated_obj_path": "Device.DeviceInfo.VendorConfigFile.1."
+                          },
+                          {
+                              "instantiated_obj_path": "Device.DeviceInfo.VendorLogFile.1."
+                          }
+                      ]
+                  }
+              ]
+          }

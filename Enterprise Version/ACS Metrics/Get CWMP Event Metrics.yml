@@ -1,0 +1,193 @@
+info:
+  name: Get CWMP Event Metrics
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}info/acs/events?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: start
+      value: 2026-08-29T00:00:00Z
+      type: query
+      description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+    - name: end
+      value: 2026-08-30T00:00:00Z
+      type: query
+      description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+    - name: event_code
+      value: "2"
+      type: query
+      description: Optional. Return only counts for this CWMP event code (e.g. 2 = PERIODIC). Omit for all codes.
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: 200 OK
+    request:
+      url: "{{base_url}}info/acs/events?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: start
+          value: 2026-08-29T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+        - name: end
+          value: 2026-08-30T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+        - name: event_code
+          value: "2"
+          type: query
+          description: Optional. Return only counts for this CWMP event code (e.g. 2 = PERIODIC). Omit for all codes.
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+            "results": [
+              { "org": "12345678901234567890", "event_code": "2", "count": 1840 },
+              { "org": "12345678901234567890", "event_code": "1", "count": 96 },
+              { "org": "12345678901234567890", "event_code": "4", "count": 52 },
+              { "org": "12345678901234567890", "event_code": "6", "count": 31 }
+            ]
+          }
+  - name: 400 Bad Request - invalid time range
+    request:
+      url: "{{base_url}}info/acs/events?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: start
+          value: 2026-08-29T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+        - name: end
+          value: 2026-08-30T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+        - name: event_code
+          value: "2"
+          type: query
+          description: Optional. Return only counts for this CWMP event code (e.g. 2 = PERIODIC). Omit for all codes.
+          disabled: true
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: '"start must be a time before end"'
+  - name: 503 Service Unavailable
+    request:
+      url: "{{base_url}}info/acs/events?start=2026-08-29T00:00:00Z&end=2026-08-30T00:00:00Z"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: start
+          value: 2026-08-29T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 start of the range (inclusive). Defaults to now-24h.
+        - name: end
+          value: 2026-08-30T00:00:00Z
+          type: query
+          description: Optional. RFC 3339 end of the range (exclusive). Defaults to now. Must be after start.
+        - name: event_code
+          value: "2"
+          type: query
+          description: Optional. Return only counts for this CWMP event code (e.g. 2 = PERIODIC). Omit for all codes.
+          disabled: true
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: '"acs-metrics service not available"'
+
+docs: |-
+  Returns the number of CWMP (TR-069) Inform events received per event code over a time range, scoped to the authenticated user's organization. The frontend renders this as a **donut chart**, one slice per event code.
+
+  Each event is counted at the time the `acs` service received the Inform; `acs-metrics` pre-aggregates counts in ~10-minute windows and this endpoint sums them over `[start, end)`.
+
+  ### Query parameters
+
+  | Name | Required | Description |
+  |---|---|---|
+  | `start` | No | RFC 3339 timestamp, inclusive lower bound. Defaults to `now - 24h`. |
+  | `end` | No | RFC 3339 timestamp, exclusive upper bound. Defaults to `now`. Must be strictly after `start`. |
+  | `event_code` | No | Restrict the result to a single CWMP event code. Omit to get every code. |
+
+  ### CWMP event codes
+
+  | Code | Meaning | Code | Meaning |
+  |---|---|---|---|
+  | 0 | BOOTSTRAP | 7 | TRANSFER COMPLETE |
+  | 1 | BOOT | 8 | DIAGNOSTICS COMPLETE |
+  | 2 | PERIODIC | 9 | REQUEST DOWNLOAD |
+  | 3 | SCHEDULED | 10 | AUTONOMOUS TRANSFER COMPLETE |
+  | 4 | VALUE CHANGE | 11 | DU STATE CHANGE COMPLETE |
+  | 5 | KICKED | 12 | AUTONOMOUS DU STATE CHANGE COMPLETE |
+  | 6 | CONNECTION REQUEST | | |
+
+  ### Authentication
+
+  `Authorization: {{authToken}}` (JWT). Requires the **Overview → Read** permission.
+
+  ### Response `200 OK`
+
+  ```json
+  {
+    "results": [
+      { "org": "12345678901234567890", "event_code": "2", "count": 1840 },
+      { "org": "12345678901234567890", "event_code": "1", "count": 96 },
+      { "org": "12345678901234567890", "event_code": "4", "count": 52 }
+    ]
+  }
+  ```
+
+  `results` is omitted or empty when no events were recorded in the range. When `event_code` is supplied, at most one entry is returned.
+
+  ### Error responses
+
+  | Status | Body | Cause |
+  |---|---|---|
+  | `400 Bad Request` | `"invalid start: ..."` / `"start must be a time before end"` | Malformed or inverted time range |
+  | `403 Forbidden` | `Not allowed to perform this action` | Missing Overview read permission |
+  | `502 Bad Gateway` | `Error to communicate with acs-metrics service: ...` | NATS request to `acs-metrics` failed |
+  | `503 Service Unavailable` | `acs-metrics service not available` | No `acs-metrics` responder on NATS |

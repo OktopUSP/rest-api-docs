@@ -1,0 +1,31 @@
+info:
+  name: Firmware Download
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url_file}}firmwares/:fileId"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: fileId
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "file": "example.cfg"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

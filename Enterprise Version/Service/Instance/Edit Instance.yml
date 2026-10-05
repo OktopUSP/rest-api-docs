@@ -1,0 +1,77 @@
+info:
+  name: Edit Instance
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}service/instance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "id": "69ca92ffbbbf26001dcca0ec",
+          "device_id": "HUAWNFYC-OPA123-0",
+          "service_id": "69ca80207a4e2558538ffce0",
+          "tenant_id": "12345678901234567890",
+          "status": "pending",
+          "variables": {
+              "A": "dsadsa"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/instance"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "id": "69ca92ffbbbf26001dcca0ec",
+              "device_id": "HUAWNFYC-OPA123-0",
+              "service_id": "69ca80207a4e2558538ffce0",
+              "tenant_id": "12345678901234567890",
+              "status": "pending",
+              "variables": {
+                  "A": "dsadsa"
+              }
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 15:13:56 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: ""

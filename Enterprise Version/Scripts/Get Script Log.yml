@@ -1,0 +1,104 @@
+info:
+  name: Get Script Log
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}scripts/:script_id/log"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: script_id
+      value: 673fd9b65df925a773782ca7
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Error (log file not found)
+    request:
+      url: "{{base_url}}scripts/:script_id/log"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: script_id
+          value: ""
+          type: path
+    response:
+      status: 404
+      statusText: Not Found
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 12:22:11 GMT
+        - name: Content-Length
+          value: "20"
+      body:
+        type: json
+        data: '"log file not found"'
+  - name: Get Script Log
+    request:
+      url: "{{base_url}}scripts/:script_id/log"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: script_id
+          value: 673fd9b65df925a773782ca7
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 12:23:11 GMT
+        - name: Content-Length
+          value: "210"
+      body:
+        type: json
+        data: |
+          hello rapaziada
+          testando
+          olá
+          hello rapaziada
+          testando
+          olá
+          hello rapaziada
+          testando
+          olá
+          hello rapaziada
+          testando
+          olá
+          hello rapaziada
+          testando
+          olá
+          hello rapaziada
+          testando
+          olá
+          hello rapaziada
+          testando
+          olá

@@ -1,0 +1,75 @@
+info:
+  name: Get SpeedTest Results
+  type: http
+  seq: 25
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/speedtestresults"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get SpeedTest Results
+    request:
+      url: "{{base_url}}device/:device/:mtp/speedtestresults"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Thu, 22 May 2025 15:45:14 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "133"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "interface": "",
+              "url": "",
+              "bytes_received": 1689,
+              "bytes_sent": 2177,
+              "action": "",
+              "rtt": "263µs",
+              "throughput": "0",
+              "resp_time": "308.814ms"
+          }

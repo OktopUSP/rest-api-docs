@@ -1,0 +1,178 @@
+info:
+  name: GetParameterValues
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}device/cwmp/:device/getParameterValues"
+  headers:
+    - name: Content-Type
+      value: application/xml
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+  body:
+    type: xml
+    data: |-
+      <?xml version="1.0" encoding="UTF-8"?>
+      <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <soap:Header/>
+        <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <cwmp:GetParameterValues>
+            <ParameterNames>
+              <string>InternetGatewayDevice.TraceRouteDiagnostics.</string>
+             </ParameterNames>
+          </cwmp:GetParameterValues>
+        </soap:Body>
+      </soap:Envelope>
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: GetParameterValues
+    request:
+      url: "{{base_url}}device/cwmp/:device/getParameterValues"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: VMXQU21B06601401
+          type: path
+      body:
+        type: xml
+        data: |-
+          <?xml version="1.0" encoding="UTF-8"?>
+          <soap:Envelope xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cwmp="urn:dslforum-org:cwmp-1-0" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:schemaLocation="urn:dslforum-org:cwmp-1-0 ..\schemas\wt121.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <soap:Header/>
+            <soap:Body soap:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+              <cwmp:GetParameterValues>
+                <ParameterNames>
+                  <string>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.</string>
+                 </ParameterNames>
+              </cwmp:GetParameterValues>
+            </soap:Body>
+          </soap:Envelope>
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 21 May 2024 23:04:50 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: xml
+        data: |-
+          <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+              <SOAP-ENV:Header>
+                  <cwmp:ID SOAP-ENV:mustUnderstand="1"/>
+              </SOAP-ENV:Header>
+              <SOAP-ENV:Body>
+                  <cwmp:GetParameterValuesResponse>
+                      <ParameterList SOAP-ENC:arrayType="cwmp:ParameterValueStruct[21]">
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Enable</Name>
+                              <Value xsi:type="xsd:boolean">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Status</Name>
+                              <Value xsi:type="xsd:string">Disabled</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Name</Name>
+                              <Value xsi:type="xsd:string">wl1</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BSSID</Name>
+                              <Value xsi:type="xsd:string">F8:AF:05:25:5B:A8</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Channel</Name>
+                              <Value xsi:type="xsd:int">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.AutoChannelEnable</Name>
+                              <Value xsi:type="xsd:boolean">1</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.ChannelsInUse</Name>
+                              <Value xsi:type="xsd:string">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.SSID</Name>
+                              <Value xsi:type="xsd:string">HUAWEI-1BLSP6</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.BeaconType</Name>
+                              <Value xsi:type="xsd:string">11i</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Standard</Name>
+                              <Value xsi:type="xsd:string">b/g/n</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.WMMEnable</Name>
+                              <Value xsi:type="xsd:boolean">1</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalBytesSent</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalBytesReceived</Name>
+                              <Value xsi:type="xsd:unsignedInt">1960</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalPacketsSent</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalPacketsReceived</Name>
+                              <Value xsi:type="xsd:unsignedInt">9</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.TotalAssociations</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.PreSharedKey.1.KeyPassphrase</Name>
+                              <Value xsi:type="xsd:string"/>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.ErrorsSent</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.ErrorsReceived</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.DiscardPacketsSent</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                          <ParameterValueStruct>
+                              <Name>InternetGatewayDevice.LANDevice.1.WLANConfiguration.1.Stats.DiscardPacketsReceived</Name>
+                              <Value xsi:type="xsd:unsignedInt">0</Value>
+                          </ParameterValueStruct>
+                      </ParameterList>
+                  </cwmp:GetParameterValuesResponse>
+              </SOAP-ENV:Body>
+          </SOAP-ENV:Envelope>

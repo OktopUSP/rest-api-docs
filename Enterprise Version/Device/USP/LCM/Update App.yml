@@ -1,0 +1,200 @@
+info:
+  name: Update App
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/lcm"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "deployment_unit": "Device.SoftwareModules.DeploymentUnit.2.",
+          "url": "http://192.168.4.225/apps/testapp32.tar"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Start App
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "execution_unit": "Device.SoftwareModules.ExecutionUnit.1.",
+              "status": "Active"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 13:06:06 GMT
+      body:
+        type: json
+        data: ""
+  - name: Stop App
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "execution_unit": "Device.SoftwareModules.ExecutionUnit.1.",
+              "status": "Idle"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 13:09:50 GMT
+      body:
+        type: json
+        data: ""
+  - name: Update App Version
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "deployment_unit": "Device.SoftwareModules.DeploymentUnit.2.",
+              "url": "http://192.168.4.225/apps/testapp32.tar"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 13:38:56 GMT
+        - name: Content-Length
+          value: "132"
+      body:
+        type: json
+        data: |-
+          {
+              "executed_command": "Device.SoftwareModules.DeploymentUnit.2.Update()",
+              "OperationResp": {
+                  "ReqObjPath": "Device.LocalAgent.Request.4"
+              }
+          }
+  - name: Invalid App Action
+    request:
+      url: "{{base_url}}device/:device/:mtp/lcm"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "execution_unit": "Device.SoftwareModules.ExecutionUnit.1.",
+              "status": "cvbvcbc"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 04 Nov 2024 13:16:01 GMT
+        - name: Content-Length
+          value: "252"
+      body:
+        type: json
+        data: |-
+          {
+              "executed_command": "Device.SoftwareModules.ExecutionUnit.1.SetRequestedState()",
+              "OperationResp": {
+                  "CmdFailure": {
+                      "err_code": 7004,
+                      "err_msg": "DATA_MODEL_Operate: Synchronous operation (Device.SoftwareModules.ExecutionUnit.1.SetRequestedState()) failed"
+                  }
+              }
+          }

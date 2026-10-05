@@ -1,0 +1,57 @@
+info:
+  name: Delete Script
+  type: http
+  seq: 4
+
+http:
+  method: DELETE
+  url: "{{base_url}}scripts"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name":"newScriptname"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Script
+    request:
+      url: "{{base_url}}scripts"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name":"newScriptname"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 02:48:58 GMT
+      body:
+        type: json
+        data: ""

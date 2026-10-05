@@ -1,0 +1,66 @@
+info:
+  name: Portal Update Payment
+  type: http
+  seq: 4
+
+http:
+  method: GET
+  url: "{{base_url}}billing/payment-update-portal"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: returnUrl
+      value: ""
+      type: query
+      description: define the url to go back after the operations are done
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Portal Update Payment
+    request:
+      url: "{{base_url}}billing/payment-update-portal"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: returnUrl
+          value: ""
+          type: query
+          description: define the url to go back after the operations are done
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 18 Nov 2025 19:49:04 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "157"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "paymentUpdatePortal": "https://pay.oktopus.app.br/p/session/<session-id>/flow"
+          }

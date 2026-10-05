@@ -1,0 +1,7 @@
+info:
+  name: CWMP and USP
+  type: folder
+  seq: 3
+
+request:
+  auth: inherit

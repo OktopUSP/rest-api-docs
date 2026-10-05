@@ -1,0 +1,68 @@
+info:
+  name: Register User
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}auth/register"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "email":"opa3@gmail.com",
+          "name": "opa3",
+          "password":"opa3",
+          "phone":"589 90857-0897",
+          "role": "Manager",
+          "org": "org1"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: UserRegister
+    request:
+      url: "{{base_url}}auth/register"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: ""
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+              "email":"jose@gmail.com",
+              "password":"tesdsa23"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sun, 14 May 2023 13:13:13 GMT
+        - name: Content-Length
+          value: "0"
+      body:
+        type: text
+        data: ""

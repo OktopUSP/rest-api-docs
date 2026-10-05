@@ -1,0 +1,82 @@
+info:
+  name: Profile Log
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}device-profile/log?name=MeuProfile&protocol=cwmp"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: name
+      value: MeuProfile
+      type: query
+    - name: protocol
+      value: cwmp
+      type: query
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Log Device Script
+    request:
+      url: "{{base_url}}device-profile/log?name=MeuProfile&protocol=cwmp"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: MeuProfile
+          type: query
+        - name: protocol
+          value: cwmp
+          type: query
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.4
+        - name: Date
+          value: Thu, 26 Feb 2026 08:42:39 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "236"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: |-
+          2026-02-26 08:20:30 test2
+          2026-02-26 08:20:30 test2
+          2026-02-26 08:20:28 test2
+          2026-02-26 08:20:25 test2
+          2026-02-26 08:19:35 test
+          2026-02-26 08:19:35 test
+          2026-02-26 08:19:35 test
+          2026-02-26 08:19:34 test
+          Log test2026-02-26 08:19:29 test

@@ -1,0 +1,66 @@
+info:
+  name: Portal Update Subscription Plan
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}billing/update-subscription-plan-portal"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: returnUrl
+      value: ""
+      type: query
+      description: define the url to go back after the operations are done
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Portal Update Subscription Plan
+    request:
+      url: "{{base_url}}billing/update-subscription-plan-portal"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: returnUrl
+          value: ""
+          type: query
+          description: define the url to go back after the operations are done
+          disabled: true
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 18 Nov 2025 19:48:49 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "166"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updateSubscriptionPlanPortal": "https://pay.oktopus.app.br/p/session/<session-id>/flow"
+          }

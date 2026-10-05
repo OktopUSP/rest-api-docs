@@ -1,0 +1,85 @@
+info:
+  name: Get Models Available
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}ai-assistant/models"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Models Available
+    request:
+      url: "{{base_url}}ai-assistant/models"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 07 Oct 2025 17:56:03 GMT
+        - name: Content-Length
+          value: "73"
+      body:
+        type: json
+        data: |-
+          {
+              "anthropic": [
+                  "claude-4"
+              ],
+              "googleai": [
+                  "gemini-pro"
+              ],
+              "openai": [
+                  "gpt-4.1"
+              ]
+          }
+  - name: Service Not Available
+    request:
+      url: "{{base_url}}ai-assistant/models"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 503
+      statusText: Service Unavailable
+      headers:
+        - name: Content-Type
+          value: text/plain; charset=utf-8
+        - name: Vary
+          value: Origin
+        - name: X-Content-Type-Options
+          value: nosniff
+        - name: Date
+          value: Tue, 07 Oct 2025 18:23:58 GMT
+        - name: Content-Length
+          value: "35"
+      body:
+        type: text
+        data: |
+          AI assistant service not available

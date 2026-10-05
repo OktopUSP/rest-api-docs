@@ -1,0 +1,88 @@
+info:
+  name: SpeedTest Upload
+  type: http
+  seq: 23
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/speedtest"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "url": "http://oktopus.app.br:8080/uploads/upload.file",
+          "action": "upload"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: SpeedTest Upload
+    request:
+      url: "{{base_url}}device/:device/:mtp/speedtest"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "url": "http://oktopus.app.br:8080/uploads/upload.file",
+              "action": "upload"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Fri, 21 Feb 2025 19:27:51 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "121"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "result": "Completed",
+              "interface": "",
+              "url": "",
+              "action": "",
+              "rtt": "160ms",
+              "throughput": "4.71Mbps",
+              "resp_time": "17.543011s"
+          }

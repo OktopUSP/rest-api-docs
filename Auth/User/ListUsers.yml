@@ -1,0 +1,122 @@
+info:
+  name: ListUsers
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}users"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: ListUsers
+    request:
+      url: "{{base_url}}users"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 24 Jun 2023 13:45:40 GMT
+        - name: Content-Length
+          value: "329"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "_id": "6496f080efc45e47f1d8dd61",
+                  "email": "jonas@gmail.com",
+                  "level": 1,
+                  "name": ""
+              },
+              {
+                  "_id": "6496f2feaacc82a70b5bc1e3",
+                  "email": "juninho@gmail.com",
+                  "level": 0,
+                  "name": ""
+              },
+              {
+                  "_id": "6496f346aacc82a70b5bc1e4",
+                  "email": "thomas@gmail.com",
+                  "level": 0,
+                  "name": ""
+              },
+              {
+                  "_id": "6496f37daacc82a70b5bc1e5",
+                  "email": "lucas@gmail.com",
+                  "level": 1,
+                  "name": ""
+              }
+          ]
+  - name: ListUsersV2
+    request:
+      url: "{{base_url}}users"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 08 Oct 2025 17:45:16 GMT
+        - name: Content-Length
+          value: "211"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "_id": "68e6a1917a89c0b8844833d5",
+                  "createdAt": "08/10/2025",
+                  "email": "test@gmail.com",
+                  "name": "",
+                  "org": "12345678901234567890",
+                  "phone": "",
+                  "preferences": {
+                      "ai_model": "gpt-4o",
+                      "locale": "",
+                      "theme": ""
+                  },
+                  "role": "Admin"
+              }
+          ]

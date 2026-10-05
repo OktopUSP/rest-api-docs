@@ -1,0 +1,59 @@
+info:
+  name: Add User To Organization
+  type: http
+  seq: 7
+
+http:
+  method: PUT
+  url: "{{base_url}}organization/user"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "email": "test@gmail.com",
+          "role": "support"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Add User To Organization
+    request:
+      url: "{{base_url}}organization/user"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "email": "john@gmail.com",
+              "role": "Admin"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 04 Jul 2025 17:35:42 GMT
+      body:
+        type: json
+        data: ""

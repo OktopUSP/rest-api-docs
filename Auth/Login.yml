@@ -1,0 +1,63 @@
+info:
+  name: Login
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}auth/login"
+  headers:
+    - name: Content-Type
+      value: application/json
+  body:
+    type: json
+    data: |-
+      {
+          "email":"{{email}}",
+          "password":"{{password}}",
+          "otp": "639581"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var responseBody = res.getBody();
+        bru.setVar("authToken", responseBody.token);
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Login
+    request:
+      url: "{{base_url}}auth/login"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "email":"jose@gmail.com",
+              "password":"test123"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 03 May 2023 02:35:35 GMT
+        - name: Content-Length
+          value: "166"
+      body:
+        type: json
+        data: '"<jwt-token>"'

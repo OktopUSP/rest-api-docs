@@ -1,0 +1,137 @@
+info:
+  name: Get All Mass Actions
+  type: http
+  seq: 3
+
+http:
+  method: GET
+  url: "{{base_url}}mass-actions"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get All Mass Actions
+    request:
+      url: "{{base_url}}mass-actions/"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 16 Oct 2024 19:07:33 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "id": "670ff9e23c452a0ff6aedfc4",
+                  "name": "sssss",
+                  "description": "",
+                  "devices": [
+                      {
+                          "id": "os::4C2EFE-GCN230700061",
+                          "actionResult": 1,
+                          "actionInfo": "{\"deleted_obj_results\":[{\"requested_path\":\"Device.IP.Interface.[Alias==test].\",\"oper_status\":{\"OperStatus\":{\"OperSuccess\":{}}}}]}"
+                      },
+                      {
+                          "id": "os::FFFFFF-10000000ef93a6b3",
+                          "actionResult": 2,
+                          "actionInfo": "device was not online"
+                      }
+                  ],
+                  "status": 1,
+                  "date": "2024-10-16T17:37:38.183Z",
+                  "user": {
+                      "email": "teste@gmail.com",
+                      "name": "Teste"
+                  },
+                  "actionType": 4,
+                  "parameters": {
+                      "num_of_updates_in_parallel": 1,
+                      "payload": "{\n          \"header\": {\n              \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n              \"msg_type\": 10\n          },\n          \"body\": {\n              \"request\": {\n                  \"delete\": {\n                      \"allow_partial\": true,\n                      \"obj_paths\": [\n                          \"Device.IP.Interface.[Alias==test].\"\n                      ]\n                  }\n              }\n          }\n      }"
+                  },
+                  "removed": false
+              },
+              {
+                  "id": "671004a42ee0fcaf3d6c58f3",
+                  "name": "Get-test",
+                  "description": "",
+                  "devices": [
+                      {
+                          "id": "os::4C2EFE-GCN230700061",
+                          "actionResult": 1,
+                          "actionInfo": "{\"req_path_results\":[{\"requested_path\":\"Device.WiFi.SSID.[Name==wlan0].\",\"resolved_path_results\":[{\"resolved_path\":\"Device.WiFi.SSID.1.\",\"result_params\":{\"Alias\":\"cpe-1\",\"BSSID\":\"4c:2e:fe:12:fe:00\",\"Enable\":\"true\",\"LastChange\":\"18000\",\"LowerLayers\":\"Device.WiFi.Radio.1\",\"MACAddress\":\"4c:2e:fe:12:fe:00\",\"Name\":\"wlan0\",\"SSID\":\"INTELBRAS-5G\",\"Status\":\"Up\",\"Upstream\":\"false\"}},{\"resolved_path\":\"Device.WiFi.SSID.1.Stats.\",\"result_params\":{\"ACKFailureCount\":\"0\",\"AggregatedPacketCount\":\"0\",\"BroadcastPacketsReceived\":\"0\",\"BroadcastPacketsSent\":\"0\",\"BytesReceived\":\"0\",\"BytesSent\":\"0\",\"DiscardPacketsReceived\":\"0\",\"DiscardPacketsSent\":\"727\",\"ErrorsReceived\":\"0\",\"ErrorsSent\":\"0\",\"FailedRetransCount\":\"0\",\"MulticastPacketsReceived\":\"0\",\"MulticastPacketsSent\":\"0\",\"MultipleRetryCount\":\"0\",\"PacketsReceived\":\"0\",\"PacketsSent\":\"0\",\"RetransCount\":\"0\",\"RetryCount\":\"0\",\"UnicastPacketsReceived\":\"0\",\"UnicastPacketsSent\":\"0\",\"UnknownProtoPacketsReceived\":\"0\"}}]}]}"
+                      },
+                      {
+                          "id": "485754434ECDE6AD",
+                          "actionResult": 2,
+                          "actionInfo": "device was not online"
+                      }
+                  ],
+                  "status": 1,
+                  "date": "2024-10-16T18:23:32.129Z",
+                  "user": {
+                      "email": "teste@gmail.com",
+                      "name": "Teste"
+                  },
+                  "actionType": 4,
+                  "parameters": {
+                      "num_of_updates_in_parallel": 1,
+                      "payload": "{\n          \"header\": {\n              \"msg_id\": \"b7dc38ea-aefb-4761-aa55-edaa97adb2f0\",\n              \"msg_type\": 1\n          },\n          \"body\": {\n              \"request\": {\n                  \"get\": {\n                      \"paramPaths\": [\n                          \"Device.WiFi.SSID.[Name==wlan0].\"\n                      ],\n                      \"maxDepth\": 2\n                  }\n              }\n          }\n      }"
+                  },
+                  "removed": false
+              },
+              {
+                  "id": "6710052e2ee0fcaf3d6c58f4",
+                  "name": "Pão com maionese",
+                  "description": "oloquinho meu",
+                  "devices": [
+                      {
+                          "id": "485754434ECDE6AD",
+                          "actionResult": 2,
+                          "actionInfo": "device was not online"
+                      },
+                      {
+                          "id": "dsadasdsa",
+                          "actionResult": 2,
+                          "actionInfo": "Device not found"
+                      }
+                  ],
+                  "status": 1,
+                  "date": "2024-10-16T18:25:50.795Z",
+                  "user": {
+                      "email": "teste@gmail.com",
+                      "name": "Teste"
+                  },
+                  "actionType": 1,
+                  "parameters": {
+                      "fw_download_url": "http://192.168.4.225/firmwares/hw_ctree-wifi-resetado.xml",
+                      "fw_name": "2.2-dsfdsfsd-dev",
+                      "num_of_updates_in_parallel": 4
+                  },
+                  "removed": false
+              }
+          ]

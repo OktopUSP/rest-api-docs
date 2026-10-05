@@ -1,0 +1,63 @@
+info:
+  name: Active Organization
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}organization/active"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "id": "68a8dc36da14da38748d973a"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Active Organization
+    request:
+      url: "{{base_url}}organization/active"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "id": "68a8dc36da14da38748d973a"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Wed, 02 Jul 2025 14:41:54 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "13"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: '"activated!"'

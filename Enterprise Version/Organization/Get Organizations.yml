@@ -1,0 +1,59 @@
+info:
+  name: Get Organizations
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}organization"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: ""
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Organizations
+    request:
+      url: "{{base_url}}organization"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: ""
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 18 Dec 2024 20:09:34 GMT
+        - name: Content-Length
+          value: "48"
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "name": "Master",
+                  "id": "12345678901234567890"
+              }
+          ]

@@ -1,0 +1,86 @@
+info:
+  name: SpeedTest Download
+  type: http
+  seq: 22
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/speedtest"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "url": "http://oktopus.app.br:8080/downloads/200MB.file"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: SpeedTest Download
+    request:
+      url: "{{base_url}}device/:device/:mtp/speedtest"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "url": "http://oktopus.app.br:8080/downloads/200MB.file"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Thu, 20 Feb 2025 19:33:02 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "121"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "result": "Completed",
+              "interface": "",
+              "url": "",
+              "action": "",
+              "rtt": "180ms",
+              "throughput": "90.96Mbps",
+              "resp_time": "18.492167s"
+          }

@@ -1,0 +1,54 @@
+info:
+  name: Edit Message
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url}}device/message?name"
+  params:
+    - name: name
+      value: ""
+      type: query
+  body:
+    type: json
+    data: test
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Edit Message
+    request:
+      url: "{{base_url}}device/message?name=um+um"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: um+um
+          type: query
+      body:
+        type: json
+        data: lelecoléqui
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 08 Oct 2024 18:20:24 GMT
+      body:
+        type: json
+        data: ""

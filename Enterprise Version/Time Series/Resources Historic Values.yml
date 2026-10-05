@@ -1,0 +1,256 @@
+info:
+  name: Resources Historic Values
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/historic?resource=cellular,"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: resource
+      value: cellular,
+      type: query
+    - name: device
+      value: "{{device}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Resources Historic Values
+    request:
+      url: "{{base_url}}device/:device/historic"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 14 Oct 2024 17:31:23 GMT
+        - name: Transfer-Encoding
+          value: chunked
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "connected_devices": {
+                      "2.4GHz": [
+                          {
+                              "active": true,
+                              "adresssource": "DHCP",
+                              "hostname": "leandro-laptop",
+                              "ipadress": "192.168.18.3",
+                              "mac": "d4:6e:0e:11:f7:6b",
+                              "rssi": "-31"
+                          }
+                      ]
+                  },
+                  "date": "14/10/2024 16:05",
+                  "ping": {
+                      "cloudfare.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 20,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "google.com": {
+                          "averagertt": 15,
+                          "failurecount": 0,
+                          "maximumrtt": 18,
+                          "minimumrtt": 14,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "minecraft.com": {
+                          "averagertt": 193,
+                          "failurecount": 0,
+                          "maximumrtt": 194,
+                          "minimumrtt": 192,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "ping-br.ds.on.epicgames.com": {
+                          "averagertt": 14,
+                          "failurecount": 0,
+                          "maximumrtt": 16,
+                          "minimumrtt": 13,
+                          "result": "Success",
+                          "successcount": 20
+                      }
+                  }
+              },
+              {
+                  "connected_devices": {
+                      "2.4GHz": [
+                          {
+                              "active": true,
+                              "adresssource": "DHCP",
+                              "hostname": "leandro-laptop",
+                              "ipadress": "192.168.18.3",
+                              "mac": "d4:6e:0e:11:f7:6b",
+                              "rssi": "-30"
+                          }
+                      ]
+                  },
+                  "date": "14/10/2024 16:21",
+                  "ping": {
+                      "cloudfare.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 20,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "google.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 17,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "minecraft.com": {
+                          "averagertt": 165,
+                          "failurecount": 0,
+                          "maximumrtt": 168,
+                          "minimumrtt": 165,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "ping-br.ds.on.epicgames.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 17,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      }
+                  }
+              },
+              {
+                  "connected_devices": {
+                      "2.4GHz": [
+                          {
+                              "active": true,
+                              "adresssource": "DHCP",
+                              "hostname": "leandro-laptop",
+                              "ipadress": "192.168.18.3",
+                              "mac": "d4:6e:0e:11:f7:6b",
+                              "rssi": "-31"
+                          }
+                      ]
+                  },
+                  "date": "14/10/2024 16:50",
+                  "ping": {
+                      "cloudfare.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 18,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "google.com": {
+                          "averagertt": 15,
+                          "failurecount": 0,
+                          "maximumrtt": 17,
+                          "minimumrtt": 15,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "minecraft.com": {
+                          "averagertt": 142,
+                          "failurecount": 0,
+                          "maximumrtt": 143,
+                          "minimumrtt": 141,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "ping-br.ds.on.epicgames.com": {
+                          "averagertt": 13,
+                          "failurecount": 0,
+                          "maximumrtt": 15,
+                          "minimumrtt": 12,
+                          "result": "Success",
+                          "successcount": 20
+                      }
+                  }
+              },
+              {
+                  "connected_devices": {
+                      "2.4GHz": [
+                          {
+                              "active": true,
+                              "adresssource": "DHCP",
+                              "hostname": "leandro-laptop",
+                              "ipadress": "192.168.18.3",
+                              "mac": "d4:6e:0e:11:f7:6b",
+                              "rssi": "-30"
+                          }
+                      ]
+                  },
+                  "date": "14/10/2024 17:09",
+                  "ping": {
+                      "cloudfare.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 18,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "google.com": {
+                          "averagertt": 17,
+                          "failurecount": 0,
+                          "maximumrtt": 19,
+                          "minimumrtt": 16,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "minecraft.com": {
+                          "averagertt": 196,
+                          "failurecount": 0,
+                          "maximumrtt": 214,
+                          "minimumrtt": 194,
+                          "result": "Success",
+                          "successcount": 20
+                      },
+                      "ping-br.ds.on.epicgames.com": {
+                          "averagertt": 14,
+                          "failurecount": 0,
+                          "maximumrtt": 15,
+                          "minimumrtt": 13,
+                          "result": "Success",
+                          "successcount": 20
+                      }
+                  }
+              }
+          ]

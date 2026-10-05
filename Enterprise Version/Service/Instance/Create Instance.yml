@@ -1,0 +1,221 @@
+info:
+  name: Create Instance
+  type: http
+  seq: 3
+
+http:
+  method: POST
+  url: "{{base_url}}service/instance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "device_id": "none",
+          "service_id": "don't know",
+          "variables": {}
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/instance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "device_id": "oktopus-0-mqtt",
+              "service_id": "69ca80207a4e2558538ffce0",
+              "variables": {"A":"oloquinhomeu"}
+          }
+    response:
+      status: 201
+      statusText: Created
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 14:54:42 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "4"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: "null"
+  - name: Invalid Service Id
+    request:
+      url: "{{base_url}}service/instance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "device_id": "none",
+              "service_id": "don't know",
+              "variables": {}
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 14:52:20 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "31"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: '"Invalid service definition id"'
+  - name: Invalid CPE Id
+    request:
+      url: "{{base_url}}service/instance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "device_id": "none",
+              "service_id": "69ca80207a4e2558538ffce0",
+              "variables": {}
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 14:53:13 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "23"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: '"Failed to find cpe id"'
+  - name: Missing Variable
+    request:
+      url: "{{base_url}}service/instance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "device_id": "oktopus-0-mqtt",
+              "service_id": "69ca80207a4e2558538ffce0",
+              "variables": {}
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 14:53:49 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "21"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: '"Missing variable: A"'
+  - name: Invalid Var Type
+    request:
+      url: "{{base_url}}service/instance"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "device_id": "oktopus-0-mqtt",
+              "service_id": "69ca80207a4e2558538ffce0",
+              "variables": {"A":true}
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 14:54:15 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "37"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: '"Variable A should be of type string"'

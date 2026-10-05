@@ -1,0 +1,68 @@
+info:
+  name: General
+  type: http
+  seq: 2
+
+http:
+  method: GET
+  url: "{{base_url}}info/general"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Device Number Evolution Copy
+    request:
+      url: "{{base_url}}info/general"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Mon, 17 Nov 2025 22:42:02 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "230"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "MqttRtt": "",
+              "StompRtt": "",
+              "WebsocketsRtt": "",
+              "CwmpRtt": "",
+              "Mtp": [],
+              "ProductClassCount": null,
+              "StatusCount": {
+                  "Online": 0,
+                  "Offline": 0,
+                  "Unknown": 0
+              },
+              "ModelsCount": null,
+              "FirmwaresCount": null,
+              "VendorsCount": null,
+              "DeviceEvolution": null
+          }

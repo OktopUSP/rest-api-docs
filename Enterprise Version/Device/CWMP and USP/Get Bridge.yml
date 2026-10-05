@@ -1,0 +1,146 @@
+info:
+  name: Get Bridge
+  type: http
+  seq: 27
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/bridge"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Get Bridge
+    request:
+      url: "{{base_url}}device/:device/:mtp/bridge"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.18.0 (Ubuntu)
+        - name: Date
+          value: Mon, 27 Jan 2025 21:08:17 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "814"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "bridge_path": "Device.Bridging.Bridge.1.",
+                  "ip_path": "Device.IP.Interface.1.",
+                  "enable": {
+                      "writable": true,
+                      "value": true
+                  },
+                  "name": {
+                      "writable": false,
+                      "value": "br0"
+                  },
+                  "ipv4": [
+                      {
+                          "enable": {
+                              "writable": false,
+                              "value": "1"
+                          },
+                          "ip_address": {
+                              "writable": true,
+                              "value": "192.168.0.1"
+                          },
+                          "subnet_mask": {
+                              "writable": true,
+                              "value": "255.255.255.0"
+                          },
+                          "origin": {
+                              "writable": false,
+                              "value": "Static"
+                          }
+                      }
+                  ],
+                  "max_mtu_size": {
+                      "writable": false,
+                      "value": "1500"
+                  },
+                  "ipv6": null,
+                  "bytes_sent": {
+                      "writable": false,
+                      "value": "191797279"
+                  },
+                  "bytes_received": {
+                      "writable": false,
+                      "value": "109593275"
+                  },
+                  "ports": [
+                      {
+                          "enable": {
+                              "writable": true,
+                              "value": true
+                          },
+                          "name": "LAN1",
+                          "path": "Device.Bridging.Bridge.1.Port.3."
+                      },
+                      {
+                          "enable": {
+                              "writable": true,
+                              "value": true
+                          },
+                          "name": "LAN2",
+                          "path": "Device.Bridging.Bridge.1.Port.4."
+                      },
+                      {
+                          "enable": {
+                              "writable": true,
+                              "value": true
+                          },
+                          "name": "LAN3",
+                          "path": "Device.Bridging.Bridge.1.Port.5."
+                      }
+                  ],
+                  "igmp_proxy_enable": {
+                      "writable": true,
+                      "value": true
+                  },
+                  "mld_proxy_enable": {
+                      "writable": true,
+                      "value": false
+                  }
+              }
+          ]

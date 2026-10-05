@@ -1,0 +1,262 @@
+info:
+  name: RequestDeviceGet
+  type: http
+  seq: 5
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/get"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "param_paths": [
+              "Device.LocalAgent."
+          ],
+          "max_depth": 1
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: MultipleParamGet
+    request:
+      url: "{{base_url}}device/{{device}}/get"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "param_paths": [
+                  "Device.WiFi.SSID.[Name==wlan0].",
+                  "Device.IP.Interface.*.Alias",
+                  "Device.DeviceInfo.FirmwareImage.*.Alias",
+                  "Device.IP.Interface.1.IPv4Address.1.IPAddress"
+              ],
+              "max_depth": 2
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 10 May 2023 02:16:33 GMT
+        - name: Content-Length
+          value: "1857"
+      body:
+        type: json
+        data: |-
+          {
+              "req_path_results": [
+                  {
+                      "requested_path": "Device.WiFi.SSID.[Name==wlan0].",
+                      "resolved_path_results": [
+                          {
+                              "resolved_path": "Device.WiFi.SSID.1.",
+                              "result_params": {
+                                  "Alias": "cpe-1",
+                                  "BSSID": "48:51:cf:dc:d6:1c",
+                                  "Enable": "true",
+                                  "LastChange": "72000",
+                                  "LowerLayers": "Device.WiFi.Radio.1",
+                                  "MACAddress": "48:51:cf:dc:d6:1c",
+                                  "Name": "wlan0",
+                                  "SSID": "INTELBRAS-5G",
+                                  "Stats.ACKFailureCount": "0",
+                                  "Stats.AggregatedPacketCount": "0",
+                                  "Stats.BroadcastPacketsReceived": "384197597",
+                                  "Stats.BroadcastPacketsSent": "31046",
+                                  "Stats.BytesReceived": "11141685820",
+                                  "Stats.BytesSent": "1726749838",
+                                  "Stats.DiscardPacketsReceived": "0",
+                                  "Stats.DiscardPacketsSent": "0",
+                                  "Stats.ErrorsReceived": "0",
+                                  "Stats.ErrorsSent": "1030",
+                                  "Stats.FailedRetransCount": "0",
+                                  "Stats.MulticastPacketsReceived": "36055021",
+                                  "Stats.MulticastPacketsSent": "924",
+                                  "Stats.MultipleRetryCount": "760193",
+                                  "Stats.PacketsReceived": "69329686",
+                                  "Stats.PacketsSent": "1502012",
+                                  "Stats.RetransCount": "760193",
+                                  "Stats.RetryCount": "760193",
+                                  "Stats.UnicastPacketsReceived": "640936",
+                                  "Stats.UnicastPacketsSent": "5785784",
+                                  "Stats.UnknownProtoPacketsReceived": "0",
+                                  "Status": "Up",
+                                  "Upstream": "false"
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.*.Alias",
+                      "resolved_path_results": [
+                          {
+                              "resolved_path": "Device.IP.Interface.1.",
+                              "result_params": {
+                                  "Alias": ""
+                              }
+                          },
+                          {
+                              "resolved_path": "Device.IP.Interface.2.",
+                              "result_params": {
+                                  "Alias": "cpe-2"
+                              }
+                          },
+                          {
+                              "resolved_path": "Device.IP.Interface.3.",
+                              "result_params": {
+                                  "Alias": "goiaba"
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "requested_path": "Device.DeviceInfo.FirmwareImage.*.Alias",
+                      "resolved_path_results": [
+                          {
+                              "resolved_path": "Device.DeviceInfo.FirmwareImage.1.",
+                              "result_params": {
+                                  "Alias": "cpe-1"
+                              }
+                          },
+                          {
+                              "resolved_path": "Device.DeviceInfo.FirmwareImage.2.",
+                              "result_params": {
+                                  "Alias": "cpe-2"
+                              }
+                          }
+                      ]
+                  },
+                  {
+                      "requested_path": "Device.IP.Interface.1.IPv4Address.1.IPAddress",
+                      "resolved_path_results": [
+                          {
+                              "resolved_path": "Device.IP.Interface.1.IPv4Address.1.",
+                              "result_params": {
+                                  "IPAddress": "192.168.1.1"
+                              }
+                          }
+                      ]
+                  }
+              ]
+          }
+  - name: GetDeviceInfo
+    request:
+      url: "{{base_url}}device/{{device}}/get"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "param_paths": [
+                  "Device.DeviceInfo."
+              ],
+              "max_depth": 2
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 10 May 2023 02:17:02 GMT
+        - name: Content-Length
+          value: "1969"
+      body:
+        type: json
+        data: |-
+          {
+              "req_path_results": [
+                  {
+                      "requested_path": "Device.DeviceInfo.",
+                      "resolved_path_results": [
+                          {
+                              "resolved_path": "Device.DeviceInfo.",
+                              "result_params": {
+                                  "ActiveFirmwareImage": "Device.DeviceInfo.FirmwareImage.2",
+                                  "BootFirmwareImage": "Device.DeviceInfo.FirmwareImage.2",
+                                  "Description": "System Description",
+                                  "FirmwareImage.1.Alias": "cpe-1",
+                                  "FirmwareImage.1.Available": "true",
+                                  "FirmwareImage.1.BootFailureLog": "",
+                                  "FirmwareImage.1.Name": "img.tar",
+                                  "FirmwareImage.1.Status": "Available",
+                                  "FirmwareImage.1.Version": "2.2-221112",
+                                  "FirmwareImage.2.Alias": "cpe-2",
+                                  "FirmwareImage.2.Available": "true",
+                                  "FirmwareImage.2.BootFailureLog": "",
+                                  "FirmwareImage.2.Name": "img.tar",
+                                  "FirmwareImage.2.Status": "Active",
+                                  "FirmwareImage.2.Version": "2.2-221214",
+                                  "FirmwareImageNumberOfEntries": "2",
+                                  "HardwareVersion": "121AC_v2.0",
+                                  "Manufacturer": "Intelbras",
+                                  "ManufacturerOUI": "4851CF",
+                                  "MemoryStatus.Free": "92068",
+                                  "MemoryStatus.Total": "132440",
+                                  "ModelName": "121AC",
+                                  "Processor.1.Alias": "cpe-1",
+                                  "Processor.1.Architecture": "mipseb",
+                                  "ProcessorNumberOfEntries": "1",
+                                  "ProductClass": "121AC",
+                                  "ProvisioningCode": "",
+                                  "SerialNumber": "000000000002",
+                                  "SoftwareVersion": "2.2-221214",
+                                  "TemperatureStatus.TemperatureSensor.1.Alias": "cpe-1",
+                                  "TemperatureStatus.TemperatureSensor.1.Enable": "true",
+                                  "TemperatureStatus.TemperatureSensor.1.Name": "Optical Module",
+                                  "TemperatureStatus.TemperatureSensor.1.Status": "Enabled",
+                                  "TemperatureStatus.TemperatureSensor.1.Value": "30",
+                                  "TemperatureStatus.TemperatureSensorNumberOfEntries": "1",
+                                  "UpTime": "1756762",
+                                  "VendorConfigFile.1.Alias": "cpe-1",
+                                  "VendorConfigFile.1.Date": "1969-12-31T21:00:00+00:00",
+                                  "VendorConfigFile.1.Description": "System Description",
+                                  "VendorConfigFile.1.Name": "/tmp/config.xml",
+                                  "VendorConfigFile.1.UseForBackupRestore": "true",
+                                  "VendorConfigFile.1.Version": "2.2-221214",
+                                  "VendorConfigFileNumberOfEntries": "1",
+                                  "VendorLogFile.1.Alias": "cpe-1",
+                                  "VendorLogFile.1.MaximumSize": "51200",
+                                  "VendorLogFile.1.Name": "/var/log/messages",
+                                  "VendorLogFile.1.Persistent": "false",
+                                  "VendorLogFileNumberOfEntries": "1"
+                              }
+                          }
+                      ]
+                  }
+              ]
+          }

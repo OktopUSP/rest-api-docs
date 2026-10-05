@@ -1,0 +1,38 @@
+info:
+  name: Execute Instance
+  type: http
+  seq: 4
+
+http:
+  method: POST
+  url: "{{base_url}}service/instance/:service-instance-id/execute"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: service-instance-id
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "id": "69ca8eb2bbbf26001dcca0eb",
+          "device_id": "oktopus-0-mqtt",
+          "service_id": "69ca80207a4e2558538ffce0",
+          "tenant_id": "12345678901234567890",
+          "status": "pending",
+          "variables": {
+              "A": "oloquinhomeu"
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

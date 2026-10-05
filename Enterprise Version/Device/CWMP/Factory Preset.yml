@@ -1,0 +1,37 @@
+info:
+  name: Factory Preset
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/factorypreset?action=upload"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: action
+      value: upload
+      type: query
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "url":"http://192.168.4.225/firmwares/hw_ctree.xml"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false

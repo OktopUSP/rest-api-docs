@@ -1,0 +1,73 @@
+info:
+  name: Set Device Tenant
+  type: http
+  seq: 12
+
+http:
+  method: PUT
+  url: "{{base_url}}device"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "sn":"HUAWNFYC-OPA123-0",
+          "org":[
+              "69fcbd55d25b1293cb0a7242",
+              "12345678901234567890"
+          ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Set Device Tenant
+    request:
+      url: "{{base_url}}device"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "sn":"HUAWNFYC-OPA123-0",
+              "org":[
+                  "69fcbd55d25b1293cb0a7242",
+                  "12345678901234567890"
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Thu, 07 May 2026 17:51:26 GMT
+        - name: Content-Type
+          value: application/json; version=1
+        - name: Content-Length
+          value: "34"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: Device tenant changed successfully

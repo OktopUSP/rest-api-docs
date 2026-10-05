@@ -1,0 +1,364 @@
+info:
+  name: RequestDeviceAdd
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/add"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: oktopus-0-mqtt
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "allow_partial": true,
+          "create_objs": [
+              {
+                  "obj_path": "Device.BulkData.Profile.",
+                  "param_settings": [
+                      {
+                          "param": "Alias",
+                          "value": "test-1",
+                          "required": true
+                      },
+                      {
+                          "param": "Enable",
+                          "value": "true",
+                          "required": true  
+                      },
+                      {
+                          "param": "Name",
+                          "value": "test-1",
+                          "required": true
+                      },
+                      {
+                          "param": "Protocol",
+                          "value": "HTTP",
+                          "required": true
+                      },
+                      {
+                          "param": "ReportingInterval",
+                          "value": "15",
+                          "required": true
+                      },
+                      {
+                          "param": "HTTP.URL",
+                          "value": "http://127.0.0.1:4000",
+                          "required": true
+                      },
+                      {
+                          "param": "HTTP.Method",
+                          "value": "POST",
+                          "required": true
+                      }
+                  ]
+              },
+              {
+                  "obj_path": "Device.BulkData.Profile.[Alias==test-1].Parameter.",
+                  "param_settings": [
+                      {
+                          "param": "Reference",
+                          "value": "Device.LocalAgent.",
+                          "required": true
+                      }
+                  ]
+              }
+          ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: CreateNewParamInstance
+    request:
+      url: "{{base_url}}device/{{device}}/add"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial": true,
+              "create_objs": [
+                  {
+                      "obj_path": "Device.IP.Interface.",
+                      "param_settings": [
+                          {
+                              "param": "Alias",
+                              "value": "test",
+                              "required": true
+                          }
+                      ]
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 10 May 2023 02:18:56 GMT
+        - name: Content-Length
+          value: "160"
+      body:
+        type: json
+        data: |-
+          {
+              "created_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "instantiated_path": "Device.IP.Interface.4."
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Bulk Data through USPNotify
+    request:
+      url: "{{base_url}}device/:device/:mtp/add"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: oktopus-0-mqtt
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial": true,
+              "create_objs": [
+                  {
+                      "obj_path": "Device.BulkData.Profile.",
+                      "param_settings": [
+                          {
+                              "param": "Alias",
+                              "value": "test-1",
+                              "required": true
+                          },
+                          {
+                              "param": "Enable",
+                              "value": "true",
+                              "required": true  
+                          },
+                          {
+                              "param": "Name",
+                              "value": "test-1",
+                              "required": true
+                          },
+                          {
+                              "param": "Protocol",
+                              "value": "USPEventNotif",
+                              "required": true
+                          },
+                          {
+                              "param": "ReportingInterval",
+                              "value": "15",
+                              "required": true
+                          }
+                      ]
+                  },
+                  {
+                      "obj_path": "Device.BulkData.Profile.[Alias==test-1].Parameter.",
+                      "param_settings": [
+                          {
+                              "param": "Reference",
+                              "value": "Device.LocalAgent.",
+                              "required": true
+                          }
+                      ]
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 30 Apr 2024 23:36:08 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "created_obj_results": [
+                  {
+                      "requested_path": "Device.BulkData.Profile.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "instantiated_path": "Device.BulkData.Profile.1.",
+                                  "unique_keys": {
+                                      "Alias": "test-1"
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.BulkData.Profile.[Alias==test-1].Parameter.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "instantiated_path": "Device.BulkData.Profile.1.Parameter.1."
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Bulk Data through HTTP
+    request:
+      url: "{{base_url}}device/:device/:mtp/add"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: oktopus-0-mqtt
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial": true,
+              "create_objs": [
+                  {
+                      "obj_path": "Device.BulkData.Profile.",
+                      "param_settings": [
+                          {
+                              "param": "Alias",
+                              "value": "test-1",
+                              "required": true
+                          },
+                          {
+                              "param": "Enable",
+                              "value": "true",
+                              "required": true  
+                          },
+                          {
+                              "param": "Name",
+                              "value": "test-1",
+                              "required": true
+                          },
+                          {
+                              "param": "Protocol",
+                              "value": "HTTP",
+                              "required": true
+                          },
+                          {
+                              "param": "ReportingInterval",
+                              "value": "15",
+                              "required": true
+                          },
+                          {
+                              "param": "HTTP.URL",
+                              "value": "http://127.0.0.1:4000",
+                              "required": true
+                          },
+                          {
+                              "param": "HTTP.Method",
+                              "value": "POST",
+                              "required": true
+                          }
+                      ]
+                  },
+                  {
+                      "obj_path": "Device.BulkData.Profile.[Alias==test-1].Parameter.",
+                      "param_settings": [
+                          {
+                              "param": "Reference",
+                              "value": "Device.LocalAgent.",
+                              "required": true
+                          }
+                      ]
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 13 May 2024 17:59:36 GMT
+        - name: Content-Length
+          value: "381"
+      body:
+        type: json
+        data: |-
+          {
+              "created_obj_results": [
+                  {
+                      "requested_path": "Device.BulkData.Profile.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "instantiated_path": "Device.BulkData.Profile.1.",
+                                  "unique_keys": {
+                                      "Alias": "test-1"
+                                  }
+                              }
+                          }
+                      }
+                  },
+                  {
+                      "requested_path": "Device.BulkData.Profile.[Alias==test-1].Parameter.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "instantiated_path": "Device.BulkData.Profile.1.Parameter.1."
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

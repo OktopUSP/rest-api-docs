@@ -1,0 +1,7 @@
+info:
+  name: SpeedTest Server
+  type: folder
+  seq: 19
+
+request:
+  auth: inherit

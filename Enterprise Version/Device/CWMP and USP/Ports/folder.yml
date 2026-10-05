@@ -1,0 +1,11 @@
+info:
+  name: Ports
+  type: folder
+  seq: 1
+
+request:
+  auth: inherit
+
+docs:
+  content: Physical interfaces and WAN logical configuration.
+  type: text/markdown

@@ -1,0 +1,53 @@
+info:
+  name: Delete Message
+  type: http
+  seq: 2
+
+http:
+  method: DELETE
+  url: "{{base_url}}device/message?name=usp-test-1"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: name
+      value: usp-test-1
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Message
+    request:
+      url: "{{base_url}}device/template?name=usp-test-1"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: name
+          value: usp-test-1
+          type: query
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Mon, 07 Oct 2024 18:15:21 GMT
+      body:
+        type: json
+        data: ""

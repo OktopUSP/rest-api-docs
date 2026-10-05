@@ -1,0 +1,63 @@
+info:
+  name: Reboot
+  type: http
+  seq: 8
+
+http:
+  method: PUT
+  url: "{{base_url}}device/cwmp/:device/reboot"
+  headers:
+    - name: Content-Type
+      value: application/xml
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Reboot
+    request:
+      url: "{{base_url}}device/cwmp/:device/reboot"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/xml
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 18 Sep 2024 13:40:48 GMT
+        - name: Content-Length
+          value: "429"
+      body:
+        type: xml
+        data: |-
+          <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cwmp="urn:dslforum-org:cwmp-1-0">
+              <SOAP-ENV:Header>
+                  <cwmp:ID SOAP-ENV:mustUnderstand="1"/>
+              </SOAP-ENV:Header>
+              <SOAP-ENV:Body>
+                  <cwmp:RebootResponse/>
+              </SOAP-ENV:Body>
+          </SOAP-ENV:Envelope>

@@ -1,0 +1,87 @@
+info:
+  name: CPE Upload Config File
+  type: http
+  seq: 1
+
+http:
+  method: PUT
+  url: "{{base_url_file}}configs/cpe/:serial_number/upload"
+  headers:
+    - name: Content-Type
+      value: application/octet-stream
+  params:
+    - name: serial_number
+      value: "{{device}}"
+      type: path
+  auth:
+    type: basic
+    username: "{{upload_file_username}}"
+    password: "{{upload_file_password}}"
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Unauthorized
+    request:
+      url: "{{base_url_file}}configs/cpe/:serial_number/upload"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/octet-stream
+      params:
+        - name: serial_number
+          value: "{{device}}"
+          type: path
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Server
+          value: nginx/1.27.5
+        - name: Date
+          value: Sat, 04 Oct 2025 14:10:32 GMT
+        - name: Content-Type
+          value: text/plain; charset=utf-8
+        - name: Content-Length
+          value: "13"
+        - name: Connection
+          value: keep-alive
+        - name: X-Content-Type-Options
+          value: nosniff
+      body:
+        type: text
+        data: |
+          Unauthorized
+  - name: Success
+    request:
+      url: "{{base_url_file}}configs/cpe/:serial_number/upload"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/octet-stream
+      params:
+        - name: serial_number
+          value: "{{device}}"
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.5
+        - name: Date
+          value: Sat, 04 Oct 2025 14:29:42 GMT
+        - name: Content-Type
+          value: text/plain; charset=utf-8
+        - name: Content-Length
+          value: "26"
+        - name: Connection
+          value: keep-alive
+      body:
+        type: text
+        data: File uploaded successfully

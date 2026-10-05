@@ -1,0 +1,129 @@
+info:
+  name: New Script
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}scripts"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name": "goiaba",
+          "description": "newScriptDescription",
+          "content": "newScriptPayload",
+          "active": true
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: New Script
+    request:
+      url: "{{base_url}}scripts"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name": "fghgfhgf",
+              "description": "newScriptDescription",
+              "content": "newScriptPayload",
+              "active": true
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 01:07:35 GMT
+      body:
+        type: json
+        data: ""
+  - name: Error (same name)
+    request:
+      url: "{{base_url}}scripts"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name": "fghgfhgf",
+              "description": "newScriptDescription",
+              "content": "newScriptPayload",
+              "active": true
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 01:07:49 GMT
+        - name: Content-Length
+          value: "40"
+      body:
+        type: json
+        data: '"A script already exists with this name"'
+  - name: Error (no content)
+    request:
+      url: "{{base_url}}scripts"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name": "Test",
+              "description": "newScriptDescription",
+              
+              "active": true
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 01:13:26 GMT
+        - name: Content-Length
+          value: "21"
+      body:
+        type: json
+        data: '"Content is required"'

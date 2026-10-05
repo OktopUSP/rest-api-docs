@@ -1,0 +1,118 @@
+info:
+  name: Get Wan Options
+  type: http
+  seq: 5
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/wanoptions"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: No Wan Options
+    request:
+      url: "{{base_url}}device/:device/:mtp/wanoptions"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Thu, 18 Sep 2025 18:26:53 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "4"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: "null"
+  - name: Has Wan Options
+    request:
+      url: "{{base_url}}device/:device/:mtp/wanoptions"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Thu, 18 Sep 2025 18:27:29 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "241"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "InternetGatewayDevice.WANDevice.1.",
+                  "type": "Ethernet"
+              },
+              {
+                  "path": "InternetGatewayDevice.WANDevice.2.",
+                  "type": "DSL"
+              },
+              {
+                  "path": "InternetGatewayDevice.WANDevice.3.",
+                  "type": "DSL"
+              },
+              {
+                  "path": "InternetGatewayDevice.WANDevice.4.",
+                  "type": "3G"
+              }
+          ]

@@ -1,0 +1,75 @@
+info:
+  name: Edit Script
+  type: http
+  seq: 3
+
+http:
+  method: PUT
+  url: "{{base_url}}scripts"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: ""
+      value: ""
+      type: query
+      disabled: true
+  body:
+    type: json
+    data: |-
+      {
+          "_id": "",
+          "name": "goiaba",
+          "description": "newScriptDescription",
+          "content": "newScriptPayload",
+          "active": false
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Edit Script
+    request:
+      url: "{{base_url}}scripts"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: ""
+          value: ""
+          type: query
+          disabled: true
+      body:
+        type: json
+        data: |-
+          {
+              "_id": "673fd9b65df925a773782ca7",
+              "name": "test123",
+              "description": "newScriptDescription",
+              "content": "newScriptPayload",
+              "active": false
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 22 Nov 2024 04:06:26 GMT
+      body:
+        type: json
+        data: ""

@@ -1,0 +1,253 @@
+info:
+  name: RequestDeviceSet
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/set"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: oktopus-0-mqtt
+      type: path
+    - name: mtp
+      value: mqtt
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "allow_partial":true,
+          "update_objs":[
+              {
+                  "obj_path":"Device.BulkData.",
+                  "param_settings":[
+                      {
+                      "param":"Enable",
+                      "value":"true",
+                      "required":true
+                      }
+                  ]
+              }
+          ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: RequestDeviceSet
+    request:
+      url: "{{base_url}}device/{{device}}/set"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial":true,
+              "update_objs":[
+                  {
+                      "obj_path":"Device.IP.Interface.2.",
+                      "param_settings":[
+                          {
+                          "param":"Alias",
+                          "value":"goiaba",
+                          "required":true
+                          }
+                      ]
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Date
+          value: Wed, 10 May 2023 02:22:03 GMT
+        - name: Content-Length
+          value: "221"
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.IP.Interface.2.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.IP.Interface.2.",
+                                          "updated_params": {
+                                              "Alias": "goiaba"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Activate Bulk Data
+    request:
+      url: "{{base_url}}device/:device/:mtp/set"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: oktopus-0-mqtt
+          type: path
+        - name: mtp
+          value: mqtt
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial":true,
+              "update_objs":[
+                  {
+                      "obj_path":"Device.BulkData.",
+                      "param_settings":[
+                          {
+                          "param":"Enable",
+                          "value":"true",
+                          "required":true
+                          }
+                      ]
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Tue, 30 Apr 2024 23:35:27 GMT
+        - name: Content-Length
+          value: "208"
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.BulkData.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.BulkData.",
+                                          "updated_params": {
+                                              "Enable": "true"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
+  - name: Set WiFi Password
+    request:
+      url: "{{base_url}}device/:device/:mtp/set"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::0000CA-29G412666500039
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "allow_partial":true,
+              "update_objs":[
+                  {
+                      "obj_path":"Device.WiFi.AccessPoint.2.Security.",
+                      "param_settings":[
+                          {
+                          "param":"KeyPassphrase",
+                          "value":"77898778",
+                          "required":true
+                          }
+                      ]
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.0
+        - name: Date
+          value: Wed, 28 Aug 2024 12:50:03 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "257"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.WiFi.AccessPoint.2.Security.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.WiFi.AccessPoint.2.Security.",
+                                          "updated_params": {
+                                              "KeyPassphrase": "77898778"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }

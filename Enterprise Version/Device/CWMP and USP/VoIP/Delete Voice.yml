@@ -1,0 +1,77 @@
+info:
+  name: Delete Voice
+  type: http
+  seq: 4
+
+http:
+  method: DELETE
+  url: "{{base_url}}device/:device/:mtp/voice"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: any
+      type: path
+  body:
+    type: json
+    data: |-
+      {
+          "path":"InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.2."
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Delete Voice
+    request:
+      url: "{{base_url}}device/:device/:mtp/voice"
+      method: DELETE
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: any
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "path":"InternetGatewayDevice.Services.VoiceService.1.VoiceProfile.3."
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.24.0 (Ubuntu)
+        - name: Date
+          value: Tue, 23 Sep 2025 12:43:55 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "36"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: '"Voice profile successfully deleted"'

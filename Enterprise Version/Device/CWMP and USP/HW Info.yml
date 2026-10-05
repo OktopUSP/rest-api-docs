@@ -1,0 +1,76 @@
+info:
+  name: HW Info
+  type: http
+  seq: 11
+
+http:
+  method: GET
+  url: "{{base_url}}device/:device/:mtp/hwinfo"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Hardware Information
+    request:
+      url: "{{base_url}}device/:device/:mtp/hwinfo"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 13 Nov 2024 11:40:43 GMT
+        - name: Content-Length
+          value: "262"
+      body:
+        type: json
+        data: |-
+          {
+              "uptime_seconds": 173529,
+              "hardware_version": "343D.A",
+              "architecture": "arm",
+              "cpu_usage_percentage": 2,
+              "memory_usage_percentage": 51.96,
+              "memory_total_kilobytes": 262144,
+              "memory_free_kilobytes": 125932,
+              "memory_use_kilobytes": 136212,
+              "temperature_celsius": [
+                  {
+                      "HUAWEI": 50
+                  }
+              ]
+          }

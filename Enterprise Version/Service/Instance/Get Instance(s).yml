@@ -1,0 +1,82 @@
+info:
+  name: Get Instance(s)
+  type: http
+  seq: 1
+
+http:
+  method: GET
+  url: "{{base_url}}service/instance"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Success
+    request:
+      url: "{{base_url}}service/instance"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.29.5
+        - name: Date
+          value: Mon, 30 Mar 2026 14:54:56 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "235"
+        - name: Connection
+          value: keep-alive
+        - name: Access-Control-Allow-Credentials
+          value: "true"
+        - name: Access-Control-Allow-Origin
+          value: "null"
+      body:
+        type: json
+        data: |-
+          {
+              "items": [
+                  {
+                      "id": "69ca8eb2bbbf26001dcca0eb",
+                      "device_id": "oktopus-0-mqtt",
+                      "service_id": "69ca80207a4e2558538ffce0",
+                      "tenant_id": "12345678901234567890",
+                      "status": "pending",
+                      "variables": {
+                          "A": "oloquinhomeu"
+                      }
+                  }
+              ],
+              "page": 1,
+              "page_size": 20,
+              "total": 1
+          }

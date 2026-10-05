@@ -1,0 +1,90 @@
+info:
+  name: Update Role
+  type: http
+  seq: 4
+
+http:
+  method: PUT
+  url: "{{base_url}}roles"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "name":"test",
+          "description": "look at me"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Update Role
+    request:
+      url: "{{base_url}}roles"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name":"test",
+              "description": "look at me"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 13 Sep 2024 18:30:25 GMT
+      body:
+        type: json
+        data: ""
+  - name: Admin Role Update Changes Not Allowed
+    request:
+      url: "{{base_url}}roles"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "name":"Admin",
+              "description": "look at me"
+          }
+    response:
+      status: 500
+      statusText: Internal Server Error
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Fri, 13 Sep 2024 18:32:26 GMT
+        - name: Content-Length
+          value: "28"
+      body:
+        type: json
+        data: admin role cannot be updated

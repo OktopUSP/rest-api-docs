@@ -1,0 +1,229 @@
+info:
+  name: Edit Tenant Device Management Config
+  type: http
+  seq: 10
+
+http:
+  method: PUT
+  url: "{{base_url}}organization/bulk_device_management/config"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  body:
+    type: json
+    data: |-
+      {
+          "speed_test": {
+              "enable_download_speed_test": true,
+              "enable_upload_speed_test": true,
+              "download_servers": [
+                  {
+                      "host": "http://178.20.72.24/downloads/20MB.file",
+                      "default": false
+                  },
+                  {
+                      "host": "http://178.20.72.24/downloads/200MB.file",
+                      "default": true
+                  }
+              ],
+              "upload_servers": [
+                  {
+                      "host": "http://178.20.72.24/uploads",
+                      "default": true
+                  }
+              ]
+          },
+          "ping_test": {
+              "enable": true,
+              "servers": [
+                  "178.20.72.41",
+                  "178.20.72.85"
+              ]
+          },
+          "critical_start_time": "0001-01-01T00:00:00Z",
+          "critical_end_time": "0001-01-01T00:00:00Z",
+          "timezone": "Local",
+          "interval": 2700000000000,
+          "config_per_device_model": {
+              "WNRQQ-108": {
+                  "speed_test": {
+                      "enable_download_speed_test": false,
+                      "enable_upload_speed_test": false
+                  },
+                  "ping_test": {
+                      "enable": true,
+                      "servers": [
+                          "178.20.72.41",
+                          "178.20.72.85"
+                      ]
+                  },
+                  "critical_start_time": "0001-01-01T00:00:00Z",
+                  "critical_end_time": "0001-01-01T00:00:00Z",
+                  "timezone": "Local",
+                  "interval": 2700000000000
+              }
+          }
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Edit Tenant Device Management Config
+    request:
+      url: "{{base_url}}organization/bulk_device_management/config"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "speed_test": {
+                  "enable_download_speed_test": true,
+                  "enable_upload_speed_test": true,
+                  "download_servers": [
+                      {
+                          "host": "http://217.145.76.36/download/download_file_200MB.txt",
+                          "default": true
+                      }
+                  ],
+                  "upload_servers": [
+                      {
+                          "host": "http://178.20.72.24/uploads",
+                          "default": true
+                      }
+                  ]
+              },
+              "ping_test": {
+                  "enable": true,
+                  "servers": [
+                      "soundcloud.com",
+                      "cloudfare.com",
+                      "spotify.com",
+                      "youtube.com"
+                  ]
+              },
+              "critical_start_time": "0001-01-01T00:00:00Z",
+              "critical_end_time": "0001-01-01T00:00:00Z",
+              "timezone": "Local",
+              "interval": 2700000000000
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 11 Oct 2025 13:37:43 GMT
+      body:
+        type: json
+        data: ""
+  - name: Per Model Config
+    request:
+      url: "{{base_url}}organization/bulk_device_management/config"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      body:
+        type: json
+        data: |-
+          {
+              "speed_test": {
+                  "enable_download_speed_test": true,
+                  "enable_upload_speed_test": true,
+                  "download_servers": [
+                      {
+                          "host": "http://217.145.76.36/download/download_file_200MB.txt",
+                          "default": true
+                      }
+                  ],
+                  "upload_servers": [
+                      {
+                          "host": "http://178.20.72.24/uploads",
+                          "default": true
+                      }
+                  ]
+              },
+              "ping_test": {
+                  "enable": true,
+                  "servers": [
+                      "hetzner.com",
+                      "cloudfare.com",
+                      "spotify.com",
+                      "youtube.com"
+                  ]
+              },
+              "critical_start_time": "0001-01-01T00:00:00Z",
+              "critical_end_time": "0001-01-01T00:00:00Z",
+              "timezone": "Local",
+              "interval": 2700000000000,
+              "config_per_device_model": {
+                  "EG8145X6-10": {
+                      "speed_test": {
+                          "enable_download_speed_test": false,
+                          "enable_upload_speed_test": true,
+                          "upload_servers": [
+                              {
+                                  "host": "http://178.20.72.24/uploads",
+                                  "default": true
+                              }
+                          ]
+                      },
+                      "ping_test": {
+                          "enable": true,
+                          "servers": [
+                              "hetzner.com",
+                              "cloudfare.com",
+                              "spotify.com",
+                              "youtube.com"
+                          ]
+                      },
+                      "critical_start_time": "0001-01-01T00:00:00Z",
+                      "critical_end_time": "0001-01-01T00:00:00Z",
+                      "timezone": "Local",
+                      "interval": 2700000000000
+                  }
+              }
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Sat, 11 Oct 2025 16:02:24 GMT
+      body:
+        type: json
+        data: ""

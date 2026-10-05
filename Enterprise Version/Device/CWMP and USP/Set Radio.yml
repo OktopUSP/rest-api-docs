@@ -1,0 +1,108 @@
+info:
+  name: Set Radio
+  type: http
+  seq: 6
+
+http:
+  method: PUT
+  url: "{{base_url}}device/:device/:mtp/radio"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: device
+      value: "{{device}}"
+      type: path
+    - name: mtp
+      value: ""
+      type: path
+  body:
+    type: json
+    data: |-
+      [
+          {
+              "path": "Device.WiFi.Radio.2.",
+              "operating_standards":{
+                  "value": "a,n"
+              }
+          }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Set Radio
+    request:
+      url: "{{base_url}}device/:device/:mtp/radio"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: os::0000CA-29G412666500039
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "path": "Device.WiFi.Radio.1.",
+                  "enable": {
+                      "value": "false"
+                  }
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Server
+          value: nginx/1.27.0
+        - name: Date
+          value: Tue, 27 Aug 2024 16:45:16 GMT
+        - name: Content-Type
+          value: application/json
+        - name: Content-Length
+          value: "216"
+        - name: Connection
+          value: keep-alive
+        - name: Vary
+          value: Origin
+      body:
+        type: json
+        data: |-
+          {
+              "updated_obj_results": [
+                  {
+                      "requested_path": "Device.WiFi.Radio.1.",
+                      "oper_status": {
+                          "OperStatus": {
+                              "OperSuccess": {
+                                  "updated_inst_results": [
+                                      {
+                                          "affected_path": "Device.WiFi.Radio.1.",
+                                          "updated_params": {
+                                              "Enable": "false"
+                                          }
+                                      }
+                                  ]
+                              }
+                          }
+                      }
+                  }
+              ]
+          }
