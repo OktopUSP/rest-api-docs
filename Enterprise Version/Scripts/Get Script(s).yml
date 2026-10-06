@@ -94,5 +94,5 @@ docs:
   content: |-
     Lists the organization's scripts that have not been deleted.
 
-    `state` is the script's runtime status, set by the server: `running`, `stopping` or `stopped`. See the Scripts folder for details.
+    `state` is the script's runtime status, set by the server: `running`, `stopping`, `stopped` or `finished`. See the Scripts folder for details.
   type: text/markdown

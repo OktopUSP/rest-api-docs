@@ -25,12 +25,13 @@ docs:
     |---|---|
     | `running` | The script is running |
     | `stopping` | The script was edited, deactivated or deleted and is finishing the work in progress |
-    | `stopped` | The script is inactive, finished on its own, or failed |
+    | `stopped` | The script was deactivated or deleted, or is inactive |
+    | `finished` | The script ran and exited on its own (no listener registered, or an error in its top-level code; see its log) |
 
     ### Lifecycle
 
     - Creating, editing, activating, deactivating or deleting a script only starts, restarts or stops **that** script. Other scripts keep running.
     - When a running script is edited, its `state` is `stopping` until the previous version has fully stopped, then `running`. The new version never runs at the same time as the previous one.
     - A script stops immediately in Lua code and in `sleep()`. A call already in progress (NATS, HTTP, CWMP) finishes first, so `stopping` can last until that call returns or times out.
-    - A script whose code finishes without registering any listener ends as `stopped`. It only runs again when it is edited or reactivated.
+    - A script whose code finishes without registering any listener, or fails, ends as `finished`. It only runs again when it is edited or reactivated.
   type: text/markdown
