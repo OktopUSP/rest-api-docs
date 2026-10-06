@@ -55,3 +55,8 @@ examples:
       body:
         type: json
         data: ""
+
+docs:
+  content: |-
+    Deletes a script by `name`. If it is running, it is stopped: `state` goes to `stopping`, then `stopped`. Other scripts keep running.
+  type: text/markdown

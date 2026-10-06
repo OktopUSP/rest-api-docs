@@ -127,3 +127,10 @@ examples:
       body:
         type: json
         data: '"Content is required"'
+
+docs:
+  content: |-
+    Creates a script. If `active` is `true`, the script starts right away; other running scripts are not affected.
+
+    A new script is created with `state` set to `stopped`. `state` is read-only and is ignored if sent in the body.
+  type: text/markdown

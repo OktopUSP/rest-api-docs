@@ -73,3 +73,12 @@ examples:
       body:
         type: json
         data: ""
+
+docs:
+  content: |-
+    Updates a script by `_id`. Only this script is restarted, stopped or started; other scripts keep running.
+
+    - Changing `name` or `content` of an active script restarts it: `state` goes to `stopping` until the previous version has fully stopped, then to `running`.
+    - Setting `active` to `false` stops the script: `state` goes to `stopping`, then `stopped`.
+    - `state` is read-only and is ignored if sent in the body.
+  type: text/markdown

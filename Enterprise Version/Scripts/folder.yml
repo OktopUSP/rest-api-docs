@@ -5,3 +5,32 @@ info:
 
 request:
   auth: inherit
+
+docs:
+  content: |-
+    ## Scripts
+
+    Lua scripts that run inside the scripts service, scoped to the authenticated user's organization.
+
+    ### `active` vs `state`
+
+    | Field | Set by | Meaning |
+    |---|---|---|
+    | `active` | Client | Whether the script should run |
+    | `state` | Server (read-only) | What the script is actually doing |
+
+    `state` is one of:
+
+    | Value | Meaning |
+    |---|---|
+    | `running` | The script is running |
+    | `stopping` | The script was edited, deactivated or deleted and is finishing the work in progress |
+    | `stopped` | The script is inactive, finished on its own, or failed |
+
+    ### Lifecycle
+
+    - Creating, editing, activating, deactivating or deleting a script only starts, restarts or stops **that** script. Other scripts keep running.
+    - When a running script is edited, its `state` is `stopping` until the previous version has fully stopped, then `running`. The new version never runs at the same time as the previous one.
+    - A script stops immediately in Lua code and in `sleep()`. A call already in progress (NATS, HTTP, CWMP) finishes first, so `stopping` can last until that call returns or times out.
+    - A script whose code finishes without registering any listener ends as `stopped`. It only runs again when it is edited or reactivated.
+  type: text/markdown

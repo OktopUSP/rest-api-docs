@@ -57,7 +57,8 @@ examples:
                   "last_change": "2024-11-22T01:05:13.247Z",
                   "last_changed_by": "teste@gmail.com",
                   "name": "newScriptname",
-                  "state": 0
+                  "org": "12345678901234567890",
+                  "state": "running"
               },
               {
                   "_id": "673fd9575df925a773782ca6",
@@ -70,11 +71,12 @@ examples:
                   "last_change": "2024-11-22T01:07:35.683Z",
                   "last_changed_by": "teste@gmail.com",
                   "name": "fghgfhgf",
-                  "state": 0
+                  "org": "12345678901234567890",
+                  "state": "stopping"
               },
               {
                   "_id": "673fd9b65df925a773782ca7",
-                  "active": true,
+                  "active": false,
                   "content": "newScriptPayload",
                   "created_by": "teste@gmail.com",
                   "deleted": false,
@@ -83,6 +85,14 @@ examples:
                   "last_change": "2024-11-22T01:09:10.197Z",
                   "last_changed_by": "teste@gmail.com",
                   "name": "goiaba",
-                  "state": 0
+                  "org": "12345678901234567890",
+                  "state": "stopped"
               }
           ]
+
+docs:
+  content: |-
+    Lists the organization's scripts that have not been deleted.
+
+    `state` is the script's runtime status, set by the server: `running`, `stopping` or `stopped`. See the Scripts folder for details.
+  type: text/markdown
