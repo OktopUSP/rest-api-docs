@@ -1,0 +1,185 @@
+info:
+  name: Change Device Labels
+  type: http
+  seq: 3
+
+http:
+  method: PATCH
+  url: "{{base_url}}device/label?id={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: id
+      value: "{{device}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      {
+          "add": [
+              {
+                  "name": "block",
+                  "value": "B",
+                  "parent": {
+                      "name": "condominium",
+                      "value": "residencial"
+                  }
+              },
+              {
+                  "name": "floor",
+                  "value": "331",
+                  "parent": {
+                      "name": "block",
+                      "value": "B"
+                  }
+              }
+          ],
+          "remove": [
+              {
+                  "name": "block",
+                  "value": "A"
+              },
+              {
+                  "name": "connection",
+                  "value": "timeout"
+              }
+          ]
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Change Device Labels
+    request:
+      url: "{{base_url}}device/label?id={{device}}"
+      method: PATCH
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: "{{device}}"
+          type: query
+      body:
+        type: json
+        data: |-
+          {
+              "add": [
+                  {
+                      "name": "block",
+                      "value": "B",
+                      "parent": {
+                          "name": "condominium",
+                          "value": "residencial"
+                      }
+                  },
+                  {
+                      "name": "floor",
+                      "value": "331",
+                      "parent": {
+                          "name": "block",
+                          "value": "B"
+                      }
+                  }
+              ],
+              "remove": [
+                  {
+                      "name": "block",
+                      "value": "A"
+                  },
+                  {
+                      "name": "connection",
+                      "value": "timeout"
+                  }
+              ]
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; version=1
+      body:
+        type: text
+        data: Label updated
+  - name: Parent not found
+    request:
+      url: "{{base_url}}device/label?id={{device}}"
+      method: PATCH
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: "{{device}}"
+          type: query
+      body:
+        type: json
+        data: |-
+          {
+              "add": [
+                  {
+                      "name": "floor",
+                      "value": "332",
+                      "parent": {
+                          "name": "block",
+                          "value": "C"
+                      }
+                  }
+              ]
+          }
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; version=1
+      body:
+        type: text
+        data: "invalid labels: parent label block:C of floor:332 not found"
+
+docs: |-
+  Adds, removes and moves labels of a device, leaving its other labels as they are.
+
+  The changes are applied to the labels stored when the request is handled, so a `connection` label Oktopus adds or removes at the same time is kept. This is what the device edit dialog uses; to send the whole list instead, use **Replace Device Labels** (PUT).
+
+  With the labels of the **Get Device Labels** example, the request above moves `floor:331` from `block:A` to a new `block:B` and removes `block:A` and `connection:timeout`.
+
+  Query parameters:
+
+  - `id`: the device serial number.
+
+  Body:
+
+  - `add` (array, optional): labels to add, each one with `name` and `value` (strings, required, up to 100 characters) and, to nest it, `parent`: the `name` and `value` of a label the device has or that is added in the same request. Adding a label the device already has moves it, with its children, under `parent`, or to the top level without `parent`.
+  - `remove` (array, optional): labels to remove, as `name` and `value`. Their children move to the removed label's parent. Removing a label the device doesn't have changes nothing.
+
+  A label both removed and added is moved, keeping its children. Spaces at the start and end of names and values are removed. Any other field is refused.
+
+  Rules, checked on the labels the device ends up with:
+
+  - A `name`:`value` pair appears once per device, wherever it is in the tree.
+  - A label can't be nested under itself or one of its children.
+  - `connection` labels stay at the top level: they can't have a `parent` nor be one.
+  - A device has at most 50 labels, counting the nested ones.
+
+  Responses:
+
+  - `200`: `Label updated`.
+  - `400`: the body breaks the format or a rule; the message says why and nothing is changed.
+  - `404`: `Device not found`.
+
+  Requires the Devices update permission.
