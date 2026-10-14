@@ -1,0 +1,171 @@
+info:
+  name: Replace Device Labels
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{base_url}}device/label?id={{device}}"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+  params:
+    - name: id
+      value: "{{device}}"
+      type: query
+  body:
+    type: json
+    data: |-
+      [
+          {
+              "name": "condominium",
+              "value": "residencial",
+              "children": [
+                  {
+                      "name": "block",
+                      "value": "A",
+                      "children": [
+                          {
+                              "name": "floor",
+                              "value": "331"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "name": "plan",
+              "value": "500 mega"
+          }
+      ]
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Replace Device Labels
+    request:
+      url: "{{base_url}}device/label?id={{device}}"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: "{{device}}"
+          type: query
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "name": "condominium",
+                  "value": "residencial",
+                  "children": [
+                      {
+                          "name": "block",
+                          "value": "A",
+                          "children": [
+                              {
+                                  "name": "floor",
+                                  "value": "331"
+                              }
+                          ]
+                      }
+                  ]
+              },
+              {
+                  "name": "plan",
+                  "value": "500 mega"
+              }
+          ]
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; version=1
+      body:
+        type: text
+        data: Label updated
+  - name: Repeated label
+    request:
+      url: "{{base_url}}device/label?id={{device}}"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: id
+          value: "{{device}}"
+          type: query
+      body:
+        type: json
+        data: |-
+          [
+              {
+                  "name": "block",
+                  "value": "A",
+                  "children": [
+                      {
+                          "name": "floor",
+                          "value": "331"
+                      }
+                  ]
+              },
+              {
+                  "name": "floor",
+                  "value": "331"
+              }
+          ]
+    response:
+      status: 400
+      statusText: Bad Request
+      headers:
+        - name: Content-Type
+          value: application/json; version=1
+      body:
+        type: text
+        data: label floor:331 is given more than once
+
+docs: |-
+  Replaces all the labels of a device with the labels in the body, in the same format **Get Device Labels** returns.
+
+  It also replaces the `connection` labels Oktopus manages: send them back to keep them. To add, remove or move some labels without sending the whole list, and without overwriting a `connection` label Oktopus changes at the same time, use **Change Device Labels** (PATCH).
+
+  Query parameters:
+
+  - `id`: the device serial number.
+
+  Body: a JSON array of labels, each one with:
+
+  - `name` (string, required): up to 100 characters.
+  - `value` (string, required): up to 100 characters.
+  - `children` (array, optional): the labels that belong to this one, in the same format.
+
+  Spaces at the start and end of names and values are removed. Any other field is refused.
+
+  Rules:
+
+  - A `name`:`value` pair appears once per device, wherever it is in the tree.
+  - `connection` labels stay at the top level: they can't be in `children` nor have `children`.
+  - A device has at most 50 labels, counting the nested ones.
+
+  Responses:
+
+  - `200`: `Label updated`.
+  - `400`: the body breaks the format or a rule; the message says why and nothing is changed.
+  - `404`: `Device not found`.
+
+  Requires the Devices update permission.
