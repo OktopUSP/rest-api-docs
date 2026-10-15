@@ -34,7 +34,40 @@ settings:
   forwardAuthorizationHeader: false
 
 examples:
-  - name: Firmware Update
+  - name: Firmware Update Started (TR-069)
+    request:
+      url: "{{base_url}}device/:device/:mtp/fw_update"
+      method: PUT
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+      params:
+        - name: device
+          value: "{{device}}"
+          type: path
+        - name: mtp
+          value: ""
+          type: path
+      body:
+        type: json
+        data: |-
+          {
+              "Url": "http://192.168.4.225:8004/logo.png"
+          }
+    response:
+      status: 204
+      statusText: No Content
+      headers:
+        - name: Vary
+          value: Origin
+        - name: Date
+          value: Wed, 18 Sep 2024 19:32:47 GMT
+      body:
+        type: json
+        data: ""
+  - name: Firmware Update Already Applied (TR-069)
     request:
       url: "{{base_url}}device/:device/:mtp/fw_update"
       method: PUT
@@ -67,7 +100,28 @@ examples:
         - name: Date
           value: Wed, 18 Sep 2024 19:32:47 GMT
         - name: Content-Length
-          value: "25"
+          value: "35"
       body:
         type: json
-        data: '"Firmware update started"'
+        data: '"Firmware update successfully done"'
+
+docs: |-
+  Asks the device to download and install the firmware image at `Url`.
+
+  ## TR-069 (CWMP) responses
+
+  The ACS sends a `Download` RPC (file type `1 Firmware Upgrade Image`), and the response depends on the device's `DownloadResponse`:
+
+  | Status | Body | Meaning |
+  |---|---|---|
+  | `204 No Content` | empty | The device accepted the download but has not installed it yet (`DownloadResponse` status `1`). It downloads the image, installs it, reboots, and then reports the result in a `TransferComplete`. **A 204 does not mean the firmware was installed**: check the device's software version after it reconnects. |
+  | `200 OK` | `"Firmware update successfully done"` | The device reports that it already installed the firmware (`DownloadResponse` status `0`). |
+  | `202 Accepted` | message | The device did not open a CWMP session in time, so the request waits in the queue until the device's next Inform. |
+  | `405 Method Not Allowed` | `"firmware upgrade not supported"` | The device model does not support firmware upgrades. |
+  | `500 Internal Server Error` | `"Error code: <code>, message: <text>"` | The device rejected the `Download` with a CWMP fault. |
+
+  Mass firmware updates wait for the `TransferComplete` and mark each device as successful or failed based on its fault code.
+
+  ## USP responses
+
+  `200 OK` with the device's `Operate` response.
