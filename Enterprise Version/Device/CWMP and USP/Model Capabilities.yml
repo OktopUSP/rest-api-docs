@@ -11,6 +11,8 @@ http:
       value: application/json
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: model
       value: EG8145X6-10a

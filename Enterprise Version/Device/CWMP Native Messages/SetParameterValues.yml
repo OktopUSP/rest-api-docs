@@ -11,6 +11,8 @@ http:
       value: application/xml
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: device
       value: 485754434ECDE6AD

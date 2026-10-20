@@ -9,6 +9,8 @@ http:
   headers:
     - name: Content-Type
       value: application/json
+    - name: X-Api-Version
+      value: "2"
   body:
     type: json
     data: |-

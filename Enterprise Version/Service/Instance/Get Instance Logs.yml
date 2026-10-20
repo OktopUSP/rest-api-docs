@@ -11,6 +11,8 @@ http:
       value: application/json
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: service_instance_id
       value: 69cbb2a7905d227aecbe5f62

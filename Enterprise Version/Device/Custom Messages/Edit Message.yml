@@ -6,6 +6,9 @@ info:
 http:
   method: PUT
   url: "{{base_url}}device/message?name"
+  headers:
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: name
       value: ""

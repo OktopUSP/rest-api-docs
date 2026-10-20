@@ -12,6 +12,8 @@ http:
       disabled: true
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: device
       value: "{{device}}"
