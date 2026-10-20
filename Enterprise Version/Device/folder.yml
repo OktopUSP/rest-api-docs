@@ -20,7 +20,7 @@ docs:
 
     **Every route that takes a device (`:device` in the path, `id` or `sn` in the query) accepts any of the three.** CWMP requests are sent to the ACS with the serial number and USP requests to the agent with the Endpoint ID, whatever identifier was used.
 
-    On **API version 1** (the default) the devices list and `GET device?id=` keep the shape they had before devices were unified: a TR-369 device has `SN` = its Endpoint ID and a dual-stack device is two rows. See **Get Device(s)**.
+    On **API version 1** (the default) the devices list and `GET device?id=` keep the shape they had before devices were unified: a TR-369 device has `SN` = its Endpoint ID and a dual-stack device is two rows. See **Get Device(s)** (version 1) and **Get Device(s) (API v2)**.
 
     ## Protocol of the per-device routes
 

@@ -1,7 +1,7 @@
 info:
   name: Remove Device
   type: http
-  seq: 13
+  seq: 14
 
 http:
   method: DELETE

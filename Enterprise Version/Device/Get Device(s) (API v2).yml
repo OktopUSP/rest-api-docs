@@ -1,0 +1,627 @@
+info:
+  name: Get Device(s) (API v2)
+  type: http
+  seq: 11
+
+http:
+  method: GET
+  url: "{{base_url}}device?page_number=0&page_size=20&statusOrder=desc"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
+  params:
+    - name: id
+      value: "{{device}}"
+      type: query
+      disabled: true
+    - name: page_number
+      value: "0"
+      type: query
+    - name: page_size
+      value: "20"
+      type: query
+    - name: statusOrder
+      value: desc
+      type: query
+    - name: status
+      value: "2"
+      type: query
+      disabled: true
+    - name: protocol
+      value: dual-stack
+      type: query
+      disabled: true
+    - name: vendor
+      value: ""
+      type: query
+      disabled: true
+    - name: model
+      value: ""
+      type: query
+      disabled: true
+    - name: version
+      value: ""
+      type: query
+      disabled: true
+    - name: alias
+      value: ""
+      type: query
+      disabled: true
+    - name: sn
+      value: "{{device}}"
+      type: query
+      disabled: true
+    - name: sn_v2
+      value: ""
+      type: query
+      disabled: true
+    - name: csv
+      value: "true"
+      type: query
+      disabled: true
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: List Devices
+    request:
+      url: "{{base_url}}device?page_number=0&page_size=20"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: X-Api-Version
+          value: "2"
+      params:
+        - name: page_number
+          value: "0"
+          type: query
+        - name: page_size
+          value: "20"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; version=2
+        - name: X-Api-Version
+          value: "2"
+        - name: Vary
+          value: Accept, X-Api-Version
+      body:
+        type: json
+        data: |-
+          {
+              "devices": [
+                  {
+                      "SN": "HWTC00000001",
+                      "sn_v2": "HWTC00000001",
+                      "usp_endpoint_id": "",
+                      "Model": "EG8145X6-10",
+                      "Customer": "",
+                      "Vendor": "Huawei Technologies Co., Ltd.",
+                      "Version": "V5R021C00S205",
+                      "ProductClass": "EG8145X6-10",
+                      "Alias": "",
+                      "DataModel": "TR-181",
+                      "Status": 2,
+                      "Bridge": null,
+                      "Cwmp": [
+                          {
+                              "Id": "acs-1",
+                              "Mtp": "cwmp",
+                              "Org": "",
+                              "Status": 2,
+                              "LastSeen": "2026-10-20T12:00:00Z"
+                          }
+                      ],
+                      "label": "[]",
+                      "ip": "100.64.10.20",
+                      "ipv6": "",
+                      "mac_wan": "AA:BB:CC:00:00:01",
+                      "pppoe_user": "customer1",
+                      "org": [
+                          "67a0c0ffee0000000000aaaa"
+                      ],
+                      "uptime": 86400,
+                      "connection_ip": "200.10.20.30",
+                      "last_seen": "2026-10-20T12:00:00Z",
+                      "created_at": "2026-03-14T09:30:00Z",
+                      "connections": [
+                          {
+                              "protocol": "tr069",
+                              "mtp": "cwmp",
+                              "adapter": "acs-1",
+                              "status": 2,
+                              "last_seen": "2026-10-20T12:00:00Z",
+                              "datamodel": "TR-181"
+                          }
+                      ],
+                      "protocol": "tr069"
+                  },
+                  {
+                      "SN": "S240Y00000001",
+                      "sn_v2": "S240Y00000001",
+                      "usp_endpoint_id": "os::AABBCC-S240Y00000001",
+                      "Model": "EX5601-T0",
+                      "Customer": "",
+                      "Vendor": "Zyxel",
+                      "Version": "V5.70(ACDZ.6.2)C0",
+                      "ProductClass": "EX5601-T0",
+                      "Alias": "living room",
+                      "DataModel": "TR-181",
+                      "Status": 2,
+                      "Bridge": [
+                          {
+                              "Id": "mqtt-1",
+                              "Mtp": "mqtt",
+                              "Org": "",
+                              "Status": 2,
+                              "LastSeen": "2026-10-20T12:01:00Z"
+                          }
+                      ],
+                      "Cwmp": [
+                          {
+                              "Id": "acs-1",
+                              "Mtp": "cwmp",
+                              "Org": "",
+                              "Status": 2,
+                              "LastSeen": "2026-10-20T12:00:00Z"
+                          }
+                      ],
+                      "label": "[]",
+                      "ip": "100.64.10.21",
+                      "ipv6": "",
+                      "mac_wan": "AA:BB:CC:00:00:02",
+                      "pppoe_user": "customer2",
+                      "org": [
+                          "67a0c0ffee0000000000aaaa"
+                      ],
+                      "uptime": 3600,
+                      "connection_ip": "200.10.20.30",
+                      "last_seen": "2026-10-20T12:01:00Z",
+                      "created_at": "2026-05-02T10:00:00Z",
+                      "connections": [
+                          {
+                              "protocol": "tr069",
+                              "mtp": "cwmp",
+                              "adapter": "acs-1",
+                              "status": 2,
+                              "last_seen": "2026-10-20T12:00:00Z",
+                              "datamodel": "TR-181"
+                          },
+                          {
+                              "protocol": "tr369",
+                              "mtp": "mqtt",
+                              "adapter": "mqtt-1",
+                              "status": 2,
+                              "last_seen": "2026-10-20T12:01:00Z",
+                              "datamodel": "TR-181",
+                              "endpoint_id": "os::AABBCC-S240Y00000001"
+                          }
+                      ],
+                      "protocol": "dual-stack"
+                  },
+                  {
+                      "SN": "S240Y00000002",
+                      "sn_v2": "S240Y00000002",
+                      "usp_endpoint_id": "os::AABBCC-S240Y00000002",
+                      "Model": "EX5601-T0",
+                      "Customer": "",
+                      "Vendor": "Zyxel",
+                      "Version": "V5.70(ACDZ.6.2)C0",
+                      "ProductClass": "EX5601-T0",
+                      "Alias": "",
+                      "DataModel": "TR-181",
+                      "Status": 2,
+                      "Bridge": [
+                          {
+                              "Id": "mqtt-1",
+                              "Mtp": "mqtt",
+                              "Org": "",
+                              "Status": 2,
+                              "LastSeen": "2026-10-20T12:01:00Z"
+                          }
+                      ],
+                      "Cwmp": null,
+                      "label": "[]",
+                      "ip": "100.64.10.22",
+                      "ipv6": "",
+                      "mac_wan": "AA:BB:CC:00:00:03",
+                      "pppoe_user": "customer3",
+                      "org": [
+                          "67a0c0ffee0000000000aaaa"
+                      ],
+                      "uptime": 7200,
+                      "connection_ip": "200.10.20.30",
+                      "last_seen": "2026-10-20T12:01:00Z",
+                      "created_at": "2026-06-10T08:00:00Z",
+                      "connections": [
+                          {
+                              "protocol": "tr369",
+                              "mtp": "mqtt",
+                              "adapter": "mqtt-1",
+                              "status": 2,
+                              "last_seen": "2026-10-20T12:01:00Z",
+                              "datamodel": "TR-181",
+                              "endpoint_id": "os::AABBCC-S240Y00000002"
+                          }
+                      ],
+                      "protocol": "tr369"
+                  }
+              ],
+              "page": 0,
+              "pages": 0,
+              "size": 20,
+              "total": 3
+          }
+  - name: Dual-stack Device, Both Connections Online
+    request:
+      url: "{{base_url}}device?id=S240Y00000001"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: X-Api-Version
+          value: "2"
+      params:
+        - name: id
+          value: "S240Y00000001"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; version=2
+        - name: X-Api-Version
+          value: "2"
+        - name: Vary
+          value: Accept, X-Api-Version
+      body:
+        type: json
+        data: |-
+          {
+              "SN": "S240Y00000001",
+              "sn_v2": "S240Y00000001",
+              "usp_endpoint_id": "os::AABBCC-S240Y00000001",
+              "Model": "EX5601-T0",
+              "Customer": "",
+              "Vendor": "Zyxel",
+              "Version": "V5.70(ACDZ.6.2)C0",
+              "ProductClass": "EX5601-T0",
+              "Alias": "living room",
+              "DataModel": "TR-181",
+              "Status": 2,
+              "Bridge": [
+                  {
+                      "Id": "mqtt-1",
+                      "Mtp": "mqtt",
+                      "Org": "",
+                      "Status": 2,
+                      "LastSeen": "2026-10-20T12:01:00Z"
+                  }
+              ],
+              "Cwmp": [
+                  {
+                      "Id": "acs-1",
+                      "Mtp": "cwmp",
+                      "Org": "",
+                      "Status": 2,
+                      "LastSeen": "2026-10-20T12:00:00Z"
+                  }
+              ],
+              "label": "[]",
+              "ip": "100.64.10.21",
+              "ipv6": "",
+              "mac_wan": "AA:BB:CC:00:00:02",
+              "pppoe_user": "customer2",
+              "org": [
+                  "67a0c0ffee0000000000aaaa"
+              ],
+              "uptime": 3600,
+              "connection_ip": "200.10.20.30",
+              "last_seen": "2026-10-20T12:01:00Z",
+              "created_at": "2026-05-02T10:00:00Z",
+              "connections": [
+                  {
+                      "protocol": "tr069",
+                      "mtp": "cwmp",
+                      "adapter": "acs-1",
+                      "status": 2,
+                      "last_seen": "2026-10-20T12:00:00Z",
+                      "datamodel": "TR-181"
+                  },
+                  {
+                      "protocol": "tr369",
+                      "mtp": "mqtt",
+                      "adapter": "mqtt-1",
+                      "status": 2,
+                      "last_seen": "2026-10-20T12:01:00Z",
+                      "datamodel": "TR-181",
+                      "endpoint_id": "os::AABBCC-S240Y00000001"
+                  }
+              ],
+              "protocol": "dual-stack"
+          }
+  - name: Dual-stack Device, TR-069 Offline
+    request:
+      url: "{{base_url}}device?id=os::AABBCC-S240Y00000001"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: X-Api-Version
+          value: "2"
+      params:
+        - name: id
+          value: "os::AABBCC-S240Y00000001"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; version=2
+        - name: X-Api-Version
+          value: "2"
+        - name: Vary
+          value: Accept, X-Api-Version
+      body:
+        type: json
+        data: |-
+          {
+              "SN": "S240Y00000001",
+              "sn_v2": "S240Y00000001",
+              "usp_endpoint_id": "os::AABBCC-S240Y00000001",
+              "Model": "EX5601-T0",
+              "Customer": "",
+              "Vendor": "Zyxel",
+              "Version": "V5.70(ACDZ.6.2)C0",
+              "ProductClass": "EX5601-T0",
+              "Alias": "living room",
+              "DataModel": "TR-181",
+              "Status": 2,
+              "Bridge": [
+                  {
+                      "Id": "mqtt-1",
+                      "Mtp": "mqtt",
+                      "Org": "",
+                      "Status": 2,
+                      "LastSeen": "2026-10-20T12:01:00Z"
+                  }
+              ],
+              "Cwmp": [
+                  {
+                      "Id": "acs-1",
+                      "Mtp": "cwmp",
+                      "Org": "",
+                      "Status": 0,
+                      "LastSeen": "2026-10-19T22:40:00Z"
+                  }
+              ],
+              "label": "[]",
+              "ip": "100.64.10.21",
+              "ipv6": "",
+              "mac_wan": "AA:BB:CC:00:00:02",
+              "pppoe_user": "customer2",
+              "org": [
+                  "67a0c0ffee0000000000aaaa"
+              ],
+              "uptime": 3600,
+              "connection_ip": "200.10.20.30",
+              "last_seen": "2026-10-20T12:01:00Z",
+              "created_at": "2026-05-02T10:00:00Z",
+              "connections": [
+                  {
+                      "protocol": "tr069",
+                      "mtp": "cwmp",
+                      "adapter": "acs-1",
+                      "status": 0,
+                      "last_seen": "2026-10-19T22:40:00Z",
+                      "datamodel": "TR-181"
+                  },
+                  {
+                      "protocol": "tr369",
+                      "mtp": "mqtt",
+                      "adapter": "mqtt-1",
+                      "status": 2,
+                      "last_seen": "2026-10-20T12:01:00Z",
+                      "datamodel": "TR-181",
+                      "endpoint_id": "os::AABBCC-S240Y00000001"
+                  }
+              ],
+              "protocol": "dual-stack"
+          }
+  - name: Filter Dual-stack Devices
+    request:
+      url: "{{base_url}}device?page_number=0&page_size=20&protocol=dual-stack"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: X-Api-Version
+          value: "2"
+      params:
+        - name: page_number
+          value: "0"
+          type: query
+        - name: page_size
+          value: "20"
+          type: query
+        - name: protocol
+          value: "dual-stack"
+          type: query
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json; version=2
+        - name: X-Api-Version
+          value: "2"
+        - name: Vary
+          value: Accept, X-Api-Version
+      body:
+        type: json
+        data: |-
+          {
+              "devices": [
+                  {
+                      "SN": "S240Y00000001",
+                      "sn_v2": "S240Y00000001",
+                      "usp_endpoint_id": "os::AABBCC-S240Y00000001",
+                      "Model": "EX5601-T0",
+                      "Customer": "",
+                      "Vendor": "Zyxel",
+                      "Version": "V5.70(ACDZ.6.2)C0",
+                      "ProductClass": "EX5601-T0",
+                      "Alias": "living room",
+                      "DataModel": "TR-181",
+                      "Status": 2,
+                      "Bridge": [
+                          {
+                              "Id": "mqtt-1",
+                              "Mtp": "mqtt",
+                              "Org": "",
+                              "Status": 2,
+                              "LastSeen": "2026-10-20T12:01:00Z"
+                          }
+                      ],
+                      "Cwmp": [
+                          {
+                              "Id": "acs-1",
+                              "Mtp": "cwmp",
+                              "Org": "",
+                              "Status": 2,
+                              "LastSeen": "2026-10-20T12:00:00Z"
+                          }
+                      ],
+                      "label": "[]",
+                      "ip": "100.64.10.21",
+                      "ipv6": "",
+                      "mac_wan": "AA:BB:CC:00:00:02",
+                      "pppoe_user": "customer2",
+                      "org": [
+                          "67a0c0ffee0000000000aaaa"
+                      ],
+                      "uptime": 3600,
+                      "connection_ip": "200.10.20.30",
+                      "last_seen": "2026-10-20T12:01:00Z",
+                      "created_at": "2026-05-02T10:00:00Z",
+                      "connections": [
+                          {
+                              "protocol": "tr069",
+                              "mtp": "cwmp",
+                              "adapter": "acs-1",
+                              "status": 2,
+                              "last_seen": "2026-10-20T12:00:00Z",
+                              "datamodel": "TR-181"
+                          },
+                          {
+                              "protocol": "tr369",
+                              "mtp": "mqtt",
+                              "adapter": "mqtt-1",
+                              "status": 2,
+                              "last_seen": "2026-10-20T12:01:00Z",
+                              "datamodel": "TR-181",
+                              "endpoint_id": "os::AABBCC-S240Y00000001"
+                          }
+                      ],
+                      "protocol": "dual-stack"
+                  }
+              ],
+              "page": 0,
+              "pages": 0,
+              "size": 20,
+              "total": 1
+          }
+  - name: Unsupported API Version
+    request:
+      url: "{{base_url}}device?page_number=0&page_size=20"
+      method: GET
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "{{authToken}}"
+        - name: X-Api-Version
+          value: "3"
+      params:
+        - name: page_number
+          value: "0"
+          type: query
+        - name: page_size
+          value: "20"
+          type: query
+    response:
+      status: 406
+      statusText: Not Acceptable
+      headers:
+        - name: Content-Type
+          value: application/json; version=1
+        - name: X-Api-Version
+          value: "1"
+        - name: Vary
+          value: Accept, X-Api-Version
+      body:
+        type: json
+        data: |-
+          {
+              "default_version": "1",
+              "error": "unsupported API version: 3",
+              "supported_versions": [
+                  "1",
+                  "2"
+              ]
+          }
+
+docs: |-
+  **API version 2 — send `X-Api-Version: 2`** (or `Accept: application/json; version=2`). Lists the devices of your organization, or returns one with `id`, with **one entry per device**: a CPE connected over TR-069 and TR-369 is a single device carrying both connections. This is the format the Oktopus web interface uses. Requests without a version get **Get Device(s)** (version 1).
+
+  | Field | Description |
+  |---|---|
+  | `SN` | Device key: the serial number (the one the ACS knows the CPE by) |
+  | `sn_v2` | Serial number reported by the device |
+  | `usp_endpoint_id` | USP Agent Endpoint ID, empty for a TR-069-only device |
+  | `protocol` | `tr069`, `tr369` or `dual-stack` |
+  | `Status` | The device as a whole: `2` (online) when at least one connection is online |
+  | `Cwmp`, `Bridge` | TR-069 and TR-369 links, each with its own `Status` and `LastSeen`; `Cwmp` is `[]` for a device known to the ACS with no link right now |
+  | `connections` | One entry per protocol: `protocol` (`tr069` \| `tr369`), `mtp`, `adapter`, `status`, `last_seen`, `datamodel` and, for TR-369, `endpoint_id` |
+
+  `id` accepts the serial number, `sn_v2` or the Agent Endpoint ID and always returns the same device. See the examples **Dual-stack Device, Both Connections Online** and **Dual-stack Device, TR-069 Offline**: the device stays online while one of its connections is.
+
+  ## Query parameters
+
+  | Parameter | Description |
+  |---|---|
+  | `id` | One device by serial number, `sn_v2` or Agent Endpoint ID |
+  | `page_number`, `page_size` | Page, starting at `0`; size from `1` to `100` (default `20`) |
+  | `sn` | Exact serial number or Agent Endpoint ID |
+  | `sn_v2` | Exact serial number reported by the device |
+  | `vendor`, `model`, `version`, `type` (product class), `alias`, `datamodel`, `ip`, `connection_ip`, `pppoe_user`, `wan_mac`, `label` | Property filters |
+  | `status` | `0` offline, `1` associating, `2` online, `3` unknown. With `protocol`, the status of **that protocol's connection** (`protocol=tr369&status=2` = TR-369 online) |
+  | `protocol` | `tr069` (known to the ACS), `tr369` (known over USP) or `dual-stack` (both) |
+  | `statusOrder` (`asc` \| `desc`), `lastSeenOrder` (`1` \| `-1`), `uptime` (`1` \| `-1`) | Sorting |
+  | `csv=true` | Returns the page as CSV (`pagination=false` for every matching device). The CSV is the same on both API versions: one row per device, `SN` = serial number, `Agent Endpoint ID` = Endpoint ID, `Protocol` = `TR-069` \| `TR-369` \| `Dual-stack` |
+
+  `404` `"No devices found"` when nothing matches.

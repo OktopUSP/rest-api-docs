@@ -1,7 +1,7 @@
 info:
   name: Device Filter Options
   type: http
-  seq: 15
+  seq: 16
 
 http:
   method: GET
