@@ -115,3 +115,10 @@ examples:
       body:
         type: json
         data: '"No id provided"'
+
+docs: |-
+  Removes one or more devices, comma-separated in `id`. Each `id` can be the serial number, `sn_v2` or the Agent Endpoint ID.
+
+  Removing a device removes **all its connections**: a CPE on both TR-069 and TR-369 loses both sides and the ACS forgets it. The device shows up again only when it reconnects, without its alias, labels or map location. To drop only one protocol of a CPE (e.g. its TR-069 side after a migration to TR-369), use the `remove_device_protocol()` script function instead.
+
+  Empty ids are ignored (`id=SN1,` removes `SN1` only); `400` `"No id provided"` when no id is left. Returns `200` with the number of devices removed.

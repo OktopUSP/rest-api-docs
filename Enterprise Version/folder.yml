@@ -5,3 +5,39 @@ info:
 
 request:
   auth: inherit
+
+docs:
+  content: |-
+    Endpoints of the Oktopus commercial (Enterprise) version.
+
+    ## API versions
+
+    The API is versioned per request: every route keeps its path and the client says which version it wants in a request header.
+
+    ```
+    X-Api-Version: 2
+    Accept: application/json; version=2
+    Content-Type: application/json; version=2
+    ```
+
+    | Rule | |
+    |---|---|
+    | No version in the request | Served as **version 1**, the behaviour integrations written before versioning rely on. Send `X-Api-Version: 1` to stay on it even if the default changes in the future. |
+    | Precedence | `X-Api-Version` > `Accept` > `Content-Type` |
+    | Two headers with different versions | `400 Bad Request` |
+    | Version not served | `406 Not Acceptable`, body `{"error": "...", "supported_versions": ["1", "2"], "default_version": "1"}` |
+    | Response | `X-Api-Version` with the version that served it, also as the `version` parameter of `Content-Type`; `Vary: Accept, X-Api-Version` |
+
+    The Oktopus web interface uses the latest version. Version 1 and version 2 differ only in the devices endpoints (**Device > Get Device(s)** and **Device > Device Filter Options**); every other request behaves the same on both. See the **Device** folder for how devices on TR-069 and TR-369 are identified.
+
+    Example of a refused version:
+
+    ```
+    GET /api/device
+    X-Api-Version: 3
+
+    406 Not Acceptable
+    X-Api-Version: 1
+    {"default_version":"1","error":"unsupported API version: 3","supported_versions":["1","2"]}
+    ```
+  type: text/markdown

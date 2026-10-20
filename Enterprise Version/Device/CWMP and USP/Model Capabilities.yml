@@ -18,6 +18,10 @@ http:
     - name: sn
       value: "{{device}}"
       type: query
+    - name: protocol
+      value: usp
+      type: query
+      disabled: true
   auth: inherit
 
 settings:
@@ -84,3 +88,14 @@ examples:
               "Pon": true,
               "ParallelProcessing": false
           }
+
+docs: |-
+  Returns which features the device's profile supports, so a client can tell which per-device requests make sense for it.
+
+  | Parameter | Description |
+  |---|---|
+  | `sn` | Serial number, `sn_v2` or Agent Endpoint ID of the device (required) |
+  | `model` | Device model (required) |
+  | `protocol` | Optional, `cwmp` or `usp`. Capabilities are per protocol; for a device on both, ask for the protocol you are going to use. Without it, the protocol per-device requests with `any` would use (TR-369 when online, otherwise TR-069) |
+
+  The response carries `X-Oktopus-Protocol` with the protocol the capabilities refer to. Capabilities of a TR-369 device are returned even while it is offline.
