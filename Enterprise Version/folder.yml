@@ -5,3 +5,54 @@ info:
 
 request:
   auth: inherit
+
+docs:
+  content: |-
+    Endpoints of the Oktopus commercial (Enterprise) version.
+
+    ## API versions
+
+    The API is versioned per request: every route keeps its path and the client says which version it wants in a request header.
+
+    ```
+    X-Api-Version: 2
+    Accept: application/json; version=2
+    Content-Type: application/json; version=2
+    ```
+
+    | Rule | |
+    |---|---|
+    | No version in the request | Served as **version 1**, the behaviour integrations written before versioning rely on. Send `X-Api-Version: 1` to stay on it even if the default changes in the future. |
+    | Precedence | `X-Api-Version` > `Accept` > `Content-Type` |
+    | Two headers with different versions | `400 Bad Request` |
+    | Version not served | `406 Not Acceptable`, body `{"error": "...", "supported_versions": ["1", "2"], "default_version": "1"}` |
+    | Response | `X-Api-Version` with the version that served it, also as the `version` parameter of `Content-Type`; `Vary: Accept, X-Api-Version` |
+
+    The Oktopus web interface uses the latest version. Version 1 and version 2 differ only in the devices endpoints (**Device > Get Device(s)** for version 1, **Device > Get Device(s) (API v2)** for version 2, and **Device > Device Filter Options**); every other request behaves the same on both. See the **Device** folder for how devices on TR-069 and TR-369 are identified.
+
+    Every request in this collection sends `X-Api-Version: 2`, except **Device > Get Device(s)**, which documents version 1 and sends `X-Api-Version: 1`. Requests that don't go to the controller (file server, speed test server, health checks of other services) are not versioned.
+
+    ### Not versioned, already one entry per device
+
+    These endpoints answer the same on both versions and use the unified identifiers (`SN` = serial number for TR-369 devices too, one entry per CPE). Their ids can be passed to any device route, which accepts the serial number, `sn_v2` or the Agent Endpoint ID:
+
+    | Endpoint | What a version 1 client may notice |
+    |---|---|
+    | `POST mass-actions/devices/preview` | Devices in the version 2 shape |
+    | `GET device/label/find` | The `SN` of a TR-369 device is its serial number |
+    | `GET insights/network/devices`, `GET map` | Rows keyed by the serial number |
+    | `GET info/status`, `GET info/general`, `GET info/device_evolution` | A CPE on TR-069 and TR-369 is counted once |
+    | Mass action results | Devices processed after the update are identified by the serial number |
+    | `GET device/:device/historic` and Insights history | History of TR-369 devices recorded before the update stays under the previous identifier |
+
+    Example of a refused version:
+
+    ```
+    GET /api/device
+    X-Api-Version: 3
+
+    406 Not Acceptable
+    X-Api-Version: 1
+    {"default_version":"1","error":"unsupported API version: 3","supported_versions":["1","2"]}
+    ```
+  type: text/markdown

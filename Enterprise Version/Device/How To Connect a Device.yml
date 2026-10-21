@@ -1,7 +1,7 @@
 info:
   name: How To Connect a Device
   type: http
-  seq: 14
+  seq: 15
 
 http:
   method: GET
@@ -11,6 +11,8 @@ http:
       value: application/json
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   auth: inherit
 
 settings:

@@ -12,6 +12,8 @@ http:
     - name: Authorization
       value: "{{authToken}}"
       disabled: true
+    - name: X-Api-Version
+      value: "2"
   body:
     type: json
     data: |-

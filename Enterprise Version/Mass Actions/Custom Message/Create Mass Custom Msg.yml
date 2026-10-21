@@ -11,6 +11,8 @@ http:
       value: application/json
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   body:
     type: json
     data: |-
@@ -86,3 +88,15 @@ examples:
       body:
         type: json
         data: ""
+
+docs: |-
+  Sends a raw message to every selected device: a CWMP RPC (XML) or a USP message (JSON, protojson) in `parameters.payload`.
+
+  | Field | Description |
+  |---|---|
+  | `parameters.payload` | The message, as a string |
+  | `parameters.protocol` | Optional, `cwmp` or `usp`: the protocol the payload is written for. When omitted it is inferred from the payload (JSON → `usp`, XML → `cwmp`); any other value returns `400` |
+  | `devices[].id` | Serial number, `sn_v2` or Agent Endpoint ID |
+  | `device_selection` | Rule-based selection instead of `devices`; a rule on the field `sn` matches the serial number or the Agent Endpoint ID |
+
+  The message runs **once per device**, on the payload's protocol, also for devices connected over both TR-069 and TR-369. In the action results, a device that never used that protocol fails with `device has no TR-069 connection` / `device has no TR-369 connection`, and a device known on it but not connected right now with `device is not connected over TR-069 right now` / `device is not connected over TR-369 right now`.

@@ -6,6 +6,9 @@ info:
 http:
   method: GET
   url: "{{base_url}}health"
+  headers:
+    - name: X-Api-Version
+      value: "2"
   auth: inherit
 
 settings:

@@ -1,7 +1,7 @@
 info:
   name: Set Device Alias
   type: http
-  seq: 11
+  seq: 12
 
 http:
   method: PUT
@@ -11,6 +11,8 @@ http:
       value: application/json
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: id
       value: 485754434ECDE6AD

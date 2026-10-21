@@ -1,7 +1,7 @@
 info:
   name: Device Filter Options
   type: http
-  seq: 15
+  seq: 16
 
 http:
   method: GET
@@ -11,6 +11,8 @@ http:
       value: application/json
     - name: Authorization
       value: "{{authToken}}"
+    - name: X-Api-Version
+      value: "2"
   auth: inherit
 
 settings:
@@ -62,3 +64,8 @@ examples:
                   ""
               ]
           }
+
+docs: |-
+  Returns the models, product classes, vendors and versions of the devices that match the filters, to build filter drop-downs. Accepts the same filters as **Get Device(s)**.
+
+  The `protocol` filter accepts `tr069` and `tr369` on API version 1 (default) and also `dual-stack` on version 2 (`X-Api-Version: 2`); an unknown value returns `400`. With `protocol`, `status` is the status of that protocol's connection.

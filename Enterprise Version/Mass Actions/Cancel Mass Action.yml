@@ -6,6 +6,9 @@ info:
 http:
   method: PUT
   url: "{{base_url}}mass-actions?actionId=671017da6174deeacd62a2aa"
+  headers:
+    - name: X-Api-Version
+      value: "2"
   params:
     - name: actionId
       value: 671017da6174deeacd62a2aa

@@ -13,7 +13,19 @@ request:
       value: ""
 
 docs:
-  content: REST API documentation of Oktopus Open Source USP Controller and CWMP compatible multi-vendor device management platform.
+  content: |-
+    REST API documentation of Oktopus Open Source USP Controller and CWMP compatible multi-vendor device management platform.
+
+    ## API versions (Enterprise Version)
+
+    The Enterprise API is versioned per request, in a header. Routes don't change.
+
+    | Version | How to ask for it | Devices endpoints |
+    |---|---|---|
+    | **1** (default) | No header, or `X-Api-Version: 1` | One row per protocol: a CPE on TR-069 and TR-369 is two rows, a TR-369 device has `SN` = its Agent Endpoint ID. See **Enterprise Version > Device > Get Device(s)** |
+    | **2** | `X-Api-Version: 2` (or `Accept: application/json; version=2`) | One entry per device with both connections: `SN` = serial number, `usp_endpoint_id`, `protocol` (`tr069` \| `tr369` \| `dual-stack`) and per-protocol `connections`. See **Enterprise Version > Device > Get Device(s) (API v2)** |
+
+    Only the devices list (`GET device`, `GET device?id=`) and its filter options differ between versions. Every response says which version served it in `X-Api-Version`. Integrations that don't send a version keep the version 1 format; send `X-Api-Version: 1` to keep it even if the default changes. Details in the **Enterprise Version** folder.
   type: text/markdown
 bundled: false
 extensions:

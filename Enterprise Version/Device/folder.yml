@@ -5,3 +5,43 @@ info:
 
 request:
   auth: inherit
+
+docs:
+  content: |-
+    ## Devices on TR-069 and TR-369
+
+    A CPE is **one device**, whether it connects over TR-069 (CWMP), TR-369 (USP) or both (_dual-stack_). It has three identifiers:
+
+    | Field | What it is |
+    |---|---|
+    | `SN` | The device key: the serial number the ACS knows the CPE by, or the serial number reported over USP for a TR-369-only CPE |
+    | `sn_v2` | The serial number the CPE reports |
+    | `usp_endpoint_id` | The USP Agent Endpoint ID (e.g. `os::AABBCC-S240Y00000001`), empty for a TR-069-only CPE |
+
+    **Every route that takes a device (`:device` in the path, `id` or `sn` in the query) accepts any of the three.** CWMP requests are sent to the ACS with the serial number and USP requests to the agent with the Endpoint ID, whatever identifier was used.
+
+    On **API version 1** (the default) the devices list and `GET device?id=` keep the shape they had before devices were unified: a TR-369 device has `SN` = its Endpoint ID and a dual-stack device is two rows. See **Get Device(s)** (version 1) and **Get Device(s) (API v2)**.
+
+    ## Protocol of the per-device routes
+
+    Per-device routes have a protocol segment: `device/:device/:mtp/<resource>`.
+
+    | `:mtp` | Protocol used |
+    |---|---|
+    | `any` | TR-369 when its connection is online, otherwise TR-069. On a dual-stack device, if TR-369 doesn't answer, the request is replayed over TR-069. |
+    | `cwmp`, `tr069`, `tr-069` | TR-069 only |
+    | `usp`, `tr369`, `tr-369`, `mqtt`, `ws`, `stomp` | TR-369 only (the MTP actually used is the device's) |
+
+    Responses of per-device routes carry:
+
+    | Header | Value |
+    |---|---|
+    | `X-Oktopus-Protocol` | `tr069` or `tr369`: the protocol that served the request |
+    | `X-Oktopus-Protocol-Fallback` | `tr369` when TR-369 didn't answer and the response came from TR-069 |
+
+    | Error | When |
+    |---|---|
+    | `400` `"Device has no TR-069 connection"` / `"Device has no TR-369 connection"` | The route or `:mtp` forces a protocol the device never used (e.g. a CWMP native message to a TR-369-only device) |
+    | `400` `"Device is Offline"` | No connection of the device is available for the request |
+    | `404` | No device with that identifier in your organization |
+  type: text/markdown
