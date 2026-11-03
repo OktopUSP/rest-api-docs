@@ -1,0 +1,22 @@
+info:
+  name: Embed
+  type: folder
+  seq: 5
+
+request:
+  auth: inherit
+
+docs:
+  content: |-
+    Trusted token handoff that lets a third-party system (e.g. a support CRM) show the Oktopus device pages inside an iframe, signing its agents in without an Oktopus login screen.
+
+    ```
+    host backend ──POST /auth/embed/code (Bearer EMBED_API_KEY)──▶ controller ──▶ { code }
+    host page    ──iframe /embed/device/<SN>?code=<code>──▶ Oktopus UI
+    Oktopus UI   ──POST /auth/embed/exchange { code }──▶ controller ──▶ { token, user }
+    ```
+
+    Embedding is off until the controller has `EMBED_API_KEY`, `EMBED_TENANT_ID` and `EMBED_ROLE` set; until then **Create Embed Code** answers `404`. `EMBED_SESSION_HOURS` (default `12`) sets how long the issued session token lasts.
+
+    Accounts provisioned through this flow (`auth_provider: "embed"`) have no usable password: **ChangeOwnPassword** and password reset answer `403` for them, so they can only sign in through the embed flow.
+  type: text/markdown

@@ -7,6 +7,8 @@ request:
   variables:
     - name: authToken
       value: ""
+    - name: embedCode
+      value: ""
     - name: base_url
       value: ""
     - name: base_url_file
