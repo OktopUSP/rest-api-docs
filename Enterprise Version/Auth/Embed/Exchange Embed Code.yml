@@ -1,0 +1,120 @@
+info:
+  name: Exchange Embed Code
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{base_url}}auth/embed/exchange"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: X-Api-Version
+      value: "2"
+  body:
+    type: json
+    data: |-
+      {
+          "code": "{{embedCode}}"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var responseBody = res.getBody();
+        bru.setVar("authToken", responseBody.token);
+
+docs: |-
+  Trades a code from **Create Embed Code** for a session. The Oktopus UI calls this itself from `/embed/device/<SN>`; call it directly only to test the flow.
+
+  Each code can be exchanged only once. `token` is a JWT valid for `EMBED_SESSION_HOURS` (default 12 hours), sent as the `Authorization` header of later requests. `user.permissions` is the permission tree of the agent's role (abbreviated in the example), and `id_token` is always empty for embed sessions (it is shared with the SSO exchange).
+
+  ## Errors
+
+  | Status | When |
+  |---|---|
+  | `400` | Invalid JSON. |
+  | `401` | The code is unknown, already used, or older than 60 seconds. |
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Exchange Embed Code
+    request:
+      url: "{{base_url}}auth/embed/exchange"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "code": "<one-time-code>"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "token": "<jwt-token>",
+              "id_token": "",
+              "user": {
+                  "email": "agent@customer.com",
+                  "name": "Support Agent",
+                  "phone": "",
+                  "role": "level-1",
+                  "org": "691c8ad6f7584977190de1e9",
+                  "enable_2fa": false,
+                  "auth_provider": "embed",
+                  "preferences": {
+                      "theme": "",
+                      "locale": ""
+                  },
+                  "permissions": {
+                      "Devices": {
+                          "create": false,
+                          "read": true,
+                          "update": false,
+                          "delete": false
+                      }
+                  }
+              }
+          }
+  - name: Invalid or Used Code
+    request:
+      url: "{{base_url}}auth/embed/exchange"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "code": "<already-used-code>"
+          }
+    response:
+      status: 401
+      statusText: Unauthorized
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "message": "Invalid or expired SSO code"
+          }

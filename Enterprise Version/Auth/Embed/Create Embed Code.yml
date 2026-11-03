@@ -1,0 +1,137 @@
+info:
+  name: Create Embed Code
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{base_url}}auth/embed/code"
+  headers:
+    - name: Content-Type
+      value: application/json
+    - name: Authorization
+      value: "Bearer {{embedApiKey}}"
+    - name: X-Api-Version
+      value: "2"
+  body:
+    type: json
+    data: |-
+      {
+          "email": "agent@customer.com",
+          "name": "Support Agent"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        var responseBody = res.getBody();
+        bru.setVar("embedCode", responseBody.code);
+
+docs: |-
+  Mints a single-use login code for an agent of the embedding system. **Server to server only**: the API key must never reach a browser.
+
+  ## Headers
+
+  | Header | Description |
+  |---|---|
+  | `Authorization` | `Bearer <EMBED_API_KEY>`, the secret configured on the controller. |
+
+  ## Body
+
+  | Field | Required | Description |
+  |---|---|---|
+  | `email` | yes | The agent's email, a bare address (`agent@customer.com`, not `Agent <agent@customer.com>`). |
+  | `name` | no | Display name used when the account is created. Defaults to the email. |
+
+  ## How the agent is resolved
+
+  | Account for `email` | Result |
+  |---|---|
+  | Doesn't exist | Created in `EMBED_TENANT_ID` with `EMBED_ROLE` and a random password (`auth_provider: "embed"`). |
+  | Exists, and every tenant it belongs to is `EMBED_TENANT_ID` with `EMBED_ROLE` | Reused. |
+  | Exists with any other tenant or role (e.g. an admin) | `403`. |
+
+  ## Response
+
+  ```json
+  { "code": "<one-time-code>", "expires_in": 60 }
+  ```
+
+  The code is valid for `expires_in` seconds and can be exchanged once, with **Exchange Embed Code** or by loading `https://<oktopus-host>/embed/device/<SN>?code=<code>` in the iframe. The login is recorded in the audit trail as "Embed login".
+
+  ## Errors
+
+  | Status | When |
+  |---|---|
+  | `400` | Invalid JSON, or `email` missing or not a bare address. |
+  | `401` | Missing or wrong API key. |
+  | `403` | The email belongs to an account outside the embed tenant or role. |
+  | `404` | Embedding is not configured on this controller. |
+  | `500` | `EMBED_ROLE` doesn't exist in `EMBED_TENANT_ID`, or an internal error. |
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
+  forwardAuthorizationHeader: false
+
+examples:
+  - name: Create Embed Code
+    request:
+      url: "{{base_url}}auth/embed/code"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "Bearer {{embedApiKey}}"
+      body:
+        type: json
+        data: |-
+          {
+              "email": "agent@customer.com",
+              "name": "Support Agent"
+          }
+    response:
+      status: 200
+      statusText: OK
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "code": "<one-time-code>",
+              "expires_in": 60
+          }
+  - name: Account Outside Embed Tenant or Role
+    request:
+      url: "{{base_url}}auth/embed/code"
+      method: POST
+      headers:
+        - name: Content-Type
+          value: application/json
+        - name: Authorization
+          value: "Bearer {{embedApiKey}}"
+      body:
+        type: json
+        data: |-
+          {
+              "email": "admin@customer.com"
+          }
+    response:
+      status: 403
+      statusText: Forbidden
+      headers:
+        - name: Content-Type
+          value: application/json
+      body:
+        type: json
+        data: |-
+          {
+              "message": "This user cannot be signed in through the embed integration"
+          }

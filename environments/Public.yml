@@ -4,6 +4,8 @@ variables:
     value: youremail@email
   - secret: true
     name: password
+  - secret: true
+    name: embedApiKey
   - name: device
     value: device-id
   - name: url
