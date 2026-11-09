@@ -619,8 +619,8 @@ docs: |-
   | `sn` | Exact serial number or Agent Endpoint ID |
   | `sn_v2` | Exact serial number reported by the device |
   | `vendor`, `model`, `version`, `type` (product class), `alias`, `datamodel`, `ip`, `connection_ip`, `pppoe_user`, `wan_mac`, `label` | Property filters |
-  | `status` | `0` offline, `1` associating, `2` online, `3` unknown. With `protocol`, the status of **that protocol's connection** (`protocol=tr369&status=2` = TR-369 online) |
-  | `protocol` | `tr069` (known to the ACS), `tr369` (known over USP) or `dual-stack` (both) |
+  | `status` | `0` offline, `1` associating, `2` online, `3` unknown. With `protocol`, the status of **that protocol's connection** (`protocol=tr369&status=2` = TR-369-only devices online); with `dual-stack`, the device's own status (online over either protocol) |
+  | `protocol` | `tr069` (TR-069 only), `tr369` (TR-369 only) or `dual-stack` (both). A dual-stack device matches `dual-stack` alone, not `tr069` or `tr369` |
   | `statusOrder` (`asc` \| `desc`), `lastSeenOrder` (`1` \| `-1`), `uptime` (`1` \| `-1`) | Sorting |
   | `csv=true` | Returns the page as CSV (`pagination=false` for every matching device). The CSV is the same on both API versions: one row per device, `SN` = serial number, `Agent Endpoint ID` = Endpoint ID, `Protocol` = `TR-069` \| `TR-369` \| `Dual-stack` |
 
