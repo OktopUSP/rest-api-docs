@@ -46,6 +46,13 @@ http:
       ]
   auth: inherit
 
+docs: |-
+  Updates the LAN configuration: bridges, their member ports and DHCP server.
+
+  ## Permission
+
+  `LAN: update`.
+
 settings:
   encodeUrl: true
   timeout: 0

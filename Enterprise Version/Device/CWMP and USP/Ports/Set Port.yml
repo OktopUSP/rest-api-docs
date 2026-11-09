@@ -24,6 +24,7 @@ http:
     type: json
     data: |-
       {
+          "Device.Ethernet.Interface.5.": {
               "path": "Device.Ethernet.Interface.5.",
               "enable": {
                   "writable": false,
@@ -370,8 +371,32 @@ http:
                       }
                   }
               }
+          }
       }
   auth: inherit
+
+docs: |-
+  Updates ports. The body maps each port path to the port as returned by **Get Ports**, with the edited values.
+
+  ## Permissions
+
+  Each edit is checked against the device's current ports, not against the body:
+
+  | Edit | Permission |
+  |---|---|
+  | A field of a physical interface (`Device.Ethernet.Interface`, `Device.Optical.Interface`, TR-098 `LANEthernetInterfaceConfig` and `WAN*InterfaceConfig`), such as `enable` or `alias` | `Ports: update` |
+  | Logical configuration of an upstream port (`ip` entries: IP, PPPoE, VLAN, IPv4/IPv6, DNS) and TR-098 `WANConnectionDevice` objects | `WAN: update` |
+  | Logical configuration of a downstream port, and TR-098 `LANDevice` objects other than the Ethernet interfaces | `LAN: update` |
+
+  A request that touches several kinds needs every matching permission. Fields sent back with the value the device already reports, and read-only telemetry (`status`, `rx`, `tx`, `stats`, `mac_address`, `upstream`…), need no permission, so a WAN edit may echo the whole port. Logical configuration of a port that does not report `upstream` needs both `WAN: update` and `LAN: update`.
+
+  ## Errors
+
+  | Status | When |
+  |---|---|
+  | `403` | The role lacks a permission the edit needs. |
+  | `409` | The body names a port or nested object the device does not report. Refresh the ports and retry. |
+  | `503` | The controller could not read the device's ports to check the request. |
 
 settings:
   encodeUrl: true
@@ -401,21 +426,352 @@ examples:
         type: json
         data: |-
           {
-          "pppoe": {
-              "Device.PPP.Interface.2.": {
-                  "path": "Device.PPP.Interface.2.",
-                  "username": {
-                      "writable": true,
-                      "value": "1234qwer1234"
-                  },
-                  "password": {
-                      "writable": true,
-                      "value": ""
-                  },
-                  "connection_status": {
+              "Device.Ethernet.Interface.5.": {
+                  "path": "Device.Ethernet.Interface.5.",
+                  "enable": {
                       "writable": false,
-                      "value": "Connecting"
-                  }
+                      "value": "1"
+                  },
+                  "alias": {
+                      "writable": false,
+                      "value": "EWAN"
+                  },
+                  "mac_address": {
+                      "writable": false,
+                      "value": "9A:25:4A:42:A4:A1"
+                  },
+                  "upstream": {
+                      "writable": false,
+                      "value": true
+                  },
+                  "status": {
+                      "writable": false,
+                      "value": "Up"
+                  },
+                  "rx": {
+                      "writable": false,
+                      "value": "3828434628"
+                  },
+                  "tx": {
+                      "writable": false,
+                      "value": "3567811580"
+                  },
+                  "ip": {
+                      "Device.IP.Interface.10.": {
+                          "name": {
+                              "writable": true,
+                              "value": "test_static_vlan6"
+                          },
+                          "enable": {
+                              "writable": true,
+                              "value": "0"
+                          },
+                          "max_mtu_size": {
+                              "writable": true,
+                              "value": ""
+                          },
+                          "pppoe": {},
+                          "vlan": {
+                              "Device.Ethernet.VLANTermination.6.": {
+                                  "id": {
+                                      "writable": true,
+                                      "value": "123"
+                                  },
+                                  "enable": {
+                                      "writable": true,
+                                      "value": "1"
+                                  },
+                                  "priority": {
+                                      "writable": true,
+                                      "value": "0"
+                                  }
+                              }
+                          },
+                          "ipv4": {
+                              "Device.IP.Interface.10.IPv4Address.1.": {
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": "10.10.11.16"
+                                  },
+                                  "subnet_mask": {
+                                      "writable": false,
+                                      "value": "255.255.0.0"
+                                  },
+                                  "dns_servers": {
+                                      "Device.DNS.Relay.Forwarding.15.": {
+                                          "writable": true,
+                                          "value": "8.8.6.6,8.8.8.8"
+                                      }
+                                  }
+                              }
+                          },
+                          "ipv6": {
+                              "Device.IP.Interface.10.IPv6Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "1"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": "2001:DB8:2:2::16"
+                                  },
+                                  "prefix": {
+                                      "writable": false,
+                                      "value": ""
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "Static"
+                                  },
+                                  "dns_servers": {
+                                      "Device.DNS.Relay.Forwarding.16.": {
+                                          "writable": true,
+                                          "value": "2001:4860:4860::8844,2001:4860:4860::8846"
+                                      }
+                                  },
+                                  "state": {
+                                      "writable": false,
+                                      "value": null
+                                  }
+                              }
+                          }
+                      },
+                      "Device.IP.Interface.12.": {
+                          "name": {
+                              "writable": true,
+                              "value": "test-static-dns"
+                          },
+                          "enable": {
+                              "writable": true,
+                              "value": "1"
+                          },
+                          "max_mtu_size": {
+                              "writable": true,
+                              "value": ""
+                          },
+                          "pppoe": {},
+                          "vlan": {},
+                          "ipv4": {
+                              "Device.IP.Interface.12.IPv4Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "1"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": "10.11.12.13"
+                                  },
+                                  "subnet_mask": {
+                                      "writable": false,
+                                      "value": "255.255.255.0"
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "Static"
+                                  },
+                                  "dns_servers": {
+                                      "Device.DNS.Relay.Forwarding.20.": {
+                                          "writable": true,
+                                          "value": "10.10.10.11,10.10.10.11"
+                                      }
+                                  }
+                              }
+                          },
+                          "ipv6": {
+                              "Device.IP.Interface.12.IPv6Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "0"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": "::"
+                                  },
+                                  "prefix": {
+                                      "writable": false,
+                                      "value": ""
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "Static"
+                                  },
+                                  "dns_servers": {},
+                                  "state": {
+                                      "writable": false,
+                                      "value": null
+                                  }
+                              }
+                          }
+                      },
+                      "Device.IP.Interface.8.": {
+                          "name": {
+                              "writable": true,
+                              "value": "test"
+                          },
+                          "enable": {
+                              "writable": true,
+                              "value": "1"
+                          },
+                          "max_mtu_size": {
+                              "writable": true,
+                              "value": ""
+                          },
+                          "pppoe": {},
+                          "vlan": {
+                              "Device.Ethernet.VLANTermination.4.": {
+                                  "id": {
+                                      "writable": true,
+                                      "value": "100"
+                                  },
+                                  "enable": {
+                                      "writable": true,
+                                      "value": "1"
+                                  },
+                                  "priority": {
+                                      "writable": true,
+                                      "value": "5"
+                                  }
+                              }
+                          },
+                          "ipv4": {
+                              "Device.IP.Interface.8.IPv4Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "1"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": "0.0.0.0"
+                                  },
+                                  "subnet_mask": {
+                                      "writable": false,
+                                      "value": "0.0.0.0"
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "DHCP"
+                                  },
+                                  "dns_servers": {}
+                              }
+                          },
+                          "ipv6": {
+                              "Device.IP.Interface.8.IPv6Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "1"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": ""
+                                  },
+                                  "prefix": {
+                                      "writable": false,
+                                      "value": ""
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "DHCPv6"
+                                  },
+                                  "dns_servers": {},
+                                  "state": {
+                                      "writable": false,
+                                      "value": null
+                                  }
+                              }
+                          }
+                      },
+                      "Device.IP.Interface.9.": {
+                          "name": {
+                              "writable": true,
+                              "value": "test_pppoe"
+                          },
+                          "enable": {
+                              "writable": true,
+                              "value": "1"
+                          },
+                          "max_mtu_size": {
+                              "writable": true,
+                              "value": ""
+                          },
+                          "pppoe": {
+                              "Device.PPP.Interface.2.": {
+                                  "username": {
+                                      "writable": true,
+                                      "value": "1234qwer1234"
+                                  },
+                                  "password": {
+                                      "writable": true,
+                                      "value": "asdfasdf"
+                                  },
+                                  "connection_status": {
+                                      "writable": false,
+                                      "value": "Connecting"
+                                  }
+                              }
+                          },
+                          "vlan": {
+                              "Device.Ethernet.VLANTermination.5.": {
+                                  "id": {
+                                      "writable": true,
+                                      "value": "10"
+                                  },
+                                  "enable": {
+                                      "writable": true,
+                                      "value": "0"
+                                  },
+                                  "priority": {
+                                      "writable": true,
+                                      "value": "2"
+                                  }
+                              }
+                          },
+                          "ipv4": {
+                              "Device.IP.Interface.9.IPv4Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "1"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": "0.0.0.0"
+                                  },
+                                  "subnet_mask": {
+                                      "writable": false,
+                                      "value": "0.0.0.0"
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "IPCP"
+                                  },
+                                  "dns_servers": {}
+                              }
+                          },
+                          "ipv6": {
+                              "Device.IP.Interface.9.IPv6Address.1.": {
+                                  "enable": {
+                                      "writable": false,
+                                      "value": "1"
+                                  },
+                                  "ip_address": {
+                                      "writable": false,
+                                      "value": ""
+                                  },
+                                  "prefix": {
+                                      "writable": false,
+                                      "value": ""
+                                  },
+                                  "origin": {
+                                      "writable": false,
+                                      "value": "DHCPv6"
+                                  },
+                                  "dns_servers": {},
+                                  "state": {
+                                      "writable": false,
+                                      "value": null
+                                  }
+                              }
+                          }
+                      }
                   }
               }
           }

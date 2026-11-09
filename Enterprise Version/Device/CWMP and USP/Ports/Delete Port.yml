@@ -28,9 +28,24 @@ http:
     type: json
     data: |-
       {
-          "port": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.2.WANPPPConnection.1."
+          "path": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.2.WANPPPConnection.1."
       }
   auth: inherit
+
+docs: |-
+  Deletes a WAN connection. `path` must be a logical WAN object the device reports in **Get Ports**, such as a TR-098 `WANConnectionDevice` connection or a TR-181 `Device.IP.Interface` under an upstream port.
+
+  ## Permission
+
+  `WAN: delete`.
+
+  ## Errors
+
+  | Status | When |
+  |---|---|
+  | `403` | The role lacks `WAN: delete`, or `path` is a physical port or LAN configuration. |
+  | `409` | The device does not report `path` among its ports. Refresh the ports and retry. |
+  | `503` | The controller could not read the device's ports to check the request. |
 
 settings:
   encodeUrl: true
@@ -64,7 +79,7 @@ examples:
         type: json
         data: |-
           {
-              "port": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.2.WANPPPConnection.1."
+              "path": "InternetGatewayDevice.WANDevice.1.WANConnectionDevice.2.WANPPPConnection.1."
           }
     response:
       status: 200

@@ -45,6 +45,13 @@ http:
       }
   auth: inherit
 
+docs: |-
+  Creates a WAN connection.
+
+  ## Permission
+
+  `WAN: create`.
+
 settings:
   encodeUrl: true
   timeout: 0

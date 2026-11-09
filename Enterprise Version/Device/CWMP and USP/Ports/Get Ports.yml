@@ -22,6 +22,13 @@ http:
       type: path
   auth: inherit
 
+docs: |-
+  Reads the device's ports: physical interfaces with their logical WAN and LAN configuration nested under `ip`.
+
+  ## Permission
+
+  `Ports: read` or `WAN: read`.
+
 settings:
   encodeUrl: true
   timeout: 0
